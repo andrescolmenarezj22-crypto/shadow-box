@@ -1,4 +1,4 @@
-/* auth.js — Registro e inicio de sesion local (usuario + contrasena) */
+/* auth.js — Registro simple: solo usuario, sin contrasena */
 
 var Auth = (function () {
   "use strict";
@@ -21,41 +21,17 @@ var Auth = (function () {
     else localStorage.removeItem(SESSION_KEY);
   }
 
-  /* Hash simple de contrasena (djb2 + salt) */
-  function hashPass(pass, salt) {
-    salt = salt || "yc2024";
-    var str = salt + pass + salt;
-    var hash = 5381;
-    for (var i = 0; i < str.length; i++) {
-      hash = ((hash << 5) + hash) + str.charCodeAt(i);
-      hash = hash & 0x7FFFFFFF;
-    }
-    /* Segunda pasada para mayor entropia */
-    var hash2 = 0x12345678;
-    for (var j = 0; j < str.length; j++) {
-      hash2 = ((hash2 << 7) ^ hash2) + str.charCodeAt(j);
-      hash2 = hash2 & 0x7FFFFFFF;
-    }
-    return hash.toString(36) + "_" + hash2.toString(36);
-  }
-
-  /* Registrar nuevo usuario */
-  function register(username, pass) {
+  /* Registrar nuevo usuario (solo nombre) */
+  function register(username) {
     username = (username || "").trim().toLowerCase();
-    if (!username || !pass) throw new Error("Ingresa usuario y contrasena");
-    if (username.length < 3) throw new Error("Minimo 3 caracteres");
-    if (pass.length < 4) throw new Error("Contrasena minimo 4 caracteres");
+    if (!username) throw new Error("Escribe un nombre de usuario");
+    if (username.length < 2) throw new Error("Minimo 2 caracteres");
     if (!/^[a-z0-9_]+$/.test(username)) throw new Error("Solo minusculas, numeros y _");
 
     var users = getUsers();
     if (users[username]) throw new Error("Este usuario ya existe");
 
-    var hash = hashPass(pass);
-    users[username] = {
-      hash: hash,
-      created: Date.now(),
-      displayName: username
-    };
+    users[username] = { created: Date.now(), displayName: username };
     saveUsers(users);
 
     currentUser = { username: username, displayName: username };
@@ -64,19 +40,15 @@ var Auth = (function () {
     return currentUser;
   }
 
-  /* Iniciar sesion */
-  function login(username, pass) {
+  /* Iniciar sesion (solo nombre) */
+  function login(username) {
     username = (username || "").trim().toLowerCase();
-    if (!username || !pass) throw new Error("Ingresa usuario y contrasena");
+    if (!username) throw new Error("Escribe tu usuario");
 
     var users = getUsers();
-    var user = users[username];
-    if (!user) throw new Error("Usuario no encontrado");
+    if (!users[username]) throw new Error("Usuario no encontrado. Crea una cuenta.");
 
-    var hash = hashPass(pass);
-    if (user.hash !== hash) throw new Error("Contrasena incorrecta");
-
-    currentUser = { username: username, displayName: user.displayName || username };
+    currentUser = { username: username, displayName: users[username].displayName || username };
     saveSession(currentUser);
     notifyListeners();
     return currentUser;
@@ -89,11 +61,9 @@ var Auth = (function () {
     notifyListeners();
   }
 
-  /* Obtener usuario actual */
   function getUser() { return currentUser; }
   function isLoggedIn() { return !!currentUser; }
 
-  /* Escuchar cambios de sesion */
   function onAuthChange(fn) {
     listeners.push(fn);
     fn(currentUser);
@@ -102,7 +72,6 @@ var Auth = (function () {
     listeners.forEach(function (fn) { fn(currentUser); });
   }
 
-  /* Restaurar sesion al iniciar */
   function restoreSession() {
     var s = getSession();
     if (s && s.username) {
@@ -115,18 +84,15 @@ var Auth = (function () {
     }
   }
 
-  /* Prefijo de almacenamiento por usuario */
   function key(name) {
     if (!currentUser) return "sb_default_" + name;
     return "sb_user_" + currentUser.username + "_" + name;
   }
 
-  /* Guardar datos del usuario */
   function saveData(lsKey, value) {
     localStorage.setItem(key(lsKey), typeof value === "string" ? value : JSON.stringify(value));
   }
 
-  /* Cargar datos del usuario */
   function loadData(lsKey) {
     try {
       var v = localStorage.getItem(key(lsKey));
@@ -134,10 +100,7 @@ var Auth = (function () {
     } catch (e) { return null; }
   }
 
-  /* Guardar con alias */
-  function saveAndSync(lsKey, value) {
-    saveData(lsKey, value);
-  }
+  function saveAndSync(lsKey, value) { saveData(lsKey, value); }
 
   return {
     init: function () { restoreSession(); },

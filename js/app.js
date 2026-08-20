@@ -826,18 +826,16 @@
     $("btnAuthLogin").addEventListener("click", function () {
       hideAuthError();
       var user = $("authUser").value.trim();
-      var pass = $("authPass").value;
-      if (!user || !pass) { showAuthError("Ingresa usuario y contrasena"); return; }
-      try { Auth.login(user, pass); } catch (e) { showAuthError(e.message); }
+      if (!user) { showAuthError("Escribe tu usuario"); return; }
+      try { Auth.login(user); } catch (e) { showAuthError(e.message); }
     });
 
     // Register
     $("btnAuthRegister").addEventListener("click", function () {
       hideAuthError();
       var user = $("authRegUser").value.trim();
-      var pass = $("authRegPass").value;
-      if (!user || !pass) { showAuthError("Ingresa usuario y contrasena"); return; }
-      try { Auth.register(user, pass); } catch (e) { showAuthError(e.message); }
+      if (!user) { showAuthError("Escribe un nombre de usuario"); return; }
+      try { Auth.register(user); } catch (e) { showAuthError(e.message); }
     });
 
     // Form switching
@@ -853,8 +851,7 @@
     });
 
     // Skip
-    $("btnSkipAuth").addEventListener("click", function () { showApp(); });
-    if ($("btnSkipAuth2")) $("btnSkipAuth2").addEventListener("click", function () { showApp(); });
+    // (no skip button needed — user must create/select a user)
   }
 
   /* ---- Cargar datos del usuario ---- */

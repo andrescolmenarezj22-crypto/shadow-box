@@ -32,37 +32,21 @@
   <div id="authLoginForm">
     <div class="auth-field">
       <label>USUARIO</label>
-      <input type="text" id="authUser" placeholder="Tu usuario" autocomplete="username">
+      <input type="text" id="authUser" placeholder="Escribe tu usuario" autocomplete="username">
     </div>
-    <div class="auth-field">
-      <label>CONTRASENA</label>
-      <input type="password" id="authPass" placeholder="Tu contrasena" autocomplete="current-password">
-    </div>
-    <div style="display:flex;gap:8px;margin-top:16px;">
-      <button id="btnAuthLogin" class="btn primary" style="flex:1;">INICIAR SESION</button>
-      <button id="btnSkipAuth" class="btn secondary" style="flex:1;">SIN CUENTA</button>
-    </div>
-    <p class="auth-switch">No tienes cuenta? <a id="btnShowRegister">Registrate aqui</a></p>
+    <button id="btnAuthLogin" class="btn primary big">ENTRAR</button>
+    <p class="auth-switch">No tienes usuario? <a id="btnShowRegister">Crea uno aqui</a></p>
   </div>
 
   <!-- Registro -->
   <div id="authRegisterForm" class="hidden">
     <div class="auth-field">
-      <label>USUARIO</label>
-      <input type="text" id="authRegUser" placeholder="Elige un usuario (3+ caracteres)" autocomplete="username">
+      <label>NOMBRE DE USUARIO</label>
+      <input type="text" id="authRegUser" placeholder="Escribe tu nombre (2+ caracteres)" autocomplete="username">
     </div>
-    <div class="auth-field">
-      <label>CONTRASENA</label>
-      <input type="password" id="authRegPass" placeholder="Minimo 4 caracteres" autocomplete="new-password">
-    </div>
-    <div style="display:flex;gap:8px;margin-top:16px;">
-      <button id="btnAuthRegister" class="btn primary" style="flex:1;">CREAR CUENTA</button>
-      <button id="btnSkipAuth2" class="btn secondary" style="flex:1;">SIN CUENTA</button>
-    </div>
-    <p class="auth-switch">Ya tienes cuenta? <a id="btnShowLogin">Inicia sesion</a></p>
+    <button id="btnAuthRegister" class="btn primary big">CREAR USUARIO</button>
+    <p class="auth-switch">Ya tienes usuario? <a id="btnShowLogin">Entra aqui</a></p>
   </div>
-
-  <p class="auth-offline-note">Tus datos se guardan en este dispositivo.</p>
 </section>
 
 <section id="view-profile" class="view">
