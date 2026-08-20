@@ -1,0 +1,2616 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8"><meta name="description" content="Shadow Box - Web descargable. Abre este archivo en cualquier navegador (Windows/Android) y entrena sin conexion.">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#000000">
+<title>0% LUCK 100% HARD — Modo Guerra</title>
+<meta name="description" content="Rutina militar diaria MODO GUERRA: entrenamiento, shadow box, habitos y disciplina.">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="0% LUCK 100% HARD">
+<meta name="application-name" content="0% LUCK 100% HARD">
+
+
+
+
+
+<style>/* ===========================================================================
+   SHADOW BOX — negro + rojo + glow sutil (minimalista)
+   =========================================================================== */
+:root {
+  --bg: #000000;
+  --bg2: #0a0000;
+  --blood: #9b0000;
+  --blood2: #c40000;
+  --red: #ff1f1f;
+  --red-hot: #ff3b3b;
+  --red-soft: #ff5a5a;
+  --text: #ffd9d9;
+  --text-dim: #ff9090;
+  --line: #3a0000;
+
+  --glow-text:
+    0 0 5px  var(--red),
+    0 0 12px var(--red);
+  --glow-box:
+    0 0 6px  var(--red),
+    0 0 16px var(--blood2),
+    inset 0 0 10px rgba(255,31,31,.3);
+  --glow-soft:
+    0 0 4px var(--red), 0 0 14px var(--blood2);
+
+  --blood-deep: #8a0000;
+  --red-bright: #ff4040;
+  --grad1: #7a0000;
+  --grad1b: #6a0000;
+  --grad4: #2a0000;
+  --grad5: #120000;
+  --tint: rgba(255,31,31,.4);
+  --tint2: rgba(255,64,64,.6);
+  --tint3: rgba(255,31,31,.6);
+  --tint4: rgba(90,0,0,.25);
+  --bg-glow: rgba(120,0,0,.18);
+  --bg-glow2: rgba(120,0,0,.12);
+}
+
+* { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+
+html, body {
+  margin: 0; padding: 0;
+  background: var(--bg); color: var(--text);
+  font-family: "Segoe UI", system-ui, -apple-system, sans-serif;
+  min-height: 100%; overflow-x: hidden;
+}
+
+body {
+  background:
+    radial-gradient(1200px 700px at 50% -10%, var(--bg-glow), transparent 60%),
+    radial-gradient(900px 600px at 90% 110%, var(--bg-glow2), transparent 60%),
+    var(--bg);
+  padding-bottom: 68px;
+  -webkit-font-smoothing: antialiased;
+}
+
+.hidden { display: none !important; }
+
+/* ---------- No glow ---------- */
+.no-glow,
+.no-glow *,
+.no-glow *::before,
+.no-glow *::after {
+  animation-duration: 0s !important;
+  animation-delay: 0s !important;
+  animation-iteration-count: 1 !important;
+  transition-duration: 0s !important;
+}
+.no-glow { text-shadow: none !important; }
+.no-glow [style*="text-shadow"] { text-shadow: none !important; }
+.no-glow [style*="box-shadow"] { box-shadow: none !important; }
+.no-glow [style*="drop-shadow"] { filter: none !important; }
+.no-glow .brand-logo { filter: none !important; }
+.no-glow #headerTitle { text-shadow: none !important; }
+.no-glow .btn.primary { box-shadow: none !important; }
+.no-glow .chip { box-shadow: none !important; }
+.no-glow .sched-now { box-shadow: none !important; }
+.no-glow .card-figure svg { filter: none !important; }
+.no-glow .card-figure img { filter: none !important; }
+.no-glow .cr-fig svg { filter: none !important; }
+.no-glow .cr-fig img { filter: none !important; }
+.no-glow .nav-btn .emoji { filter: none !important; }
+.no-glow .timer-digit { text-shadow: none !important; }
+.no-glow .timer-big { text-shadow: none !important; filter: none !important; }
+.no-glow #warFx::before,
+.no-glow #warFx::after { opacity: 0 !important; }
+
+/* ============================= HEADER (minimalista) ============================= */
+#appHeader {
+  position: sticky; top: 0; z-index: 50;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 8px 14px;
+  background: rgba(0,0,0,.92);
+  border-bottom: 1px solid var(--line);
+  backdrop-filter: blur(8px);
+}
+.header-brand { display: flex; align-items: center; gap: 8px; }
+.brand-logo {
+  font-size: 22px;
+  filter: drop-shadow(0 0 4px var(--red));
+  animation: pulseGlow 3s ease-in-out infinite;
+}
+#headerTitle {
+  font-weight: 900; letter-spacing: 2px; font-size: 13px;
+  color: var(--red);
+  text-shadow: none;
+}
+.header-actions { display: flex; gap: 6px; }
+
+/* ============================= BOTONES ============================= */
+.btn {
+  border: 1px solid var(--red);
+  background: linear-gradient(180deg, #1a0000, #0c0000);
+  color: var(--red-hot);
+  font-weight: 800; letter-spacing: 1.5px;
+  padding: 10px 16px; border-radius: 10px;
+  font-size: 13px; cursor: pointer;
+  box-shadow: none;
+  transition: transform .1s ease, background .15s ease;
+  text-transform: uppercase;
+}
+.btn:active { transform: scale(.96); }
+.btn:hover { background: linear-gradient(180deg, var(--grad4), #140000); }
+.btn.primary { background: linear-gradient(180deg, #5a0000, var(--grad4)); color: #fff; }
+.btn.primary:hover { background: linear-gradient(180deg, var(--grad1), var(--line)); }
+.btn.danger { background: linear-gradient(180deg, #600000, #2b0000); color: #fff; }
+.btn.secondary { background: rgba(20,0,0,.6); }
+.btn.small { padding: 6px 10px; font-size: 11px; }
+.btn.big {
+  width: 100%; margin-top: 16px; padding: 14px;
+  font-size: 15px; border-radius: 12px;
+  animation: pulseBtn 2.5s ease-in-out infinite;
+}
+.chip {
+  border: 1px solid var(--line);
+  background: rgba(16,0,0,.7);
+  color: var(--text-dim);
+  padding: 5px 10px; border-radius: 999px;
+  font-size: 11px; font-weight: 700; cursor: pointer;
+}
+.chip:hover { color: var(--red-hot); border-color: var(--red); }
+
+/* ============================= INSTALL BAR ============================= */
+.install-bar {
+  position: fixed; left: 0; right: 0; bottom: 0; z-index: 90;
+  display: flex; align-items: center; gap: 10px;
+  padding: 10px 14px; margin: 8px;
+  background: linear-gradient(180deg, #1c0000, #0a0000);
+  border: 1px solid var(--red); border-radius: 14px;
+}
+.install-ico { font-size: 22px; filter: drop-shadow(0 0 5px var(--red)); }
+.install-close {
+  border: none; background: none; color: var(--text-dim);
+  font-size: 15px; cursor: pointer; margin-left: auto;
+}
+
+/* ============================= VIEWS ============================= */
+.view { display: none; padding: 14px; max-width: 860px; margin: 0 auto; }
+.view.active { display: block; animation: viewIn .25s ease; }
+@keyframes viewIn { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; } }
+
+.view-head h1 {
+  font-size: 22px; margin: 4px 0 4px; letter-spacing: 2px;
+  color: var(--red-hot); text-shadow: none;
+}
+.view-head h2 {
+  font-size: 20px; margin: 4px 0 4px; letter-spacing: 2px;
+  color: var(--red-hot); text-shadow: none;
+}
+.subtitle { color: var(--text-dim); margin: 0 0 12px; font-size: 13px; }
+
+.section-title {
+  margin: 20px 0 8px; font-weight: 900; letter-spacing: 2px;
+  color: var(--red); text-shadow: none; font-size: 13px;
+}
+
+/* ============================= HERO ============================= */
+#homeHero { margin-bottom: 14px; }
+.hero-figure { position: relative; border-radius: 14px; overflow: hidden; border: 1px solid var(--line); }
+.hero-figure::after {
+  content: ""; position: absolute; inset: 0; pointer-events: none;
+  background: radial-gradient(600px 300px at 50% 40%, rgba(255,31,31,.10), transparent 70%);
+  mix-blend-mode: screen;
+}
+.hero-figure .figure-wrap { margin: 0; }
+
+/* ============================= FIGURAS SVG ============================= */
+.figure-wrap {
+  position: relative;
+  display: flex; align-items: center; justify-content: center;
+  width: 100%; margin: 6px auto;
+}
+.figure-wrap::before {
+  content: "";
+  position: absolute; inset: -10%;
+  background-image:
+    radial-gradient(2px 2px at 18% 25%, rgba(255,60,60,.7), transparent 70%),
+    radial-gradient(3px 3px at 62% 18%, rgba(255,40,40,.6), transparent 70%),
+    radial-gradient(2px 2px at 82% 48%, rgba(255,90,90,.7), transparent 70%),
+    radial-gradient(2px 2px at 38% 82%, rgba(255,50,50,.6), transparent 70%);
+  animation: embers 8s ease-in-out infinite;
+  pointer-events: none;
+  mix-blend-mode: screen;
+  will-change: transform, opacity;
+}
+.figure-wrap::after {
+  content: "";
+  position: absolute; inset: 0;
+  background:
+    radial-gradient(circle at 28% 22%, rgba(255,45,45,.18), transparent 52%),
+    radial-gradient(circle at 72% 82%, rgba(255,25,25,.14), transparent 55%);
+  mix-blend-mode: screen;
+  pointer-events: none;
+}
+@keyframes embers {
+  0% { transform: translateY(6%) scale(1); opacity: .35; }
+  50% { transform: translateY(-2%) scale(1.03); opacity: .8; }
+  100% { transform: translateY(-10%) scale(1); opacity: .35; }
+}
+.figure-wrap svg {
+  width: 100%; height: auto;
+  filter: drop-shadow(0 0 4px var(--red)) drop-shadow(0 0 12px var(--blood2)) saturate(1.4);
+  transition: filter .3s ease;
+}
+@keyframes figurePulse {
+  0%, 100% { filter: drop-shadow(0 0 4px var(--red)) drop-shadow(0 0 12px var(--blood2)) saturate(1.4); }
+  50% { filter: drop-shadow(0 0 8px var(--red-bright)) drop-shadow(0 0 22px var(--red)) saturate(1.8); }
+}
+.figure-wrap img {
+  width: 100%; height: auto;
+  max-height: 50vh; object-fit: contain;
+  filter: drop-shadow(0 0 4px var(--red)) drop-shadow(0 0 12px var(--blood2)) saturate(1.1);
+  transition: filter .3s ease;
+}
+.figure-ring {
+  position: absolute; inset: 8%;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(255,31,31,.2), rgba(120,0,0,.08) 45%, transparent 70%);
+  animation: ringBreathe 3s ease-in-out infinite;
+  pointer-events: none;
+}
+@keyframes ringBreathe {
+  0%,100% { transform: scale(.97); opacity: .7; }
+  50% { transform: scale(1.03); opacity: .9; }
+}
+
+/* ============================= CARD DE RUTINAS ============================= */
+#routineGrid, #techniqueGrid {
+  display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 10px;
+}
+.routine-card, .tech-card {
+  position: relative; cursor: pointer; text-align: left;
+  background: linear-gradient(180deg, #150000, #050000);
+  border: 1px solid var(--line); border-radius: 12px; padding: 10px;
+  color: var(--text);
+  transition: transform .12s ease, border-color .15s ease;
+}
+.routine-card:hover, .tech-card:hover {
+  transform: translateY(-2px);
+  border-color: var(--red);
+}
+.routine-card h3, .tech-card h3 {
+  margin: 3px 0 2px; font-size: 14px; letter-spacing: 1px;
+  color: var(--red-hot); text-shadow: none;
+}
+.routine-card p, .tech-card p { margin: 2px 0; font-size: 11.5px; color: var(--text-dim); }
+.card-meta { display: flex; gap: 6px; margin-top: 6px; flex-wrap: wrap; }
+.card-meta span {
+  font-size: 10px; font-weight: 800; letter-spacing: .5px;
+  color: var(--red-hot); background: rgba(120,0,0,.2);
+  border: 1px solid #5a0000; border-radius: 999px; padding: 2px 7px;
+}
+.card-figure { margin: 3px 0; }
+.card-figure svg { filter: drop-shadow(0 0 3px var(--red)) drop-shadow(0 0 8px var(--blood2)); }
+.card-figure img {
+  display: block; width: 100%; max-height: 180px; object-fit: contain; margin: 0 auto;
+  filter: drop-shadow(0 0 3px var(--red)) drop-shadow(0 0 8px var(--blood2)) saturate(1.1);
+}
+
+/* ============================= DETALLE RUTINA ============================= */
+.summary-card {
+  border: 1px solid var(--line); border-radius: 12px; padding: 12px;
+  background: linear-gradient(180deg, #160000, #050000);
+  display: grid; grid-template-columns: 1fr 1fr; gap: 6px;
+  margin-bottom: 12px;
+}
+.summary-card div { font-size: 12px; color: var(--text-dim); }
+.summary-card b { color: var(--red-hot); font-size: 15px; }
+
+.plan-row {
+  display: flex; align-items: center; gap: 8px;
+  padding: 8px 10px; margin-bottom: 6px;
+  background: rgba(12,0,0,.7);
+  border: 1px solid var(--line); border-radius: 10px;
+}
+.plan-row.current { border-color: var(--red); }
+.plan-idx {
+  width: 22px; height: 22px; border-radius: 50%;
+  border: 1px solid var(--red); color: var(--red-hot);
+  display: flex; align-items: center; justify-content: center;
+  font-weight: 900; font-size: 11px; flex-shrink: 0;
+}
+.plan-row b { color: var(--red-hot); flex: 1; font-size: 13px; }
+.plan-row .plan-time { color: var(--text-dim); font-variant-numeric: tabular-nums; font-size: 11px; }
+
+/* ============================= ENTRENAMIENTO ============================= */
+#trainFigure .figure-wrap svg,
+#trainFigure .figure-wrap img { max-height: 38vh; }
+.train-info { text-align: center; margin: 4px 0; }
+.train-block-tag {
+  display: inline-block; font-size: 10px; font-weight: 900; letter-spacing: 2px;
+  color: #fff; background: linear-gradient(180deg, var(--grad1), var(--line));
+  border: 1px solid var(--red); border-radius: 999px; padding: 3px 10px;
+}
+#trainBlockName {
+  font-size: 20px; margin: 6px 0 3px; letter-spacing: 2px;
+  color: var(--red-hot); text-shadow: none;
+}
+#trainCue { color: var(--text-dim); font-size: 13px; margin: 0; min-height: 18px; }
+
+/* ============================= TEMPORIZADOR ============================= */
+.timer-wrap { position: relative; width: min(280px, 78vw); margin: 10px auto; }
+#timerRing { width: 100%; height: auto; overflow: visible; }
+#timerRing circle#timerProgress {
+  filter: drop-shadow(0 0 4px var(--red)) drop-shadow(0 0 12px var(--blood2));
+  transition: stroke-dashoffset .18s linear;
+}
+#timerTime {
+  position: absolute; inset: 0; display: flex; align-items: center; justify-content: center;
+  font-size: 50px; font-weight: 900; font-variant-numeric: tabular-nums;
+  letter-spacing: 2px; color: #fff;
+  text-shadow: 0 0 4px var(--red), 0 0 14px var(--red);
+}
+#timerPhase {
+  position: absolute; left: 0; right: 0; bottom: 12%;
+  text-align: center; font-weight: 900; letter-spacing: 3px; font-size: 13px;
+  color: var(--red-hot); text-shadow: none;
+}
+.timer-phase.rest { color: #ffb347; text-shadow: 0 0 4px #ff8c00; }
+
+/* ============================= SCHEDULE STRIP ============================= */
+#scheduleStrip {
+  display: flex; gap: 5px; overflow-x: auto; padding: 8px 2px;
+  scrollbar-width: thin; scrollbar-color: var(--grad1b) transparent;
+}
+.sched-cell {
+  min-width: 56px; flex-shrink: 0;
+  padding: 5px 6px; border-radius: 8px;
+  background: rgba(12,0,0,.7); border: 1px solid var(--line);
+  text-align: center; font-size: 10px; color: var(--text-dim);
+}
+.sched-cell .sc-time { font-weight: 900; color: var(--red-hot); font-variant-numeric: tabular-nums; }
+.sched-cell .sc-name { display: block; margin-top: 1px; font-size: 9px; }
+.sched-cell.active {
+  border-color: var(--red); color: #fff;
+  background: linear-gradient(180deg, var(--grad4), #100000);
+  transform: scale(1.06);
+}
+.sched-cell.past { opacity: .3; }
+
+.train-controls {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 8px;
+  margin-top: 12px; max-width: 440px; margin-left: auto; margin-right: auto;
+}
+
+/* ============================= PERSONALIZADA ============================= */
+.custom-row {
+  display: flex; align-items: center; gap: 8px;
+  background: rgba(12,0,0,.7); border: 1px solid var(--line);
+  border-radius: 10px; padding: 8px; margin-bottom: 6px;
+}
+.custom-row .cr-fig { width: 40px; flex-shrink: 0; }
+.custom-row .cr-fig svg { filter: drop-shadow(0 0 3px var(--red)) drop-shadow(0 0 8px var(--blood2)); }
+.custom-row .cr-fig img {
+  display: block; width: 100%; height: 40px; object-fit: contain;
+  filter: drop-shadow(0 0 3px var(--red)) drop-shadow(0 0 8px var(--blood2));
+}
+.custom-row .cr-info { flex: 1; }
+.custom-row b { color: var(--red-hot); font-size: 12px; display: block; }
+.custom-row span { color: var(--text-dim); font-size: 10px; }
+.custom-row button {
+  border: 1px solid var(--grad1b); background: rgba(90,0,0,.3); color: var(--red-hot);
+  border-radius: 8px; width: 28px; height: 28px; cursor: pointer; font-weight: 900;
+}
+.custom-add {
+  display: grid; grid-template-columns: 2fr 1fr 1fr auto; gap: 6px;
+  margin: 12px 0;
+}
+.custom-add select, .custom-add input {
+  background: #0c0000; color: var(--text); border: 1px solid var(--line);
+  border-radius: 8px; padding: 8px; font-size: 12px; width: 100%;
+}
+.custom-add select:focus, .custom-add input:focus { border-color: var(--red); outline: none; }
+
+/* ============================= AJUSTES ============================= */
+.setting-row {
+  display: flex; align-items: center; justify-content: space-between; gap: 8px;
+  padding: 12px; margin-bottom: 8px;
+  background: rgba(12,0,0,.7); border: 1px solid var(--line); border-radius: 12px;
+}
+.setting-row b { color: var(--text); font-size: 13px; display: block; }
+.setting-row small { color: var(--text-dim); font-size: 11px; }
+.setting-row input[type=range] { width: 140px; accent-color: var(--red); }
+.switch { position: relative; width: 48px; height: 26px; flex-shrink: 0; }
+.switch input { opacity: 0; width: 0; height: 0; }
+.slider {
+  position: absolute; inset: 0; cursor: pointer;
+  background: var(--grad4); border: 1px solid #5a0000; border-radius: 999px; transition: .2s;
+}
+.slider::before {
+  content: ""; position: absolute; width: 18px; height: 18px; left: 3px; top: 3px;
+  background: var(--red-soft); border-radius: 50%; transition: .2s;
+}
+.switch input:checked + .slider { background: linear-gradient(180deg, var(--grad1b), var(--line)); border-color: var(--red); }
+.switch input:checked + .slider::before { transform: translateX(22px); }
+
+/* ============================= NAV INFERIOR ============================= */
+#bottomNav {
+  position: fixed; left: 0; right: 0; bottom: 0; z-index: 60;
+  display: flex; justify-content: space-around;
+  background: rgba(0,0,0,.95); border-top: 1px solid var(--line);
+  padding: 6px 4px calc(6px + env(safe-area-inset-bottom));
+  backdrop-filter: blur(8px);
+}
+.nav-btn {
+  background: none; border: none; color: var(--text-dim);
+  font-size: 10px; font-weight: 700; cursor: pointer;
+  display: flex; flex-direction: column; align-items: center; gap: 2px;
+  padding: 3px 10px; border-radius: 10px; letter-spacing: .5px;
+}
+.nav-btn .emoji { font-size: 18px; }
+.nav-btn.active { color: var(--red-hot); }
+
+/* ============================= FLASH ALARMA ============================= */
+#flashOverlay {
+  position: fixed; inset: 0; z-index: 120; pointer-events: none;
+  background: radial-gradient(circle at 50% 50%, rgba(255,31,31,.4), rgba(120,0,0,.25) 55%, transparent 80%);
+  opacity: 0;
+}
+#flashOverlay.flash { animation: flashAlarm .7s ease-out; }
+@keyframes flashAlarm {
+  0% { opacity: 0; }
+  15% { opacity: .8; }
+  60% { opacity: .3; }
+  100% { opacity: 0; }
+}
+
+/* ============================= WAR FX ============================= */
+#warFx {
+  position: fixed; inset: 0; z-index: 6; pointer-events: none;
+  background:
+    repeating-linear-gradient(0deg, rgba(0,0,0,.12) 0 1px, transparent 1px 3px),
+    radial-gradient(circle at 50% 45%, transparent 58%, rgba(0,0,0,.4) 100%);
+}
+
+/* ============================= MODO GUERRA ============================= */
+body.war-mode {
+  background:
+    radial-gradient(1200px 700px at 50% -10%, rgba(170,0,0,.32), transparent 62%),
+    radial-gradient(900px 600px at 90% 110%, rgba(170,0,0,.24), transparent 60%),
+    var(--bg);
+}
+body.war-mode .figure-wrap svg {
+  filter: drop-shadow(0 0 6px var(--red-bright)) drop-shadow(0 0 18px var(--red)) drop-shadow(0 0 50px var(--blood2)) saturate(2.2) contrast(1.1);
+}
+body.war-mode .figure-wrap svg line, body.war-mode .figure-wrap svg circle {
+  animation: warFlicker 1.6s steps(2, jump-none) infinite;
+}
+@keyframes warFlicker {
+  0%, 100% { opacity: 1; }
+  50% { opacity: .6; }
+}
+body.war-mode #warFx {
+  background:
+    repeating-linear-gradient(0deg, rgba(0,0,0,.18) 0 1px, transparent 1px 3px),
+    radial-gradient(circle at 50% 45%, transparent 42%, rgba(140,0,0,.35) 78%, rgba(60,0,0,.55) 100%);
+}
+body.war-mode .figure-ring {
+  background: radial-gradient(circle, rgba(255,50,50,.4), rgba(150,0,0,.15) 45%, transparent 72%);
+}
+
+/* ============================= SCREEN SHAKE ============================= */
+body.shake { animation: screenShake .4s ease; }
+@keyframes screenShake {
+  0%, 100% { transform: translate(0,0); }
+  20% { transform: translate(-3px, 2px); }
+  40% { transform: translate(3px, -2px); }
+  60% { transform: translate(-2px, -2px); }
+  80% { transform: translate(2px, 2px); }
+}
+
+/* ============================= TOAST ============================= */
+#toast {
+  position: fixed; top: 12px; left: 50%; transform: translateX(-50%) translateY(-140%);
+  z-index: 200; background: linear-gradient(180deg, var(--grad4), var(--grad5));
+  border: 1px solid var(--red); color: #fff; font-weight: 800; letter-spacing: 1px;
+  padding: 10px 20px; border-radius: 12px; font-size: 13px;
+  transition: transform .25s ease; max-width: 90vw; text-align: center;
+}
+#toast.show { transform: translateX(-50%) translateY(0); }
+
+/* ============================= ANIMACIONES ============================= */
+@keyframes pulseGlow {
+  0%, 100% { filter: drop-shadow(0 0 3px var(--red)) drop-shadow(0 0 8px var(--blood2)); }
+  50% { filter: drop-shadow(0 0 6px var(--red-bright)) drop-shadow(0 0 18px var(--red)); }
+}
+@keyframes pulseBtn {
+  0%, 100% { box-shadow: 0 0 6px var(--red), 0 0 18px var(--blood2); }
+  50% { box-shadow: 0 0 12px var(--red-bright), 0 0 30px var(--red); }
+}
+
+@media (max-width: 480px) {
+  .view-head h1 { font-size: 19px; }
+  .custom-add { grid-template-columns: 1fr 1fr; }
+  #timerTime { font-size: 40px; }
+}
+
+/* ============================= HOY / ENTRENA / HABITS ============================= */
+.hero-figure .figure-wrap { margin: 0; }
+.hero-badge {
+  position: absolute; top: 8px; left: 8px; z-index: 2;
+  font-size: 10px; font-weight: 900; letter-spacing: 1px;
+  color: #fff; background: rgba(120,0,0,.8);
+  border: 1px solid var(--red); border-radius: 999px; padding: 2px 8px;
+}
+.hero-body { padding: 12px 14px 14px; text-align: center; }
+.hero-body h3 {
+  margin: 3px 0 6px; letter-spacing: 2px; font-size: 17px;
+  color: var(--red-hot); text-shadow: none;
+}
+.mini-grid {
+  display: grid; grid-template-columns: repeat(4, 1fr); gap: 6px;
+  margin: 8px 0 4px;
+}
+.mini-grid div {
+  background: rgba(12,0,0,.7); border: 1px solid var(--line);
+  border-radius: 8px; padding: 6px 3px;
+}
+.mini-grid b { display: block; font-size: 9px; color: var(--text-dim); letter-spacing: .5px; }
+.mini-grid span { font-size: 13px; font-weight: 900; color: var(--red-hot); }
+.today-strip { display: flex; gap: 8px; margin-top: 12px; }
+
+/* Horario del día */
+.sched-row {
+  display: flex; align-items: center; gap: 10px;
+  padding: 8px 10px; margin-bottom: 6px;
+  background: rgba(12,0,0,.7); border: 1px solid var(--line); border-radius: 10px;
+}
+.sched-row.active { border-color: var(--red); background: linear-gradient(180deg, #1c0000, #0a0000); }
+.sched-time { font-weight: 900; color: var(--red-hot); font-variant-numeric: tabular-nums; min-width: 38px; font-size: 13px; }
+.sched-emoji { font-size: 18px; }
+.sched-txt { flex: 1; }
+.sched-txt b { display: block; color: var(--text); font-size: 12.5px; letter-spacing: .5px; }
+.sched-txt span { color: var(--text-dim); font-size: 11px; line-height: 1.3; display: block; }
+.sched-now {
+  font-size: 9px; font-weight: 900; letter-spacing: 1px; color: #fff;
+  background: var(--red); border-radius: 999px; padding: 2px 7px;
+}
+
+/* Editor de horario */
+#schedDayTabs { display: flex; gap: 4px; margin-bottom: 10px; }
+.sched-tab {
+  flex: 1; min-width: 34px; padding: 7px 3px;
+  font-weight: 900; font-size: 12px; letter-spacing: 1px;
+  color: var(--text-dim); background: rgba(12,0,0,.7);
+  border: 1px solid var(--line); border-radius: 8px; cursor: pointer;
+  transition: color .12s ease, border-color .12s ease;
+}
+.sched-tab.active {
+  color: #fff; border-color: var(--red);
+  background: linear-gradient(180deg, var(--grad1), var(--line));
+}
+.sched-tab.today { color: var(--red-hot); }
+.sched-edit-head {
+  display: flex; justify-content: space-between; align-items: baseline;
+  margin: 2px 2px 8px; color: var(--red-hot); letter-spacing: 2px; font-weight: 900;
+}
+.sched-edit-head span { color: var(--text-dim); font-size: 11px; letter-spacing: 0; font-weight: 600; }
+.sched-edit-row {
+  display: flex; gap: 6px; align-items: flex-start;
+  background: rgba(12,0,0,.7); border: 1px solid var(--line);
+  border-radius: 10px; padding: 8px; margin-bottom: 6px;
+}
+.sched-edit-fields { flex: 1; display: grid; grid-template-columns: 80px 38px 1fr; gap: 5px; }
+.sched-edit-fields input {
+  background: var(--grad5); color: var(--text); border: 1px solid var(--line);
+  border-radius: 6px; padding: 6px 7px; font-size: 12px; outline: none;
+  font-family: inherit;
+}
+.sched-edit-fields input:focus { border-color: var(--red); }
+.se-emoji { text-align: center; }
+.se-desc, .se-until { grid-column: 1 / -1; }
+.se-until { max-width: 160px; }
+.sched-edit-actions { display: flex; flex-direction: column; gap: 3px; }
+.sched-edit-actions button {
+  width: 28px; height: 28px; border-radius: 6px;
+  border: 1px solid var(--line); background: var(--tint4);
+  color: var(--red-hot); font-weight: 900; font-size: 11px; cursor: pointer;
+  transition: border-color .12s ease;
+}
+.sched-edit-actions button:hover { border-color: var(--red); }
+
+/* Plan semanal */
+.day-card {
+  background: linear-gradient(180deg, #150000, #050000);
+  border: 1px solid var(--line); border-radius: 12px; padding: 12px;
+  margin-bottom: 10px;
+}
+.day-card.today { border-color: var(--red); }
+.day-head { display: flex; align-items: center; justify-content: space-between; }
+.day-head h3 { margin: 0 0 6px; font-size: 16px; letter-spacing: 2px; color: var(--red-hot); text-shadow: none; }
+.day-tag {
+  font-size: 9px; font-weight: 900; letter-spacing: 1px; color: #fff;
+  background: var(--red); border-radius: 999px; padding: 2px 8px;
+}
+.day-detail { display: flex; flex-wrap: wrap; gap: 5px; margin-bottom: 10px; }
+.day-detail span {
+  font-size: 10px; font-weight: 700; color: var(--text-dim);
+  background: var(--tint4); border: 1px solid #4a0000; border-radius: 999px; padding: 2px 8px;
+}
+
+/* Avisos */
+.note-info, .note-warn {
+  border-radius: 10px; padding: 10px 12px; margin-bottom: 12px;
+  font-size: 12px; line-height: 1.4; border: 1px solid var(--line);
+}
+.note-info { background: rgba(12,0,0,.7); color: var(--text); border-color: #4a0000; }
+.note-warn { background: rgba(80,40,0,.14); color: #ffd9a0; border-color: #8a5000; }
+
+/* Hábitos */
+.habit-progress {
+  display: flex; align-items: baseline; gap: 8px;
+  background: linear-gradient(180deg, #160000, #050000);
+  border: 1px solid var(--line); border-radius: 12px; padding: 12px; margin-bottom: 10px;
+}
+.habit-progress b { font-size: 26px; color: var(--red-hot); }
+.habit-progress span { color: var(--text-dim); font-size: 12px; }
+.habit-row, .goal-row {
+  display: flex; align-items: center; gap: 8px;
+  background: rgba(12,0,0,.7); border: 1px solid var(--line);
+  border-radius: 10px; padding: 10px; margin-bottom: 6px; cursor: pointer;
+  transition: border-color .12s ease;
+}
+.habit-row.done, .goal-row.done { border-color: #4a8a00; }
+.habit-row.done b, .goal-row.done b { color: #aaff55; }
+.habit-emoji { font-size: 18px; }
+.habit-row b, .goal-row b { flex: 1; color: var(--text); font-size: 12.5px; letter-spacing: .5px; }
+.habit-check {
+  width: 22px; height: 22px; border-radius: 50%;
+  border: 1px solid var(--line); color: #0a0000;
+  display: flex; align-items: center; justify-content: center;
+  font-weight: 900; font-size: 13px; flex-shrink: 0;
+}
+.habit-row.done .habit-check, .goal-row.done .habit-check {
+  background: #5cbf00; border-color: #5cbf00;
+  color: #060600;
+}
+.week-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 5px; }
+.week-cell {
+  text-align: center; background: rgba(12,0,0,.7);
+  border: 1px solid var(--line); border-radius: 8px; padding: 6px 2px;
+}
+.week-cell.today { border-color: var(--red); }
+.week-cell b { display: block; font-size: 10px; color: var(--text-dim); }
+.week-cell span { font-size: 12px; font-weight: 900; color: var(--text); display: block; margin: 1px 0; }
+.week-cell i {
+  font-style: normal; font-size: 9px; font-weight: 800; color: #ffb4b4;
+  border-radius: 999px; padding: 2px 5px;
+}
+
+/* Finanzas */
+.fin-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 6px; margin-bottom: 10px; }
+.fin-card {
+  background: linear-gradient(180deg, #160000, #050000);
+  border: 1px solid var(--line); border-radius: 10px; padding: 10px; text-align: center;
+}
+.fin-card b { display: block; font-size: 9px; letter-spacing: 2px; color: var(--text-dim); margin-bottom: 3px; }
+.fin-money { font-size: 16px; font-weight: 900; color: var(--red-hot); }
+.fin-row {
+  display: flex; align-items: center; gap: 8px;
+  background: rgba(12,0,0,.7); border: 1px solid var(--line);
+  border-radius: 10px; padding: 7px 10px; margin-bottom: 6px;
+}
+.fin-row span { flex: 1; color: var(--text); font-size: 12px; }
+.fin-row input {
+  width: 110px; background: #0c0000; color: var(--text);
+  border: 1px solid var(--line); border-radius: 8px; padding: 7px; font-size: 13px;
+  text-align: right; font-variant-numeric: tabular-nums;
+}
+.fin-row input:focus { border-color: var(--red); outline: none; }
+
+/* ============================= RANKS ============================= */
+.rank-bar {
+  display: flex; align-items: center; gap: 10px;
+  background: linear-gradient(180deg, #150000, #050000);
+  border: 1px solid var(--line); border-radius: 12px; padding: 12px; margin-bottom: 10px;
+}
+.rank-icon { font-size: 28px; flex-shrink: 0; }
+.rank-info { flex: 1; }
+.rank-info b { display: block; font-size: 14px; color: var(--red-hot); letter-spacing: 1px; }
+.rank-info small { color: var(--text-dim); font-size: 11px; }
+.rank-progress {
+  width: 100%; height: 6px; background: var(--grad5); border-radius: 999px;
+  margin-top: 4px; overflow: hidden;
+}
+.rank-progress-fill {
+  height: 100%; border-radius: 999px;
+  background: linear-gradient(90deg, var(--red), var(--red-bright));
+  transition: width .5s ease;
+}
+
+/* ============================= DISCIPLINE STATS ============================= */
+.disc-stats {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px;
+  margin-bottom: 10px;
+}
+.disc-card {
+  background: rgba(12,0,0,.7); border: 1px solid var(--line);
+  border-radius: 10px; padding: 10px; text-align: center;
+}
+.disc-card b { display: block; font-size: 9px; letter-spacing: 1px; color: var(--text-dim); margin-bottom: 3px; }
+.disc-card .disc-pct {
+  font-size: 22px; font-weight: 900; color: var(--red-hot);
+}
+.disc-card small { color: var(--text-dim); font-size: 10px; }
+
+/* ============================= SPORT TABS ============================= */
+.sport-tabs {
+  display: flex; gap: 5px; overflow-x: auto; padding: 6px 0;
+  scrollbar-width: none;
+}
+.sport-tabs::-webkit-scrollbar { display: none; }
+.sport-tab {
+  flex-shrink: 0; padding: 6px 12px; font-size: 11px; font-weight: 800;
+  letter-spacing: .5px; color: var(--text-dim); background: rgba(12,0,0,.7);
+  border: 1px solid var(--line); border-radius: 999px; cursor: pointer;
+  transition: color .12s ease, border-color .12s ease;
+  white-space: nowrap;
+}
+.sport-tab.active {
+  color: #fff; border-color: var(--red);
+  background: linear-gradient(180deg, var(--grad1), var(--line));
+}
+.sport-tab:hover { color: var(--red-hot); border-color: var(--red); }
+</style>
+
+</head>
+<body>
+
+<div id="installBar" class="install-bar hidden">
+  <span class="install-ico">&#127947;</span>
+  <span id="installText">Instala la app en tu dispositivo</span>
+  <button id="installBtn" class="btn primary small">Instalar</button>
+  <button id="installClose" class="install-close" aria-label="Cerrar">&#10005;</button>
+</div>
+
+<header id="appHeader">
+  <div class="header-brand">
+    <span class="brand-logo">&#127947;</span>
+    <span id="headerTitle">0%&nbsp;LUCK&nbsp;100%&nbsp;HARD</span>
+  </div>
+  <div class="header-actions">
+    <button id="btnWar" class="chip" title="Modo guerra">&#9889;</button>
+    <button id="btnBack" class="chip hidden" title="Volver">&#8249; VOLVER</button>
+    <button id="btnSettings" class="chip" title="Ajustes">&#9881;</button>
+  </div>
+</header>
+
+<main id="app">
+
+  <section id="view-home" class="view active">
+    <div id="rankBar" class="rank-bar"></div>
+    <div id="discStats" class="disc-stats"></div>
+    <div class="view-head">
+      <h1 id="todayTitle">HOY</h1>
+      <p class="subtitle" id="todaySub">MODO GUERRA</p>
+    </div>
+    <div id="homeHero"></div>
+    <div class="section-title">HORARIO MODO GUERRA <button id="btnEditSchedule" class="btn secondary small" style="float:right;">&#9998; EDITAR</button></div>
+    <div id="scheduleList"></div>
+  </section>
+
+  <section id="view-military" class="view">
+    <div class="view-head">
+      <h2>ENTRENAMIENTO MILITAR</h2>
+      <p class="subtitle">Plan semanal 11-11. Entrena el dia que te toque.</p>
+    </div>
+    <div id="militaryGrid"></div>
+  </section>
+
+  <section id="view-schedule" class="view">
+    <div class="view-head">
+      <h2>HORARIO</h2>
+      <p class="subtitle">Cada dia tiene su propio horario.</p>
+    </div>
+    <div id="schedDayTabs"></div>
+    <div id="schedEditList"></div>
+    <button id="schedSave" class="btn primary" style="width:100%; margin-top:10px;">GUARDAR Y APLICAR</button>
+    <button id="schedAdd" class="btn secondary" style="width:100%; margin-top:8px;">+ ANADIR BLOQUE</button>
+    <button id="schedReset" class="btn danger" style="width:100%; margin-top:8px;">RESTAURAR</button>
+  </section>
+
+  <section id="view-shadow" class="view">
+    <div class="view-head">
+      <h2>SHADOW BOX</h2>
+      <p class="subtitle">Rutinas guiadas con temporizador y voz</p>
+    </div>
+    <div id="shadowNote"></div>
+    <div id="sportTabs" class="sport-tabs"></div>
+    <div id="routineGrid"></div>
+    <div class="section-title">TECNICAS</div>
+    <div id="techniqueGrid"></div>
+    <div class="section-title">RUTINA PERSONALIZADA</div>
+    <div id="customMini"></div>
+    <button id="btnCustomGo" class="btn secondary" style="width:100%; margin-top:8px;">EDITAR MI RUTINA</button>
+  </section>
+
+  <section id="view-library" class="view">
+    <div class="view-head">
+      <h2 id="libTitle">Tecnica</h2>
+    </div>
+    <div id="libFigure" class="figure-wrap"></div>
+    <div id="libBody"></div>
+    <button id="libPractice" class="btn primary big">PRACTICAR 1 MINUTO</button>
+  </section>
+
+  <section id="view-routine" class="view">
+    <div class="view-head">
+      <h2 id="routineTitle"></h2>
+      <p class="subtitle" id="routineDesc"></p>
+    </div>
+    <div id="routineSummary" class="summary-card"></div>
+    <div id="routinePlan"></div>
+    <button id="btnStart" class="btn primary big">INICIAR RUTINA</button>
+  </section>
+
+  <section id="view-training" class="view">
+    <div id="trainFigure" class="figure-wrap"></div>
+    <div class="train-info">
+      <div class="train-block-tag" id="trainBlockType"></div>
+      <h2 id="trainBlockName"></h2>
+      <p id="trainCue"></p>
+    </div>
+    <div class="timer-wrap">
+      <svg id="timerRing" viewBox="0 0 320 320">
+        <circle cx="160" cy="160" r="138" fill="none" stroke="#330000" stroke-width="8"/>
+        <circle id="timerProgress" cx="160" cy="160" r="138" fill="none" stroke="#ff1f1f" stroke-width="10" stroke-linecap="round"
+                stroke-dasharray="867" stroke-dashoffset="0" transform="rotate(-90 160 160)"/>
+      </svg>
+      <div id="timerTime" class="timer-time">00:00</div>
+      <div id="timerPhase" class="timer-phase">TRABAJO</div>
+    </div>
+    <div id="scheduleStrip"></div>
+    <div class="train-controls">
+      <button id="btnPause" class="btn secondary">PAUSA</button>
+      <button id="btnSkip" class="btn secondary">SALTAR</button>
+      <button id="btnStop" class="btn danger">DETENER</button>
+      <button id="btnReset" class="btn secondary">REINICIAR</button>
+    </div>
+  </section>
+
+  <section id="view-custom" class="view">
+    <div class="view-head">
+      <h2>Rutina Personalizada</h2>
+      <p class="subtitle">Crea tus propios ejercicios con tiempos exactos</p>
+    </div>
+    <div id="customList"></div>
+    <div class="custom-add">
+      <select id="customType"></select>
+      <input id="customDur" type="number" min="5" max="900" value="60" title="Duracion (segundos)">
+      <input id="customRest" type="number" min="0" max="300" value="20" title="Descanso (segundos)">
+      <button id="customAdd" class="btn primary small">+ ANADIR</button>
+    </div>
+    <button id="customStart" class="btn primary big">INICIAR MI RUTINA</button>
+  </section>
+
+  <section id="view-habits" class="view">
+    <div class="view-head">
+      <h2>HABITOS</h2>
+      <p class="subtitle">Tracker diario MODO GUERRA</p>
+    </div>
+    <div id="habitsList"></div>
+    <div class="section-title">SEMANA</div>
+    <div id="habitsWeek"></div>
+    <div class="section-title">OBJETIVOS DIARIOS</div>
+    <div id="goalsList"></div>
+    <div class="section-title">CONTROL DE TU DINERO</div>
+    <div id="financeBody"></div>
+  </section>
+
+  <section id="view-settings" class="view">
+    <div class="view-head">
+      <h2>Ajustes</h2>
+    </div>
+    <div id="settingsBody"></div>
+  </section>
+
+</main>
+
+<nav id="bottomNav">
+  <button class="nav-btn active" data-nav="home"><span class="emoji">&#127968;</span><span>HOY</span></button>
+  <button class="nav-btn" data-nav="military"><span class="emoji">&#128170;</span><span>ENTRENA</span></button>
+  <button class="nav-btn" data-nav="shadow"><span class="emoji">&#127947;</span><span>SOMBRA</span></button>
+  <button class="nav-btn" data-nav="habits"><span class="emoji">&#9989;</span><span>HABITOS</span></button>
+  <button class="nav-btn" data-nav="settings"><span class="emoji">&#9881;</span><span>AJUSTES</span></button>
+</nav>
+
+<div id="warFx"></div>
+<div id="flashOverlay"></div>
+<div id="toast"></div>
+
+<script>/* ===========================================================================
+   SHADOW BOX — Generador de figuras SVG del boxeador por técnica
+   Figuras articuladas en rojo sangre con estelas de movimiento
+   =========================================================================== */
+
+const POSES = {
+  guardia: {
+    name: "Posición de Guardia",
+    head: [100, 62], neck: [100, 92],
+    shoulders: { f: [92, 88], r: [108, 87] },
+    elbows: { f: [83, 74], r: [115, 72] },
+    gloves: { f: [91, 56], r: [107, 54] },
+    hips: [100, 134],
+    knees: { f: [91, 164], r: [111, 166] },
+    feet: { f: [83, 190], r: [119, 192] },
+    swing: null, focus: [90, 60], trails: []
+  },
+  jab: {
+    name: "Jab",
+    head: [100, 62], neck: [100, 92],
+    shoulders: { f: [94, 88], r: [106, 87] },
+    elbows: { f: [58, 84], r: [115, 72] },
+    gloves: { f: [28, 74], r: [107, 54] },
+    hips: [99, 134],
+    knees: { f: [90, 164], r: [111, 166] },
+    feet: { f: [82, 190], r: [118, 192] },
+    swing: "f", focus: [22, 74],
+    trails: [[40, 66, 12, 70], [42, 74, 10, 78], [40, 82, 12, 86]]
+  },
+  cross: {
+    name: "Directo de Derecha",
+    head: [99, 62], neck: [100, 92],
+    shoulders: { f: [94, 86], r: [106, 90] },
+    elbows: { f: [112, 72], r: [60, 86] },
+    gloves: { f: [108, 54], r: [30, 76] },
+    hips: [99, 134],
+    knees: { f: [90, 164], r: [111, 166] },
+    feet: { f: [82, 190], r: [118, 192] },
+    swing: "r", focus: [24, 76],
+    trails: [[40, 70, 12, 72], [42, 78, 10, 80], [40, 86, 12, 88]]
+  },
+  hook: {
+    name: "Gancho (Hook)",
+    head: [100, 62], neck: [100, 92],
+    shoulders: { f: [92, 88], r: [108, 87] },
+    elbows: { f: [68, 82], r: [115, 72] },
+    gloves: { f: [44, 66], r: [107, 54] },
+    hips: [100, 134],
+    knees: { f: [90, 164], r: [111, 166] },
+    feet: { f: [82, 190], r: [118, 192] },
+    swing: "f", focus: [38, 66],
+    trails: [[58, 78, 34, 74], [60, 70, 38, 64], [56, 86, 36, 82]]
+  },
+  uppercut: {
+    name: "Uppercut",
+    head: [101, 62], neck: [100, 92],
+    shoulders: { f: [93, 90], r: [109, 87] },
+    elbows: { f: [80, 72], r: [116, 72] },
+    gloves: { f: [88, 50], r: [108, 54] },
+    hips: [101, 134],
+    knees: { f: [90, 164], r: [111, 166] },
+    feet: { f: [82, 190], r: [118, 192] },
+    swing: "f", focus: [86, 44],
+    trails: [[82, 62, 84, 40], [90, 62, 92, 38], [76, 60, 76, 42]]
+  },
+  defensa: {
+    name: "Defensa / Cobertura",
+    head: [100, 58], neck: [100, 94],
+    shoulders: { f: [92, 90], r: [108, 89] },
+    elbows: { f: [78, 72], r: [117, 70] },
+    gloves: { f: [87, 50], r: [112, 48] },
+    hips: [100, 138],
+    knees: { f: [90, 168], r: [112, 170] },
+    feet: { f: [82, 194], r: [120, 196] },
+    swing: null, focus: [100, 52], trails: []
+  },
+  bob: {
+    name: "Esquiva (Bob & Weave)",
+    head: [100, 82], neck: [100, 112],
+    shoulders: { f: [91, 108], r: [109, 106] },
+    elbows: { f: [85, 90], r: [112, 88] },
+    gloves: { f: [93, 74], r: [109, 72] },
+    hips: [100, 150],
+    knees: { f: [86, 182], r: [114, 184] },
+    feet: { f: [80, 206], r: [120, 208] },
+    swing: null, focus: [95, 78], trails: []
+  },
+  footwork: {
+    name: "Juego de Pies",
+    head: [100, 62], neck: [100, 92],
+    shoulders: { f: [92, 88], r: [108, 87] },
+    elbows: { f: [84, 74], r: [114, 72] },
+    gloves: { f: [91, 56], r: [107, 54] },
+    hips: [99, 134],
+    knees: { f: [86, 166], r: [114, 164] },
+    feet: { f: [74, 192], r: [126, 190] },
+    swing: null, focus: [90, 60], trails: []
+  }
+};
+
+function _ln(ax, ay, bx, by, w, cls) {
+  return '<line x1="' + ax + '" y1="' + ay + '" x2="' + bx + '" y2="' + by +
+    '" stroke="#ff2222" stroke-width="' + w + '" stroke-linecap="round" class="' + (cls || '') + '"/>';
+}
+
+function rayEnd(cx, cy, ang, rMax) {
+  const dx = Math.cos(ang), dy = Math.sin(ang);
+  let t = rMax;
+  if (dx > 0) t = Math.min(t, (270 - cx) / dx);
+  else if (dx < 0) t = Math.min(t, (10 - cx) / dx);
+  if (dy > 0) t = Math.min(t, (248 - cy) / dy);
+  else if (dy < 0) t = Math.min(t, (10 - cy) / dy);
+  return [cx + dx * t, cy + dy * t];
+}
+
+function _circle(x, y, r, cls) {
+  return '<circle cx="' + x + '" cy="' + y + '" r="' + r + '" fill="#ff2b2b" class="' + (cls || '') + '"/>';
+}
+
+function figureSVG(key, opts) {
+  opts = opts || {};
+  const p = POSES[key] || POSES.guardia;
+  const s = opts.stroke || 9;
+  const parts = [];
+
+  /* ---- fondo escena: ráfaga de energía + anillos de combate ---- */
+  const bx = 100, by = 118;
+  for (let a = 0; a < 24; a++) {
+    const ang = a * 15 * Math.PI / 180;
+    const x1 = bx + Math.cos(ang) * 66, y1 = by + Math.sin(ang) * 66;
+    const t = rayEnd(bx, by, ang, 190);
+    parts.push('<line x1="' + x1.toFixed(1) + '" y1="' + y1.toFixed(1) +
+      '" x2="' + t[0].toFixed(1) + '" y2="' + t[1].toFixed(1) +
+      '" stroke="#ff1f1f" stroke-width="1.6" opacity="0.20" stroke-linecap="round"/>');
+  }
+  for (let i = 0; i < 3; i++) {
+    const r = 50 + i * 26;
+    const op = 0.30 - i * 0.09;
+    parts.push('<circle cx="' + bx + '" cy="' + by + '" r="' + r + '" fill="none"' +
+      ' stroke="#ff1f1f" stroke-width="1.4" opacity="' + op.toFixed(2) + '"/>');
+  }
+  parts.push('<circle cx="' + bx + '" cy="' + by + '" r="34" fill="none"' +
+    ' stroke="#ff1f1f" stroke-width="1" opacity="0.35" stroke-dasharray="3 6"/>');
+
+  // --- aura / sombra en el suelo ---
+  parts.push('<ellipse cx="100" cy="' + (p.feet.f[1] + 10) + '" rx="58" ry="9" fill="#ff1f1f" opacity="0.16"/>');
+
+  // --- piernas ---
+  parts.push(_ln(p.hips[0], p.hips[1], p.knees.f[0], p.knees.f[1], s));
+  parts.push(_ln(p.knees.f[0], p.knees.f[1], p.feet.f[0], p.feet.f[1], s * 0.8));
+  parts.push(_ln(p.hips[0], p.hips[1], p.knees.r[0], p.knees.r[1], s));
+  parts.push(_ln(p.knees.r[0], p.knees.r[1], p.feet.r[0], p.feet.r[1], s * 0.8));
+
+  // --- torso ---
+  parts.push(_ln(p.neck[0], p.neck[1], p.hips[0], p.hips[1], s * 1.15));
+
+  // --- estelas de movimiento ---
+  p.trails.forEach(function (t) {
+    parts.push('<line x1="' + t[0] + '" y1="' + t[1] + '" x2="' + t[2] + '" y2="' + t[3] +
+      '" stroke="#ff1f1f" stroke-width="3" stroke-linecap="round" opacity="0.35"/>');
+  });
+
+  // --- fantasma del guante en movimiento (motion blur) ---
+  if (p.swing) {
+    const g = p.gloves[p.swing];
+    const fx = p.focus[0], fy = p.focus[1];
+    const vx = fx - g[0], vy = fy - g[1];
+    for (let i = 1; i <= 3; i++) {
+      const k = i * 0.28;
+      const ghost = _circle(g[0] + vx * k, g[1] + vy * k, 9 + i * 2.5, "ghost");
+      parts.push(ghost.replace(
+        'fill="#ff2b2b"',
+        'fill="#ff1f1f" opacity="' + (0.34 - i * 0.08) + '"'
+      ));
+    }
+  }
+
+  // --- brazos ---
+  parts.push(_ln(p.shoulders.f[0], p.shoulders.f[1], p.elbows.f[0], p.elbows.f[1], s * 0.85));
+  parts.push(_ln(p.elbows.f[0], p.elbows.f[1], p.gloves.f[0], p.gloves.f[1], s * 0.75));
+  parts.push(_ln(p.shoulders.r[0], p.shoulders.r[1], p.elbows.r[0], p.elbows.r[1], s * 0.85));
+  parts.push(_ln(p.elbows.r[0], p.elbows.r[1], p.gloves.r[0], p.gloves.r[1], s * 0.75));
+
+  // --- cabezas (principal + fantasma) ---
+  parts.push(_circle(p.head[0], p.head[1], 15, "head"));
+  parts.push('<line x1="' + p.head[0] + '" y1="' + (p.head[1] + 15) + '" x2="' + p.neck[0] + '" y2="' + p.neck[1] +
+    '" stroke="#ff2222" stroke-width="' + s + '" stroke-linecap="round"/>');
+
+  // --- impacto (destello en el punto de golpe) ---
+  const fx = p.focus[0], fy = p.focus[1];
+  parts.push(_circle(fx, fy, 6, "impact"));
+  for (let a = 0; a < 4; a++) {
+    const ang = (a * 90 + 45) * Math.PI / 180;
+    parts.push('<line x1="' + (fx + Math.cos(ang) * 10) + '" y1="' + (fy + Math.sin(ang) * 10) +
+      '" x2="' + (fx + Math.cos(ang) * 22) + '" y2="' + (fy + Math.sin(ang) * 22) +
+      '" stroke="#ff3b3b" stroke-width="4" stroke-linecap="round" opacity="0.85"/>');
+  }
+
+  // --- guantes (por encima de todo) ---
+  parts.push(_circle(p.gloves.f[0], p.gloves.f[1], 10, "glove f"));
+  parts.push(_circle(p.gloves.r[0], p.gloves.r[1], 10, "glove r"));
+
+  const extra = opts.class ? ' class="' + opts.class + '"' : '';
+  return '<svg viewBox="0 0 280 250" ' + extra + '>' + parts.join('') + '</svg>';
+}
+
+function figureFor(poseKey) {
+  const p = POSES[poseKey] || POSES.guardia;
+  return { key: poseKey, name: p.name, svg: figureSVG(poseKey) };
+}
+</script>
+<script>/* routines.js — Shadow Box: rutinas, deportes, disciplina */
+
+// ═══════════════════════════════════════════════════════════════════
+//  TECHNIQUES
+// ═══════════════════════════════════════════════════════════════════
+
+var TECHNIQUES = [
+  { key: "guardia", name: "Posicion de Guardia", desc: "Postura base de combate" },
+  { key: "jab", name: "Jab", desc: "Golpe rapido con mano delantera" },
+  { key: "cross", name: "Directo de Derecha", desc: "Golpe de poder con mano trasera" },
+  { key: "hook", name: "Gancho (Hook)", desc: "Gancho lateral" },
+  { key: "uppercut", name: "Uppercut", desc: "Golpe ascendente" },
+  { key: "defensa", name: "Defensa / Cobertura", desc: "Bloqueo y cobertura" },
+  { key: "bob", name: "Esquiva (Bob & Weave)", desc: "Esquivar agachandose en zigzag" },
+  { key: "footwork", name: "Juego de Pies", desc: "Movimiento de pies" },
+  { key: "dribble", name: "Drible", desc: "Driblar balon en basket/futbol" },
+  { key: "tiro", name: "Tiro", desc: "Disparo a porteria o aro" },
+  { key: "pase", name: "Pase", desc: "Pase del balon" },
+  { key: "regate", name: "Regate", desc: "Regatear al rival" },
+  { key: "remate", name: "Remate de Cabeza", desc: "Remate de cabeza en futbol" },
+  { key: "defensa_fut", name: "Defensa Futbol", desc: "Defensa en futbol" },
+  { key: "natacion", name: "Natacion", desc: "Nado de piscina" },
+  { key: "ciclismo", name: "Ciclismo", desc: "Pedaleo en bicicleta" },
+  { key: "patada", name: "Patada", desc: "Patada de artes marciales" },
+  { key: "puno", name: "Punetazo", desc: "Punetazo de artes marciales" },
+  { key: "codazo", name: "Codazo", desc: "Golpe de codo" },
+  { key: "rodillazo", name: "Rodillazo", desc: "Golpe de rodilla" }
+];
+
+// ═══════════════════════════════════════════════════════════════════
+//  SPORTS
+// ═══════════════════════════════════════════════════════════════════
+
+var SPORTS = {
+  boxeo: {
+    name: "Boxeo",
+    icon: "\uD83E\uDD4A",
+    desc: "Entrenamiento de boxeo",
+    routines: ["fundamentos", "combinaciones", "defensa", "acondicionamiento", "completa"]
+  },
+  futbol: {
+    name: "Futbol",
+    icon: "\u26BD",
+    desc: "Entrenamiento de futbol",
+    routines: ["fut_tecnica", "fut_fisico", "fut_completa"]
+  },
+  basquet: {
+    name: "Basquetbol",
+    icon: "\uD83C\uDFC0",
+    desc: "Entrenamiento de basquetbol",
+    routines: ["basq_tecnica", "basq_fisico", "basq_completa"]
+  },
+  natacion: {
+    name: "Natacion",
+    icon: "\uD83C\uDFCA",
+    desc: "Entrenamiento de natacion",
+    routines: ["nat_tecnica", "nat_resistencia"]
+  },
+  artes_marciales: {
+    name: "Artes Marciales",
+    icon: "\uD83E\uDD4B",
+    desc: "Entrenamiento de artes marciales",
+    routines: ["am_tecnica", "am_fisico", "am_completa"]
+  },
+  ciclismo: {
+    name: "Ciclismo",
+    icon: "\uD83D\uDEB4",
+    desc: "Entrenamiento de ciclismo",
+    routines: ["cic_resistencia", "cic_sprints"]
+  }
+};
+
+// ═══════════════════════════════════════════════════════════════════
+//  ROUTINES
+// ═══════════════════════════════════════════════════════════════════
+
+var ROUTINES = {
+
+  // ─── BOXEO ─────────────────────────────────────────────────────
+
+  boxeo: {
+
+    fundamentos: {
+      name: "Fundamentos de Boxeo",
+      sport: "boxeo",
+      emoji: "\uD83E\uDD4A",
+      desc: "Aprende y perfecciona cada golpe y movimiento base",
+      blocks: [
+        { name: "Guardia Base", type: "guardia", dur: 45, rest: 15, cue: "Manos arriba, barbilla abajo, codos pegados" },
+        { name: "Jab", type: "jab", dur: 60, rest: 15, cue: "Extiende rapido y vuelve a la cara" },
+        { name: "Directo de Derecha", type: "cross", dur: 60, rest: 15, cue: "Gira la cadera, golpea fuerte" },
+        { name: "Gancho", type: "hook", dur: 60, rest: 15, cue: "Codo alineado, gira el torso" },
+        { name: "Uppercut", type: "uppercut", dur: 60, rest: 15, cue: "Sube con las piernas, no solo brazos" },
+        { name: "Defensa", type: "defensa", dur: 60, rest: 15, cue: "Cubrir bien la cara, cerrar codos" },
+        { name: "Bob & Weave", type: "bob", dur: 60, rest: 15, cue: "Esquivar con piernas, no espalda" },
+        { name: "Juego de Pies", type: "footwork", dur: 60, rest: 15, cue: "Ligero, nunca plantar los pies" },
+        { name: "Guardia - Enfriamiento", type: "guardia", dur: 90, rest: 0, cue: "Respirar profundo, mantener postura" }
+      ]
+    },
+
+    combinaciones: {
+      name: "Combinaciones de Golpes",
+      sport: "boxeo",
+      emoji: "\uD83D\uDC4A",
+      desc: "Combina golpes en secuencias fluidas",
+      blocks: [
+        { name: "1-2  Jab-Directo", type: "jab", dur: 60, rest: 20, cue: "Fluidez, uno tras otro sin pausa" },
+        { name: "1-2-3  Jab-Directo-Gancho", type: "hook", dur: 60, rest: 20, cue: "Cadena los tres golpes con giro" },
+        { name: "1-1-2  Jab-Jab-Directo", type: "jab", dur: 60, rest: 20, cue: "Doble jab para abrir la guardia" },
+        { name: "3-2  Gancho-Directo", type: "cross", dur: 60, rest: 20, cue: "Gancho lateral seguido de directo" },
+        { name: "1-2-5-2  Jab-Directo-Uppercut-Directo", type: "uppercut", dur: 60, rest: 20, cue: "Combinacion larga, mantener ritmo" },
+        { name: "5-6  Uppercut-Uppercut", type: "uppercut", dur: 60, rest: 20, cue: "Uppercuts alternos, subir con piernas" },
+        { name: "1-2-3-2-1  Completa", type: "hook", dur: 60, rest: 20, cue: "Combo largo, fluidez y potencia" },
+        { name: "Combos Libres", type: "jab", dur: 60, rest: 20, cue: "Inventa tus propias combinaciones" },
+        { name: "Enfriamiento", type: "guardia", dur: 90, rest: 0, cue: "Respirar, soltar tension, estirar" }
+      ]
+    },
+
+    defensa: {
+      name: "Defensa y Contragolpe",
+      sport: "boxeo",
+      emoji: "\uD83D\uDEE1\uFE0F",
+      desc: "Bloqueos, esquivas y respuestas defensivas",
+      blocks: [
+        { name: "Cobertura", type: "defensa", dur: 60, rest: 20, cue: "Manos firmes protegiendo la cara" },
+        { name: "Esquiva Lateral", type: "bob", dur: 60, rest: 20, cue: "Mover cabeza lateralmente con piernas" },
+        { name: "Bloqueo + Jab", type: "defensa", dur: 60, rest: 20, cue: "Bloquear y responder con jab rapido" },
+        { name: "Retroceso + 1-2", type: "footwork", dur: 60, rest: 20, cue: "Retroceder y contraatacar" },
+        { name: "Circulo de Pies", type: "footwork", dur: 60, rest: 20, cue: "Circular manteniendo distancia" },
+        { name: "Simulacion de Pelea", type: "defensa", dur: 60, rest: 20, cue: "Imagina un rival, reacciona" },
+        { name: "Enfriamiento", type: "guardia", dur: 90, rest: 0, cue: "Respirar profundo, relajar" }
+      ]
+    },
+
+    acondicionamiento: {
+      name: "Acondicionamiento Fisico",
+      sport: "boxeo",
+      emoji: "\uD83D\uDCAA",
+      desc: "8 rondas de alta intensidad para resistencia",
+      blocks: [
+        { name: "Calentamiento", type: "footwork", dur: 120, rest: 10, cue: "Activar cuerpo suavemente" },
+        { name: "Ronda 1", type: "jab", dur: 40, rest: 20, cue: "Ritmo constante, sin parar" },
+        { name: "Ronda 2", type: "cross", dur: 40, rest: 20, cue: "Golpes fuertes, respirar" },
+        { name: "Ronda 3", type: "hook", dur: 40, rest: 20, cue: "Ganchos con potencia" },
+        { name: "Ronda 4", type: "uppercut", dur: 40, rest: 20, cue: "Uppercuts rapidos" },
+        { name: "Ronda 5", type: "jab", dur: 40, rest: 20, cue: "Velocidad y precision" },
+        { name: "Ronda 6", type: "cross", dur: 40, rest: 20, cue: "Gira la cadera, golpea" },
+        { name: "Ronda 7", type: "hook", dur: 40, rest: 20, cue: "Casi terminamos, dalo todo" },
+        { name: "Ronda 8", type: "uppercut", dur: 40, rest: 20, cue: "Ultima ronda, intensidad maxima" },
+        { name: "Enfriamiento", type: "guardia", dur: 90, rest: 0, cue: "Bajar ritmo, respirar, estirar" }
+      ]
+    },
+
+    completa: {
+      name: "Rutina Completa de Boxeo",
+      sport: "boxeo",
+      emoji: "\u2B50",
+      desc: "Sesion completa: calentamiento, tecnicas, combos y cierre",
+      blocks: [
+        { name: "Calentamiento", type: "footwork", dur: 120, rest: 10, cue: "Movilizar articulaciones y elevar pulso" },
+        { name: "Guardia Base", type: "guardia", dur: 45, rest: 15, cue: "Postura solida, manos arriba" },
+        { name: "Jab", type: "jab", dur: 60, rest: 15, cue: "Rapido y directo, vuelve a la cara" },
+        { name: "Directo de Derecha", type: "cross", dur: 60, rest: 15, cue: "Gira cadera con el golpe" },
+        { name: "Gancho + Uppercut", type: "hook", dur: 60, rest: 15, cue: "Combina los dos en fluido" },
+        { name: "Defensa", type: "defensa", dur: 60, rest: 15, cue: "Cubrir y esquivar" },
+        { name: "Combo 1-2-3", type: "hook", dur: 60, rest: 15, cue: "Jab directo gancho sin pausa" },
+        { name: "Combo 1-1-2", type: "jab", dur: 60, rest: 15, cue: "Doble jab directo" },
+        { name: "Ronda Intensa", type: "cross", dur: 40, rest: 20, cue: "Golpes fuertes, sin descanso" },
+        { name: "Ronda Intensa 2", type: "uppercut", dur: 40, rest: 20, cue: "Ultimo esfuerzo, dalo todo" },
+        { name: "Enfriamiento", type: "guardia", dur: 90, rest: 0, cue: "Respirar, estirar, relajar" }
+      ]
+    }
+  },
+
+  // ─── FUTBOL ────────────────────────────────────────────────────
+
+  futbol: {
+
+    fut_tecnica: {
+      name: "Tecnica de Futbol",
+      sport: "futbol",
+      emoji: "\u26BD",
+      desc: "Dribling, pase, tiro y juego aereo",
+      blocks: [
+        { name: "Dribling Controlado", type: "dribble", dur: 60, rest: 15, cue: "Control del balon, cabeza arriba" },
+        { name: "Tiro a Porteria", type: "tiro", dur: 60, rest: 15, cue: "Mirar el arco, pie firme en el impacto" },
+        { name: "Pase Corto y Largo", type: "pase", dur: 60, rest: 15, cue: "Precision y timing en cada pase" },
+        { name: "Regate", type: "regate", dur: 60, rest: 15, cue: "Cambio de ritmo y direccion" },
+        { name: "Remate de Cabeza", type: "remate", dur: 60, rest: 15, cue: "Timing perfecto con la frente" },
+        { name: "Defensa Posicional", type: "defensa_fut", dur: 60, rest: 15, cue: "Posicionarse bien, angulo correcto" },
+        { name: "Enfriamiento", type: "footwork", dur: 90, rest: 0, cue: "Trote suave, respirar profundo" }
+      ]
+    },
+
+    fut_fisico: {
+      name: "Fisico de Futbol",
+      sport: "futbol",
+      emoji: "\uD83C\uDFC3",
+      desc: "Sprints, resistencia y agilidad para futbol",
+      blocks: [
+        { name: "Calentamiento con Pies", type: "footwork", dur: 60, rest: 10, cue: "Pies rapidos, lubricar articulaciones" },
+        { name: "Sprint con Balon 1", type: "dribble", dur: 30, rest: 20, cue: "Velocidad maxima con control" },
+        { name: "Sprint con Balon 2", type: "dribble", dur: 30, rest: 20, cue: "Acelerar y frenar" },
+        { name: "Sprint con Balon 3", type: "dribble", dur: 30, rest: 20, cue: "Cambio de direccion rapido" },
+        { name: "Sprint con Balon 4", type: "dribble", dur: 30, rest: 20, cue: "Driblear y acelerar" },
+        { name: "Defensa Activa", type: "defensa_fut", dur: 60, rest: 15, cue: "Entradas limpias, cuerpo en balance" },
+        { name: "Footwork Intenso", type: "footwork", dur: 60, rest: 15, cue: "Cambios de ritmo, agilidad pura" },
+        { name: "Enfriamiento", type: "footwork", dur: 90, rest: 0, cue: "Trote suave, estirar piernas" }
+      ]
+    },
+
+    fut_completa: {
+      name: "Rutina Completa de Futbol",
+      sport: "futbol",
+      emoji: "\u2B50",
+      desc: "Sesion completa: tecnica, fisico y juego",
+      blocks: [
+        { name: "Calentamiento", type: "footwork", dur: 120, rest: 10, cue: "Movilizar todo el cuerpo" },
+        { name: "Dribling", type: "dribble", dur: 60, rest: 15, cue: "Control cercano, cabeza arriba" },
+        { name: "Tiro", type: "tiro", dur: 60, rest: 15, cue: "Disparo con potencia y precision" },
+        { name: "Regate", type: "regate", dur: 60, rest: 15, cue: "Vencer al rival con movimiento" },
+        { name: "Sprint 1", type: "dribble", dur: 30, rest: 20, cue: "Explosividad pura" },
+        { name: "Sprint 2", type: "dribble", dur: 30, rest: 20, cue: "Sin bajar la intensidad" },
+        { name: "Pase", type: "pase", dur: 60, rest: 15, cue: "Precision en cada entrega" },
+        { name: "Remate de Cabeza", type: "remate", dur: 60, rest: 15, cue: "Saltar y conectar bien" },
+        { name: "Defensa", type: "defensa_fut", dur: 60, rest: 15, cue: "Posicion defensiva solida" },
+        { name: "Enfriamiento", type: "footwork", dur: 90, rest: 0, cue: "Relajar piernas, respirar" }
+      ]
+    }
+  },
+
+  // ─── BASQUETBOL ────────────────────────────────────────────────
+
+  basquet: {
+
+    basq_tecnica: {
+      name: "Tecnica de Basquetbol",
+      sport: "basquet",
+      emoji: "\uD83C\uDFC0",
+      desc: "Dribling, tiro, pase y defensa de basket",
+      blocks: [
+        { name: "Dribling Bajo", type: "dribble", dur: 60, rest: 15, cue: "Cabeza arriba, cambios de mano" },
+        { name: "Tiro en Salto", type: "tiro", dur: 60, rest: 15, cue: "Buen release, follow through" },
+        { name: "Pase y Corte", type: "pase", dur: 60, rest: 15, cue: "Pase firme, cortar rapido" },
+        { name: "Regate Avanzado", type: "regate", dur: 60, rest: 15, cue: "Crossover rapido, cambio de ritmo" },
+        { name: "Defensa Activa", type: "defensa_fut", dur: 60, rest: 15, cue: "Manos arriba, pies activos" },
+        { name: "Juego de Pies", type: "footwork", dur: 60, rest: 15, cue: "Pies rapidos, base solida" },
+        { name: "Enfriamiento", type: "bob", dur: 90, rest: 0, cue: "Trote suave, respirar profundo" }
+      ]
+    },
+
+    basq_fisico: {
+      name: "Fisico de Basquetbol",
+      sport: "basquet",
+      emoji: "\uD83D\uDCAA",
+      desc: "Agilidad, sprints y resistencia para basket",
+      blocks: [
+        { name: "Calentamiento Pies", type: "footwork", dur: 60, rest: 10, cue: "Pies ligeros, activar" },
+        { name: "Deflexion y Correr", type: "bob", dur: 45, rest: 15, cue: "Esquivar y acelerar" },
+        { name: "Sprint Dribble 1", type: "dribble", dur: 30, rest: 20, cue: "Velocidad con control total" },
+        { name: "Sprint Dribble 2", type: "dribble", dur: 30, rest: 20, cue: "Cancha completa rapido" },
+        { name: "Sprint Dribble 3", type: "dribble", dur: 30, rest: 20, cue: "Sin perder el balon" },
+        { name: "Tiro Rapido", type: "tiro", dur: 60, rest: 15, cue: "Disparo rapido bajo presion" },
+        { name: "Defensa Intensa", type: "defensa_fut", dur: 60, rest: 15, cue: "Full court defense" },
+        { name: "Enfriamiento", type: "footwork", dur: 90, rest: 0, cue: "Relajar, respirar, estirar" }
+      ]
+    },
+
+    basq_completa: {
+      name: "Rutina Completa de Basquetbol",
+      sport: "basquet",
+      emoji: "\u2B50",
+      desc: "Sesion completa: habilidades, fisico y juego",
+      blocks: [
+        { name: "Calentamiento", type: "footwork", dur: 120, rest: 10, cue: "Movilizar todo el cuerpo" },
+        { name: "Dribling", type: "dribble", dur: 60, rest: 15, cue: "Control y velocidad" },
+        { name: "Tiro", type: "tiro", dur: 60, rest: 15, cue: "Forma correcta, follow through" },
+        { name: "Pase", type: "pase", dur: 60, rest: 15, cue: "Pases rapidos y precisos" },
+        { name: "Regate", type: "regate", dur: 60, rest: 15, cue: "Vencer al defensor" },
+        { name: "Bob & Weave", type: "bob", dur: 45, rest: 15, cue: "Esquivar picks, mantener posicion" },
+        { name: "Sprint 1", type: "dribble", dur: 30, rest: 20, cue: "Explosividad cancha completa" },
+        { name: "Sprint 2", type: "dribble", dur: 30, rest: 20, cue: "Ultimo sprint, dalo todo" },
+        { name: "Defensa", type: "defensa_fut", dur: 60, rest: 15, cue: "Defensa solida al final" },
+        { name: "Enfriamiento", type: "footwork", dur: 90, rest: 0, cue: "Relajar, respirar, estirar" }
+      ]
+    }
+  },
+
+  // ─── NATACION ──────────────────────────────────────────────────
+
+  natacion: {
+
+    nat_tecnica: {
+      name: "Tecnica de Natacion",
+      sport: "natacion",
+      emoji: "\uD83C\uDFCA",
+      desc: "Perfecciona cada estilo de nado",
+      blocks: [
+        { name: "Crol (Front Crawl)", type: "natacion", dur: 120, rest: 15, cue: "Brazada larga, respiracion ritmica" },
+        { name: "Espalda", type: "natacion", dur: 120, rest: 15, cue: "Cuerpo recto, brazada por encima" },
+        { name: "Pecho (Breaststroke)", type: "natacion", dur: 120, rest: 15, cue: "Coordinacion brazos-piernas" },
+        { name: "Mariposa", type: "natacion", dur: 90, rest: 15, cue: "Ondulacion fluida, brazada fuerte" },
+        { name: "Enfriamiento", type: "natacion", dur: 90, rest: 0, cue: "Nado suave, relajar musculos" }
+      ]
+    },
+
+    nat_resistencia: {
+      name: "Resistencia Acuatica",
+      sport: "natacion",
+      emoji: "\uD83C\uDCA6",
+      desc: "Volumen y resistencia en el agua",
+      blocks: [
+        { name: "Nado Largo 1", type: "natacion", dur: 180, rest: 15, cue: "Ritmo constante, sin apresurar" },
+        { name: "Nado Largo 2", type: "natacion", dur: 180, rest: 15, cue: "Mantener tecnica con cansancio" },
+        { name: "Intervalos 1", type: "natacion", dur: 60, rest: 30, cue: "Rapido en el tramo, recuperar" },
+        { name: "Intervalos 2", type: "natacion", dur: 60, rest: 30, cue: "Aumentar ritmo en cada vuelta" },
+        { name: "Nado Largo 3", type: "natacion", dur: 180, rest: 15, cue: "Ultimo tramo largo, no parar" },
+        { name: "Enfriamiento", type: "natacion", dur: 90, rest: 0, cue: "Nado suave, respirar profundo" }
+      ]
+    }
+  },
+
+  // ─── ARTES MARCIALES ───────────────────────────────────────────
+
+  artes_marciales: {
+
+    am_tecnica: {
+      name: "Tecnica de Artes Marciales",
+      sport: "artes_marciales",
+      emoji: "\uD83E\uDD4B",
+      desc: "Golpes, patadas y movimientos fundamentales",
+      blocks: [
+        { name: "Guardia Base", type: "guardia", dur: 45, rest: 15, cue: "Siempre volver a guardia" },
+        { name: "Punetazos", type: "puno", dur: 60, rest: 15, cue: "Golpe directo, volver a guardia" },
+        { name: "Patadas Frontales", type: "patada", dur: 60, rest: 15, cue: "Cadera alineada, golpe seco" },
+        { name: "Codazos", type: "codazo", dur: 60, rest: 15, cue: "Corto y potente, de cerca" },
+        { name: "Rodillazos", type: "rodillazo", dur: 60, rest: 15, cue: "Empujar cadera, impacto fuerte" },
+        { name: "Combinacion Puño-Patada", type: "puno", dur: 60, rest: 15, cue: "Encadenar golpes y patadas" },
+        { name: "Enfriamiento", type: "guardia", dur: 90, rest: 0, cue: "Respirar, relajar, mantener guardia" }
+      ]
+    },
+
+    am_fisico: {
+      name: "Fisico de Artes Marciales",
+      sport: "artes_marciales",
+      emoji: "\uD83D\uDCAA",
+      desc: "Velocidad, potencia y resistencia combativa",
+      blocks: [
+        { name: "Guardia Rapida", type: "guardia", dur: 45, rest: 10, cue: "Agil, rapido, listo" },
+        { name: "Puños Rapidos", type: "puno", dur: 30, rest: 10, cue: "Velocidad maxima, no pensar" },
+        { name: "Patadas Rapidas", type: "patada", dur: 30, rest: 10, cue: "Patadas alternas sin pausa" },
+        { name: "Rodillazos Rapidos", type: "rodillazo", dur: 30, rest: 10, cue: "Rodillas alternas, ritmo alto" },
+        { name: "Codazos Rapidos", type: "codazo", dur: 30, rest: 10, cue: "Codazos cortos y explosivos" },
+        { name: "Combinacion Libre", type: "puno", dur: 60, rest: 15, cue: "Libera todo, golpes y patadas" },
+        { name: "Ronda Intensa 1", type: "patada", dur: 40, rest: 20, cue: "Intensidad maxima" },
+        { name: "Ronda Intensa 2", type: "puno", dur: 40, rest: 20, cue: "No bajar la guardia" },
+        { name: "Enfriamiento", type: "guardia", dur: 90, rest: 0, cue: "Respirar, relajar cuerpo" }
+      ]
+    },
+
+    am_completa: {
+      name: "Rutina Completa de Artes Marciales",
+      sport: "artes_marciales",
+      emoji: "\u2B50",
+      desc: "Sesion completa: golpes, patadas, combos e intensidad",
+      blocks: [
+        { name: "Calentamiento", type: "guardia", dur: 120, rest: 10, cue: "Movilizar todo el cuerpo" },
+        { name: "Guardia Base", type: "guardia", dur: 45, rest: 15, cue: "Postura solida y estable" },
+        { name: "Punetazos", type: "puno", dur: 60, rest: 15, cue: "Directos con potencia" },
+        { name: "Patadas", type: "patada", dur: 60, rest: 15, cue: "Patadas limpias y fuertes" },
+        { name: "Codazos", type: "codazo", dur: 60, rest: 15, cue: "Golpes de codo certeros" },
+        { name: "Rodillazos", type: "rodillazo", dur: 60, rest: 15, cue: "Rodillas con poder" },
+        { name: "Combinacion Total", type: "puno", dur: 60, rest: 15, cue: "Todo junto, fluidez letal" },
+        { name: "Ronda Intensa", type: "patada", dur: 40, rest: 20, cue: "Dalo todo, sin reserva" },
+        { name: "Ronda Intensa 2", type: "puno", dur: 40, rest: 20, cue: "Ultimo esfuerzo warrior" },
+        { name: "Enfriamiento", type: "guardia", dur: 90, rest: 0, cue: "Respirar, relajar, respeto" }
+      ]
+    }
+  },
+
+  // ─── CICLISMO ──────────────────────────────────────────────────
+
+  ciclismo: {
+
+    cic_resistencia: {
+      name: "Resistencia en Bicicleta",
+      sport: "ciclismo",
+      emoji: "\uD83D\uDEB4",
+      desc: "Sesion larga para construir base de resistencia",
+      blocks: [
+        { name: "Calentamiento", type: "ciclismo", dur: 180, rest: 15, cue: "Pedaleo suave, preparar piernas" },
+        { name: "Ritmo Medio 1", type: "ciclismo", dur: 300, rest: 15, cue: "Cadencia constante, postura recta" },
+        { name: "Ritmo Medio 2", type: "ciclismo", dur: 300, rest: 15, cue: "Mantener el ritmo, no bajar" },
+        { name: "Ritmo Alto 1", type: "ciclismo", dur: 180, rest: 15, cue: "Subir intensidad, respirar profundo" },
+        { name: "Ritmo Alto 2", type: "ciclismo", dur: 180, rest: 15, cue: "Mantener la carga, piernas fuertes" },
+        { name: "Enfriamiento", type: "ciclismo", dur: 180, rest: 0, cue: "Pedaleo ligero, bajar pulso" }
+      ]
+    },
+
+    cic_sprints: {
+      name: "Sprints en Bicicleta",
+      sport: "ciclismo",
+      emoji: "\u26A1",
+      desc: "Intervalos de alta intensidad para velocidad",
+      blocks: [
+        { name: "Calentamiento", type: "ciclismo", dur: 180, rest: 15, cue: "Preparar el cuerpo para sprints" },
+        { name: "Sprint 1", type: "ciclismo", dur: 30, rest: 30, cue: "Potencia maxima, pedalear fuerte" },
+        { name: "Sprint 2", type: "ciclismo", dur: 30, rest: 30, cue: "Sin bajar la intensidad" },
+        { name: "Sprint 3", type: "ciclismo", dur: 30, rest: 30, cue: "Explosividad pura" },
+        { name: "Sprint 4", type: "ciclismo", dur: 30, rest: 30, cue: "Resistir el dolor, seguir" },
+        { name: "Sprint 5", type: "ciclismo", dur: 30, rest: 30, cue: "Mitad de la serie, fuerte" },
+        { name: "Sprint 6", type: "ciclismo", dur: 30, rest: 30, cue: "No aflojar" },
+        { name: "Recuperacion", type: "ciclismo", dur: 120, rest: 15, cue: "Pedaleo suave, recuperar" },
+        { name: "Sprint 7", type: "ciclismo", dur: 30, rest: 30, cue: "Segunda serie, sin miedo" },
+        { name: "Sprint 8", type: "ciclismo", dur: 30, rest: 30, cue: "Velocidad pura" },
+        { name: "Sprint 9", type: "ciclismo", dur: 30, rest: 30, cue: "Casi listo" },
+        { name: "Sprint 10", type: "ciclismo", dur: 30, rest: 30, cue: "Ultimo sprint, todo o nada" },
+        { name: "Enfriamiento", type: "ciclismo", dur: 180, rest: 0, cue: "Pedaleo suave, bajar ritmo" }
+      ]
+    }
+  }
+};
+
+// ═══════════════════════════════════════════════════════════════════
+//  MODO GUERRA
+// ═══════════════════════════════════════════════════════════════════
+
+var MODO_GUERRA = {
+  lema: "Disciplina es libertad",
+  despertar: "7:00",
+  dormir: "22:30",
+  plan: {
+    lunes: {
+      exercises: ["ab", "fl", "ss", "pl", "mc"]
+    },
+    martes: {
+      exercises: ["cu", "jj", "ab", "fl", "sl"]
+    },
+    miercoles: {
+      exercises: ["ss", "pl", "mc", "ab", "cu"]
+    },
+    jueves: {
+      exercises: ["jj", "fl", "ss", "pl", "sl"]
+    },
+    viernes: {
+      exercises: ["ab", "mc", "cu", "jj", "fl"]
+    },
+    sabado: {
+      trote: true
+    },
+    domingo: {
+      descanso: true
+    }
+  }
+};
+
+// ═══════════════════════════════════════════════════════════════════
+//  SCHEDULE
+// ═══════════════════════════════════════════════════════════════════
+
+function SCHEDULE_DEFAULTS() {
+  return {
+    semana: [
+      { time: "06:30", label: "Modo Guerra", routine: null, military: true },
+      { time: "20:00", label: "Boxeo Fundamentos", routine: "fundamentos", military: false }
+    ],
+    sabado: [
+      { time: "08:00", label: "Boxeo Completa", routine: "completa", military: false },
+      { time: "16:00", label: "Modo Guerra", routine: null, military: true }
+    ],
+    domingo: []
+  };
+}
+
+function loadScheduleStore() {
+  try {
+    var raw = localStorage.getItem("shadowbox_schedule");
+    if (raw) return JSON.parse(raw);
+  } catch (e) { /* ignore */ }
+  return null;
+}
+
+function getDaySchedule(dayKey) {
+  var store = loadScheduleStore();
+  if (store && store[dayKey]) return store[dayKey];
+  var defaults = SCHEDULE_DEFAULTS();
+  return defaults[dayKey] || [];
+}
+
+function getEditableSchedule(dayKey) {
+  return JSON.parse(JSON.stringify(getDaySchedule(dayKey)));
+}
+
+function toTimeInput(t) {
+  if (typeof t === "string" && t.indexOf(":") >= 0) return t;
+  var mins = parseInt(t, 10) || 0;
+  var h = Math.floor(mins / 60);
+  var m = mins % 60;
+  return (h < 10 ? "0" : "") + h + ":" + (m < 10 ? "0" : "") + m;
+}
+
+function escHtml(s) {
+  return String(s)
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#39;");
+}
+
+// ═══════════════════════════════════════════════════════════════════
+//  MODO GUERRA — BLOCKS
+// ═══════════════════════════════════════════════════════════════════
+
+function militaryBlocks(dayKey) {
+  var plan = MODO_GUERRA.plan[dayKey];
+  if (!plan || plan.descanso) return [];
+  if (plan.trote) {
+    return [
+      { name: "Trote Continuo", type: "ciclismo", dur: 300, rest: 0, cue: "Mantener ritmo constante, respirar" }
+    ];
+  }
+  var catalog = {
+    ab: { name: "Abdominales", type: "guardia", dur: 45, rest: 15, cue: "Core firme, respirar en cada rep" },
+    fl: { name: "Flexiones", type: "guardia", dur: 45, rest: 15, cue: "Cuerpo recto, bajar completo" },
+    ss: { name: "Sentadillas", type: "guardia", dur: 45, rest: 15, cue: "Rodillas alineadas, bajar profundo" },
+    pl: { name: "Plancha", type: "guardia", dur: 45, rest: 15, cue: "Cuerpo recto, no hundir cadera" },
+    mc: { name: "Mountain Climbers", type: "guardia", dur: 45, rest: 15, cue: "Rodillas al pecho, ritmo rapido" },
+    cu: { name: "Cuclillas", type: "guardia", dur: 45, rest: 15, cue: "Paso largo, rodilla al suelo" },
+    jj: { name: "Jumping Jacks", type: "guardia", dur: 45, rest: 15, cue: "Brazos completos, saltar ligero" },
+    sl: { name: "Skipping", type: "guardia", dur: 45, rest: 15, cue: "Rodillas altas, ritmo constante" }
+  };
+  var blocks = [];
+  var exercises = plan.exercises || [];
+  for (var i = 0; i < exercises.length; i++) {
+    var ex = catalog[exercises[i]];
+    if (ex) {
+      blocks.push({
+        name: ex.name,
+        type: ex.type,
+        dur: ex.dur,
+        rest: ex.rest,
+        cue: ex.cue
+      });
+    }
+  }
+  return blocks;
+}
+
+// ═══════════════════════════════════════════════════════════════════
+//  HABITS
+// ═══════════════════════════════════════════════════════════════════
+
+var HABITS = [
+  { key: "entrene", name: "Entrene hoy", icon: "\uD83E\uDD4A" },
+  { key: "estudie", name: "Estudie", icon: "\uD83D\uDCDA" },
+  { key: "lei", name: "Lei al menos 15 min", icon: "\uD83D\uDCD6" },
+  { key: "ahorre", name: "Ahorre dinero", icon: "\uD83D\uDCB0" },
+  { key: "registre", name: "Registre su progreso", icon: "\uD83D\uDCDD" },
+  { key: "nocompras", name: "No compro impulsivamente", icon: "\uD83D\uDEAB" },
+  { key: "agua", name: "Tome suficiente agua", icon: "\uD83D\uDCA7" },
+  { key: "dormi", name: "Dormi 7+ horas", icon: "\uD83D\uDE34" },
+  { key: "noprocrast", name: "No procrastine", icon: "\u23F0" },
+  { key: "aprendi", name: "Aprendi algo nuevo", icon: "\uD83E\uDDE0" }
+];
+
+// ═══════════════════════════════════════════════════════════════════
+//  GOALS
+// ═══════════════════════════════════════════════════════════════════
+
+var GOALS = [
+  { key: "g1", name: "Correr 5K sin parar", icon: "\uD83C\uDFC3" },
+  { key: "g2", name: "100 flexiones seguidas", icon: "\uD83D\uDCAA" },
+  { key: "g3", name: "30 dias de disciplina", icon: "\uD83D\uDD25" },
+  { key: "g4", name: "Dominar combinacion 1-2-3", icon: "\uD83E\uDD4A" },
+  { key: "g5", name: "Plancha 3 minutos seguidos", icon: "\u23F1\uFE0F" },
+  { key: "g6", name: "Leer 12 libros este anio", icon: "\uD83D\uDCDA" },
+  { key: "g7", name: "Ahorrar 1000 este mes", icon: "\uD83D\uDCB0" },
+  { key: "g8", name: "Hablar ingles 15 min diarios", icon: "\uD83D\uDDE3\uFE0F" },
+  { key: "g9", name: "Entrenar 5 veces por semana", icon: "\uD83C\uDFCB\uFE0F" },
+  { key: "g10", name: "Ascender a rango ORO", icon: "\uD83E\uDD47" }
+];
+
+// ═══════════════════════════════════════════════════════════════════
+//  RANKS
+// ═══════════════════════════════════════════════════════════════════
+
+var RANKS = [
+  { level: 1, name: "COBRE", min: 0, color: "#cd7f32" },
+  { level: 2, name: "HIERRO", min: 30, color: "#808080" },
+  { level: 3, name: "ORO", min: 50, color: "#ffd700" },
+  { level: 4, name: "DIAMANTE", min: 70, color: "#b9f2ff" },
+  { level: 5, name: "NEMESIS", min: 85, color: "#ff1f1f" },
+  { level: 6, name: "ARCH NEMESIS", min: 95, color: "#ff4444" }
+];
+
+// ═══════════════════════════════════════════════════════════════════
+//  RANK FUNCTIONS
+// ═══════════════════════════════════════════════════════════════════
+
+function getRankForPercent(pct) {
+  var rank = RANKS[0];
+  for (var i = 0; i < RANKS.length; i++) {
+    if (pct >= RANKS[i].min) rank = RANKS[i];
+  }
+  return rank;
+}
+
+function getNextRank(currentLevel) {
+  for (var i = 0; i < RANKS.length; i++) {
+    if (RANKS[i].level === currentLevel + 1) return RANKS[i];
+  }
+  return null;
+}
+
+function calcDisciplinePercent(startDate, endDate, habitsStore) {
+  var start = new Date(startDate);
+  var end = new Date(endDate);
+  var msPerDay = 86400000;
+  var totalDays = Math.round((end - start) / msPerDay) + 1;
+  if (totalDays <= 0) return 0;
+  var totalPossible = totalDays * HABITS.length;
+  var completed = 0;
+  var d = new Date(start);
+  while (d <= end) {
+    var dk = dateKey(d);
+    var dayData = habitsStore ? habitsStore[dk] : null;
+    if (dayData) {
+      for (var h = 0; h < HABITS.length; h++) {
+        if (dayData[HABITS[h].key]) completed++;
+      }
+    }
+    d.setDate(d.getDate() + 1);
+  }
+  return totalPossible > 0 ? Math.round((completed / totalPossible) * 100) : 0;
+}
+
+// ═══════════════════════════════════════════════════════════════════
+//  UTILITY FUNCTIONS
+// ═══════════════════════════════════════════════════════════════════
+
+function fmtTime(sec) {
+  var m = Math.floor(sec / 60);
+  var s = sec % 60;
+  return (m < 10 ? "0" : "") + m + ":" + (s < 10 ? "0" : "") + s;
+}
+
+function routineBlocks(key) {
+  for (var sportKey in ROUTINES) {
+    if (ROUTINES.hasOwnProperty(sportKey)) {
+      if (ROUTINES[sportKey][key]) {
+        return ROUTINES[sportKey][key].blocks;
+      }
+    }
+  }
+  return null;
+}
+
+function routineTotal(blocks) {
+  var total = 0;
+  for (var i = 0; i < blocks.length; i++) {
+    total += blocks[i].dur + (blocks[i].rest || 0);
+  }
+  return total;
+}
+
+function buildSchedule(blocks) {
+  var t = 0;
+  var result = [];
+  for (var i = 0; i < blocks.length; i++) {
+    var b = blocks[i];
+    result.push({
+      name: b.name,
+      type: b.type,
+      dur: b.dur,
+      rest: b.rest,
+      cue: b.cue,
+      start: t,
+      end: t + b.dur
+    });
+    t += b.dur + (b.rest || 0);
+  }
+  result.totalTime = t;
+  return result;
+}
+
+function dateKey(d) {
+  var y = d.getFullYear();
+  var m = d.getMonth() + 1;
+  var day = d.getDate();
+  return y + "-" + (m < 10 ? "0" : "") + m + "-" + (day < 10 ? "0" : "") + day;
+}
+</script>
+<script>(function () {
+  "use strict";
+
+  // ---- $ helper ----
+  const $ = (id) => document.getElementById(id);
+
+  // ---- POSE_IMG for boxing figures ----
+  const POSE_IMG = {
+    guardia: "images/guardia.png", jab: "images/jab.png", cross: "images/jabcross.png",
+    hook: "images/hook.png", uppercut: "images/uppercut.png", defensa: "images/defensa.png",
+    bob: "images/bob.png", footwork: "images/footwork.png"
+  };
+
+  // For non-boxing techniques, use emoji-based SVG silhouettes
+  function figureHTML(type) {
+    if (POSE_IMG[type]) return '<img src="' + POSE_IMG[type] + '" alt="' + type + '">';
+    // For new sports techniques, show a stylized SVG figure
+    const sportIcons = {
+      dribble: "⚽", tiro: "🎯", pase: "🤝", regate: "🏃", remate: "🏃‍♂️",
+      defensa_fut: "🛡️", natacion: "🏊", ciclismo: "🚴", patada: "🦵",
+      puno: "👊", codazo: "💪", rodillazo: "🦵"
+    };
+    const icon = sportIcons[type] || "🏃";
+    return '<div style="font-size:80px;text-align:center;padding:20px;filter:drop-shadow(0 0 8px var(--red))drop-shadow(0 0 20px var(--blood2))">' + icon + '</div>';
+  }
+
+  // ---- Settings ----
+  const DEFAULTS = { vol: 0.9, voice: true, vibe: true, alarms: true, war: false, accent: "rojo", noglow: false };
+  let settings = Object.assign({}, DEFAULTS);
+  try { Object.assign(settings, DEFAULTS, JSON.parse(localStorage.getItem("sb_settings") || "{}")); } catch (e) {}
+
+  function applyWar() {
+    document.body.classList.toggle("war-mode", !!settings.war);
+    const b = $("btnWar");
+    if (b) {
+      b.textContent = settings.war ? "⚡ ON" : "⚡";
+      b.style.borderColor = settings.war ? "var(--red)" : "";
+      b.style.color = settings.war ? "var(--red-bright)" : "";
+    }
+  }
+
+  // ---- Accent Colors (expanded) ----
+  const ACCENT_BASES = {
+    rojo: "#ff1f1f", azul: "#2f7bff", verde: "#2ee05a",
+    cian: "#18e0d0", morado: "#b44bff", naranja: "#ff7a1f", rosa: "#ff4bc0",
+    fantasia: "#c9a52c", dorado: "#ffd700", turquesa: "#00ced1",
+    lime: "#32cd32", coral: "#ff6b6b", lila: "#9370db", azul oscuro: "#1a3a6b"
+  };
+
+  function hexRgb(h) {
+    const n = parseInt(h.slice(1), 16);
+    return [n >> 16 & 255, n >> 8 & 255, n & 255];
+  }
+  function mix(c, t, k) {
+    return "rgb(" + Math.round(c[0]+(t[0]-c[0])*k) + "," + Math.round(c[1]+(t[1]-c[1])*k) + "," + Math.round(c[2]+(t[2]-c[2])*k) + ")";
+  }
+  function rgbaOf(h, a) {
+    const c = hexRgb(h);
+    return "rgba(" + c[0] + "," + c[1] + "," + c[2] + "," + a + ")";
+  }
+
+  function applyAccent() {
+    const base = ACCENT_BASES[settings.accent] || ACCENT_BASES.rojo;
+    const c = hexRgb(base), W = [255,255,255], K = [0,0,0];
+    const set = (k, v) => document.documentElement.style.setProperty(k, v);
+    set("--red", "rgb(" + c.join(",") + ")");
+    set("--red-hot", mix(c,W,.28));
+    set("--red-soft", mix(c,W,.5));
+    set("--red-bright", mix(c,W,.12));
+    set("--blood", mix(c,K,.55));
+    set("--blood2", mix(c,K,.32));
+    set("--blood-deep", mix(c,K,.72));
+    set("--line", mix(c,K,.86));
+    set("--text", mix(c,W,.82));
+    set("--text-dim", mix(c,W,.55));
+    set("--grad1", mix(c,K,.72));
+    set("--grad1b", mix(c,K,.78));
+    set("--grad4", mix(c,K,.9));
+    set("--grad5", mix(c,K,.95));
+    set("--tint", rgbaOf(base,.4));
+    set("--tint2", rgbaOf(base,.6));
+    set("--tint3", rgbaOf(base,.6));
+    set("--tint4", rgbaOf(base,.25));
+    set("--bg-glow", rgbaOf(base,.18));
+    set("--bg-glow2", rgbaOf(base,.12));
+    set("--glow-text", "0 0 5px var(--red), 0 0 12px var(--red)");
+    set("--glow-box", "0 0 6px var(--red), 0 0 16px var(--blood2), inset 0 0 10px var(--tint3)");
+    set("--glow-soft", "0 0 4px var(--red), 0 0 14px var(--blood2)");
+  }
+
+  function applyNoGlow() {
+    document.body.classList.toggle("no-glow", !!settings.noglow);
+  }
+
+  // ---- Custom blocks ----
+  let customBlocks = [];
+  try { customBlocks = JSON.parse(localStorage.getItem("sb_custom") || "[]"); } catch (e) { customBlocks = []; }
+
+  // ---- Training state ----
+  const S = { mode: "routine", routineName: "", segs: [], idx: 0, remaining: 0, segEnd: 0, running: false, paused: false, done: false, lastSec: -1 };
+
+  // ---- Audio ----
+  let audioCtx = null;
+  function ensureAudio() {
+    if (!audioCtx) { const AC = window.AudioContext || window.webkitAudioContext; if (!AC) return null; audioCtx = new AC(); }
+    if (audioCtx.state === "suspended") audioCtx.resume();
+    return audioCtx;
+  }
+  function playBeep(freq, dur, gain, delay, type) {
+    if (!settings.alarms) return;
+    const ctx = ensureAudio(); if (!ctx) return;
+    delay = delay || 0; dur = dur || 0.12; gain = (gain || 0.5) * settings.vol;
+    const t0 = ctx.currentTime + delay;
+    const o = ctx.createOscillator(); const g = ctx.createGain();
+    o.type = type || "sine"; o.frequency.setValueAtTime(freq, t0);
+    g.gain.setValueAtTime(0.0001, t0);
+    g.gain.exponentialRampToValueAtTime(Math.max(gain,0.001), t0+0.012);
+    g.gain.exponentialRampToValueAtTime(0.0001, t0+dur);
+    o.connect(g); g.connect(ctx.destination); o.start(t0); o.stop(t0+dur+0.06);
+  }
+  function alarmWork() { playBeep(740,0.14,0.55); playBeep(1180,0.22,0.55,0.18); }
+  function alarmRest() { playBeep(660,0.14,0.5); playBeep(440,0.24,0.5,0.18); }
+  function alarmTick(sec) { playBeep(sec<=3?1320:880,0.06,0.45); }
+  function alarmFinish() { [880,1040,1318,1568].forEach(function(f,i){playBeep(f,0.2,0.6,i*0.16);}); }
+
+  // ---- Voice ----
+  function speak(text) {
+    if (!settings.voice || !("speechSynthesis" in window)) return;
+    try {
+      const u = new SpeechSynthesisUtterance(text); u.lang = "es-ES"; u.rate = 0.98;
+      const voices = speechSynthesis.getVoices().filter(v => /es/i.test(v.lang));
+      if (voices.length) u.voice = voices[0]; speechSynthesis.speak(u);
+    } catch (e) {}
+  }
+
+  // ---- Vibration ----
+  function vibrate(pattern) { if (!settings.vibe || !navigator.vibrate) return; try { navigator.vibrate(pattern); } catch (e) {} }
+
+  // ---- Flash / Toast ----
+  function flash() {
+    const el = $("flashOverlay"); el.classList.remove("flash"); void el.offsetWidth; el.classList.add("flash");
+    document.body.classList.remove("shake"); void document.body.offsetWidth; document.body.classList.add("shake");
+  }
+  let toastTimer = null;
+  function toast(msg) {
+    const el = $("toast"); el.textContent = msg; el.classList.add("show");
+    clearTimeout(toastTimer); toastTimer = setTimeout(() => el.classList.remove("show"), 2600);
+  }
+
+  // ---- Navigation ----
+  const VIEWS = ["home","military","schedule","shadow","library","routine","training","custom","habits","settings"];
+  const NAV_FOR = { library:"shadow", routine:"shadow", custom:"shadow", schedule:"home" };
+  function go(view) {
+    if (view !== "training" && S.running) { engineStop(); S.paused = false; }
+    VIEWS.forEach(v => $(`view-${v}`).classList.toggle("active", v === view));
+    document.querySelectorAll("#bottomNav .nav-btn").forEach(b => {
+      b.classList.toggle("active", b.dataset.nav === (NAV_FOR[view]||view));
+    });
+    $("btnBack").classList.toggle("hidden", !["library","routine","custom","schedule"].includes(view));
+    if (view === "home") renderHome();
+    window.scrollTo(0, 0);
+  }
+  document.querySelectorAll("#bottomNav .nav-btn").forEach(b => b.addEventListener("click", () => go(b.dataset.nav)));
+  $("btnBack").addEventListener("click", () => go("home"));
+
+  // ---- Date helpers ----
+  const DAY_KEYS = ["domingo","lunes","martes","miercoles","jueves","viernes","sabado"];
+  const DAY_NAMES = { lunes:"LUNES", martes:"MARTES", miercoles:"MIERCOLES", jueves:"JUEVES", viernes:"VIERNES", sabado:"SABADO", domingo:"DOMINGO" };
+  function dayKeyOf(d) { return DAY_KEYS[d.getDay()]; }
+  function mondayOf(d) {
+    const x = new Date(d); x.setDate(x.getDate() - (x.getDay()+6)%7); x.setHours(0,0,0,0); return x;
+  }
+  function hmMin(t) { const p = t.split(":"); return (+p[0])*60+(+p[1]); }
+
+  // ---- RANK BAR (HOME) ----
+  function renderRankBar() {
+    const habitsStore = loadHabits();
+    const now = new Date();
+    const monday = mondayOf(now);
+    const sunday = new Date(monday); sunday.setDate(monday.getDate()+6); sunday.setHours(23,59,59);
+    const weekPct = calcDisciplinePercent(monday, sunday, habitsStore);
+    const rank = getRankForPercent(weekPct);
+    const next = getNextRank(rank.level);
+    const progress = next ? ((weekPct - rank.min) / (next.min - rank.min)) * 100 : 100;
+
+    $("rankBar").innerHTML =
+      '<span class="rank-icon">' + rank.icon + '</span>' +
+      '<div class="rank-info">' +
+        '<b>' + rank.name + '</b>' +
+        '<small>Semana: ' + weekPct + '% disciplina' + (next ? ' — Proximo: ' + next.name + ' (' + next.min + '%)' : ' — MAXIMO') + '</small>' +
+        '<div class="rank-progress"><div class="rank-progress-fill" style="width:' + Math.min(100, progress) + '%;background:' + rank.color + '"></div></div>' +
+      '</div>';
+  }
+
+  // ---- DISCIPLINE STATS (HOME) ----
+  function renderDiscStats() {
+    const habitsStore = loadHabits();
+    const now = new Date();
+    // Week
+    const monday = mondayOf(now);
+    const sunday = new Date(monday); sunday.setDate(monday.getDate()+6); sunday.setHours(23,59,59);
+    const weekPct = calcDisciplinePercent(monday, sunday, habitsStore);
+    // Month
+    const monthStart = new Date(now.getFullYear(), now.getMonth(), 1);
+    const monthEnd = new Date(now.getFullYear(), now.getMonth()+1, 0); monthEnd.setHours(23,59,59);
+    const monthPct = calcDisciplinePercent(monthStart, monthEnd, habitsStore);
+    // Year
+    const yearStart = new Date(now.getFullYear(), 0, 1);
+    const yearEnd = new Date(now.getFullYear(), 11, 31); yearEnd.setHours(23,59,59);
+    const yearPct = calcDisciplinePercent(yearStart, yearEnd, habitsStore);
+
+    $("discStats").innerHTML =
+      '<div class="disc-card"><b>SEMANA</b><span class="disc-pct">' + weekPct + '%</span></div>' +
+      '<div class="disc-card"><b>MES</b><span class="disc-pct">' + monthPct + '%</span></div>' +
+      '<div class="disc-card"><b>ANIO</b><span class="disc-pct">' + yearPct + '%</span></div>';
+  }
+
+  // ---- HOME ----
+  function renderHome() {
+    renderRankBar();
+    renderDiscStats();
+    const now = new Date();
+    const dk = dayKeyOf(now);
+    const d = MODO_GUERRA.plan[dk];
+    const nombre = DAY_NAMES[dk];
+
+    $("todayTitle").textContent = "HOY · " + nombre;
+    const fechas = ["DOMINGO","LUNES","MARTES","MIERCOLES","JUEVES","VIERNES","SABADO"];
+    $("todaySub").textContent = fechas[now.getDay()] + " " + now.getDate() + "/" + (now.getMonth()+1);
+
+    let hero = "";
+    if (d.trote) {
+      hero = '<div class="hero-figure"><div class="figure-wrap">' + figureHTML("guardia") + '</div>' +
+        '<div class="hero-body"><h3>TROTE SUAVE 30 MIN</h3>' +
+        '<p style="color:var(--text-dim);font-size:12px;margin:4px 0 8px;">Sabado de resistencia. Trote + sombra.</p>' +
+        '<button class="btn primary big" data-start="' + dk + '">EMPEZAR TROTE</button></div></div>';
+    } else if (d.descanso) {
+      hero = '<div class="hero-figure"><div class="figure-wrap">' + figureHTML("guardia") + '</div>' +
+        '<div class="hero-body"><h3>DESCANSO ACTIVO</h3>' +
+        '<p style="color:var(--text-dim);font-size:12px;margin:4px 0 8px;">Caminar, estirar y respirar.</p>' +
+        '<button class="btn primary big" data-start="' + dk + '">EMPEZAR RECUPERACION</button></div></div>';
+    } else {
+      hero = '<div class="hero-figure"><div class="figure-wrap">' + figureHTML("guardia") + '</div>' +
+        '<div class="hero-badge">ENTRENAMIENTO ' + nombre + '</div></div>' +
+        '<div class="hero-body"><h3>HOY TOCA ENTRENAR</h3>' +
+        '<div class="mini-grid">' +
+          '<div><b>Abs</b><span>x' + d.ab + '</span></div>' +
+          '<div><b>Flex</b><span>x' + d.fl + '</span></div>' +
+          '<div><b>Sent</b><span>x' + d.ss + '</span></div>' +
+          '<div><b>Plan</b><span>' + d.pl + 's</span></div>' +
+          '<div><b>MC</b><span>x' + d.mc + '</span></div>' +
+          '<div><b>Cuerda</b><span>' + d.cu + 'm</span></div>' +
+          '<div><b>JJ</b><span>x' + d.jj + '</span></div>' +
+          '<div><b>Saltos</b><span>x' + d.sl + '</span></div>' +
+        '</div>' +
+        '<button class="btn primary big" data-start="' + dk + '">EMPEZAR ENTRENAMIENTO</button></div>';
+    }
+
+    const habits = loadHabits();
+    const hoy = habits[dateKey(now)] || {};
+    const doneCount = HABITS.filter(h => hoy[h.key]).length;
+    hero += '<div class="today-strip">' +
+      '<button id="todayHabits" class="btn secondary" style="flex:1;">HABITOS HOY: ' + doneCount + "/" + HABITS.length + '</button>' +
+      '<button id="todayPlan" class="btn secondary">PLAN SEMANAL</button></div>';
+
+    $("homeHero").innerHTML = hero;
+    const startBtn = document.querySelector('#homeHero [data-start]');
+    if (startBtn) startBtn.addEventListener("click", () => startTraining({mode:"military", name:"ENTRENAMIENTO "+nombre, blocks:militaryBlocks(dk)}));
+    $("todayHabits").addEventListener("click", () => go("habits"));
+    $("todayPlan").addEventListener("click", () => go("military"));
+    renderSchedule();
+  }
+
+  function renderSchedule() {
+    const now = new Date(); const nowMin = now.getHours()*60+now.getMinutes();
+    const items = getDaySchedule(dayKeyOf(now));
+    $("scheduleList").innerHTML = items.map((it,i) => {
+      const start = hmMin(it.t);
+      const end = it.until ? hmMin(it.until) : (i+1<items.length ? hmMin(items[i+1].t) : 1440);
+      const active = nowMin>=start && nowMin<end;
+      return '<div class="sched-row'+(active?" active":"")+'">' +
+        '<span class="sched-time">'+it.t+'</span>' +
+        '<span class="sched-emoji">'+it.emoji+'</span>' +
+        '<div class="sched-txt"><b>'+it.title+'</b><span>'+it.desc+'</span></div>' +
+        (active ? '<span class="sched-now">AHORA</span>' : "") +
+      '</div>';
+    }).join("");
+  }
+
+  // ---- MILITARY PLAN ----
+  function renderMilitary() {
+    const keys = ["lunes","martes","miercoles","jueves","viernes","sabado","domingo"];
+    const today = dayKeyOf(new Date());
+    $("militaryGrid").innerHTML = keys.map(k => {
+      const d = MODO_GUERRA.plan[k]; let detail = "";
+      if (d.trote) detail = '<div class="day-detail"><span>Trote suave 30 min</span></div>';
+      else if (d.descanso) detail = '<div class="day-detail"><span>Descanso activo</span></div>';
+      else detail = '<div class="day-detail"><span>Ab x'+d.ab+'</span><span>Fl x'+d.fl+'</span><span>Sent x'+d.ss+'</span><span>Pl '+d.pl+'s</span><span>MC x'+d.mc+'</span><span>Cuerda '+d.cu+'m</span><span>JJ x'+d.jj+'</span><span>Saltos x'+d.sl+'</span></div>';
+      return '<div class="day-card'+(today===k?" today":"")+'" data-day="'+k+'">' +
+        '<div class="day-head"><h3>'+d.emoji+' '+DAY_NAMES[k]+'</h3>'+(today===k?'<span class="day-tag">HOY</span>':'')+'</div>' +
+        detail + '<button class="btn primary small" data-start-day="'+k+'">EMPEZAR</button></div>';
+    }).join("");
+    $("militaryGrid").querySelectorAll("[data-start-day]").forEach(b => {
+      b.addEventListener("click", () => startTraining({mode:"military", name:"ENTRENAMIENTO "+DAY_NAMES[b.dataset.startDay], blocks:militaryBlocks(b.dataset.startDay)}));
+    });
+  }
+
+  // ---- SPORT TABS + SHADOW BOX ----
+  let currentSport = "boxeo";
+
+  function renderSportTabs() {
+    const keys = Object.keys(SPORTS);
+    $("sportTabs").innerHTML = keys.map(k => {
+      const s = SPORTS[k];
+      return '<button class="sport-tab'+(currentSport===k?" active":"")+'" data-sport="'+k+'">'+s.icon+' '+s.name+'</button>';
+    }).join("");
+    $("sportTabs").querySelectorAll("[data-sport]").forEach(b => {
+      b.addEventListener("click", () => { currentSport = b.dataset.sport; renderSportTabs(); renderShadow(); });
+    });
+  }
+
+  function renderShadow() {
+    renderSportTabs();
+    const today = dayKeyOf(new Date());
+    const d = MODO_GUERRA.plan[today];
+    let note = "";
+    if (d.descanso) note = '<div class="note-warn">Hoy es descanso activo. La sombra es opcional.</div>';
+    else if (d.trote) note = '<div class="note-info">Sabado de resistencia. Anade sombra al terminar el trote.</div>';
+    else note = '<div class="note-info">Hoy toca entrenamiento militar. La sombra ya incluye 3 rondas.</div>';
+    $("shadowNote").innerHTML = note;
+
+    const sport = SPORTS[currentSport];
+    const sportRoutines = sport.routines;
+    const rg = $("routineGrid");
+    rg.innerHTML = sportRoutines.map(key => {
+      const r = ROUTINES[key]; if (!r) return "";
+      const blocks = routineBlocks(key);
+      const total = routineTotal(blocks);
+      return '<div class="routine-card" data-rt="'+key+'">' +
+        '<div class="card-figure">' + figureHTML(blocks[0].type) + '</div>' +
+        '<h3>'+r.emoji+' '+r.name+'</h3>' +
+        '<p>'+r.desc+'</p>' +
+        '<div class="card-meta"><span>⏱ '+fmtTime(total)+'</span><span>🥊 '+blocks.length+' ejercicios</span></div>' +
+      '</div>';
+    }).join("");
+    rg.querySelectorAll(".routine-card").forEach(card => {
+      card.addEventListener("click", () => { go("routine"); showRoutine(card.dataset.rt); });
+    });
+
+    // Techniques for this sport
+    const sportTechniques = TECHNIQUES.filter(t => {
+      if (currentSport === "boxeo") return ["guardia","jab","cross","hook","uppercut","defensa","bob","footwork"].includes(t.key);
+      if (currentSport === "futbol") return ["dribble","tiro","pase","regate","remate","defensa_fut","footwork"].includes(t.key);
+      if (currentSport === "basquet") return ["dribble","tiro","pase","regate","defensa_fut","footwork","bob"].includes(t.key);
+      if (currentSport === "natacion") return ["natacion"].includes(t.key);
+      if (currentSport === "artes_marciales") return ["patada","puno","codazo","rodillazo","guardia","defensa","hook"].includes(t.key);
+      if (currentSport === "ciclismo") return ["ciclismo","footwork"].includes(t.key);
+      return false;
+    });
+    const tg = $("techniqueGrid");
+    tg.innerHTML = sportTechniques.map(t =>
+      '<div class="tech-card" data-tech="'+t.key+'">' +
+        '<div class="card-figure">'+figureHTML(t.key)+'</div>' +
+        '<h3>'+t.name+'</h3><p>'+t.desc+'</p></div>'
+    ).join("");
+    tg.querySelectorAll(".tech-card").forEach(card => {
+      card.addEventListener("click", () => { go("library"); showLibrary(card.dataset.tech); });
+    });
+
+    $("customMini").innerHTML = customBlocks.length
+      ? '<p style="color:var(--text-dim);font-size:12px;">Tu rutina tiene <b>'+customBlocks.length+'</b> ejercicio(s).</p>'
+      : '<p style="color:var(--text-dim);font-size:12px;">Sin ejercicios guardados.</p>';
+  }
+
+  $("btnCustomGo").addEventListener("click", () => go("custom"));
+
+  // ---- SCHEDULE EDITOR ----
+  let schedDay = dayKeyOf(new Date());
+  const DAY_ORDER = ["lunes","martes","miercoles","jueves","viernes","sabado","domingo"];
+
+  function saveSchedModel() {
+    const store = loadScheduleStore();
+    store[schedDay] = getEditableSchedule(schedDay);
+    localStorage.setItem("mg_schedule", JSON.stringify(store));
+  }
+
+  function renderSchedTabs() {
+    const today = dayKeyOf(new Date());
+    $("schedDayTabs").innerHTML = DAY_ORDER.map(k =>
+      '<button class="sched-tab'+(schedDay===k?" active":'')+(today===k?" today":'')+'" data-sday="'+k+'">'+DAY_NAMES[k].charAt(0)+'</button>'
+    ).join("");
+    $("schedDayTabs").querySelectorAll("[data-sday]").forEach(b => {
+      b.addEventListener("click", () => { schedDay=b.dataset.sday; renderSchedTabs(); renderSchedEdit(); });
+    });
+  }
+
+  function renderSchedEdit() {
+    const items = getDaySchedule(schedDay);
+    const el = $("schedEditList");
+    el.innerHTML = '<div class="sched-edit-head"><b>'+DAY_NAMES[schedDay]+'</b><span>'+items.length+' bloques</span></div>' +
+      items.map((it,i) =>
+        '<div class="sched-edit-row"><div class="sched-edit-fields">' +
+          '<input type="time" class="se-time" data-idx="'+i+'" data-f="t" value="'+toTimeInput(it.t)+'">' +
+          '<input class="se-emoji" data-idx="'+i+'" data-f="emoji" maxlength="4" value="'+escHtml(it.emoji)+'">' +
+          '<input class="se-title" data-idx="'+i+'" data-f="title" placeholder="Actividad" value="'+escHtml(it.title)+'">' +
+          '<input class="se-desc" data-idx="'+i+'" data-f="desc" placeholder="Descripcion" value="'+escHtml(it.desc||"")+'">' +
+          '<input type="time" class="se-until" data-idx="'+i+'" data-f="until" value="'+toTimeInput(it.until||"")+'" title="Hora fin">' +
+        '</div><div class="sched-edit-actions">' +
+          '<button data-up="'+i+'" title="Subir">&#9650;</button>' +
+          '<button data-down="'+i+'" title="Bajar">&#9660;</button>' +
+          '<button data-del="'+i+'" title="Eliminar">&#10005;</button>' +
+        '</div></div>'
+      ).join("");
+    el.querySelectorAll("input[data-idx]").forEach(inp => { inp.addEventListener("input", onSchedInput); inp.addEventListener("change", onSchedInput); });
+    el.querySelectorAll("[data-up]").forEach(b => b.addEventListener("click", () => moveSchedItem(+b.dataset.up,-1)));
+    el.querySelectorAll("[data-down]").forEach(b => b.addEventListener("click", () => moveSchedItem(+b.dataset.down,1)));
+    el.querySelectorAll("[data-del]").forEach(b => b.addEventListener("click", () => {
+      getEditableSchedule(schedDay).splice(+b.dataset.del,1); saveSchedModel(); renderSchedEdit(); toast("Bloque eliminado");
+    }));
+  }
+
+  function onSchedInput(e) {
+    const inp = e.target; const model = getEditableSchedule(schedDay);
+    model[+inp.dataset.idx][inp.dataset.f] = inp.value;
+    saveSchedModel();
+  }
+
+  function moveSchedItem(i, dir) {
+    const model = getEditableSchedule(schedDay); const j = i+dir;
+    if (j<0||j>=model.length) return;
+    const tmp=model[i]; model[i]=model[j]; model[j]=tmp; saveSchedModel(); renderSchedEdit();
+  }
+
+  // SAVE BUTTON for schedule editor
+  $("schedSave").addEventListener("click", () => {
+    saveSchedModel();
+    renderSchedEdit();
+    renderSchedule();
+    renderHome();
+    toast("Horario guardado y aplicado");
+    go("home");
+  });
+
+  $("schedAdd").addEventListener("click", () => {
+    const model = getEditableSchedule(schedDay);
+    let t = "20:00";
+    const last = model[model.length-1];
+    if (last && last.t) { const m = hmMin(last.t)+60; t = toTimeInput((Math.floor(m/60)%24)+":"+(m%60)); }
+    model.push({t:t, emoji:"⭐", title:"Nueva actividad", desc:""});
+    saveSchedModel(); renderSchedEdit(); toast("Bloque anadido");
+  });
+
+  $("schedReset").addEventListener("click", () => {
+    const store = loadScheduleStore(); delete store[schedDay];
+    localStorage.setItem("mg_schedule", JSON.stringify(store)); renderSchedEdit();
+    toast("Horario de "+DAY_NAMES[schedDay].toLowerCase()+" restaurado");
+  });
+
+  $("btnEditSchedule").addEventListener("click", () => go("schedule"));
+
+  // ---- LIBRARY ----
+  function showLibrary(key) {
+    const t = TECHNIQUES.find(x => x.key===key) || TECHNIQUES[0];
+    $("libTitle").textContent = t.name;
+    $("libFigure").innerHTML = '<div class="figure-ring"></div><div class="figure-wrap">'+figureHTML(t.key)+'</div>';
+    $("libBody").innerHTML = '<p style="color:var(--text);line-height:1.5;font-size:14px;">'+t.desc+'</p>' +
+      '<p style="color:var(--text-dim);font-size:12px;">Practica 1 minuto siguiendo la figura.</p>';
+    $("libPractice").dataset.type = t.key;
+  }
+  $("libPractice").addEventListener("click", () => {
+    const key = $("libPractice").dataset.type||"guardia";
+    const t = TECHNIQUES.find(x => x.key===key);
+    startTraining({mode:"practice", name:t.name, blocks:[{name:t.name, type:key, dur:60, rest:0, cue:t.desc}]});
+  });
+
+  // ---- ROUTINE DETAIL ----
+  function showRoutine(key) {
+    const r = ROUTINES[key]; const blocks = routineBlocks(key); const total = routineTotal(blocks);
+    $("routineTitle").textContent = r.emoji+" "+r.name;
+    $("routineDesc").textContent = r.desc;
+    const restTotal = blocks.reduce((a,b) => a+b.rest, 0);
+    $("routineSummary").innerHTML =
+      "<div><b>"+fmtTime(total)+"</b><br>Tiempo total</div>" +
+      "<div><b>"+blocks.length+"</b><br>Ejercicios</div>" +
+      "<div><b>"+fmtTime(restTotal)+"</b><br>Descanso</div>" +
+      "<div><b>"+Math.round(blocks.length/(total/60))+"</b><br>Ej/min</div>";
+    $("routinePlan").innerHTML = blocks.map((b,i) =>
+      '<div class="plan-row"><span class="plan-idx">'+(i+1)+'</span><b>'+b.name+'</b>' +
+      '<span class="plan-time">'+fmtTime(b.dur)+(b.rest?' desc '+fmtTime(b.rest):'')+'</span></div>'
+    ).join("");
+    $("btnStart").dataset.routine = key;
+  }
+
+  $("btnStart").addEventListener("click", () => {
+    const key = $("btnStart").dataset.routine;
+    startTraining({mode:"routine", name:ROUTINES[key].name, blocks:routineBlocks(key)});
+  });
+
+  // ---- CUSTOM ----
+  function saveCustom() { localStorage.setItem("sb_custom", JSON.stringify(customBlocks)); renderCustom(); renderShadow(); }
+  function renderCustom() {
+    const el = $("customList");
+    if (!customBlocks.length) { el.innerHTML = '<p style="color:var(--text-dim);">Sin ejercicios. Anade abajo.</p>'; return; }
+    el.innerHTML = customBlocks.map((b,i) =>
+      '<div class="custom-row"><div class="cr-fig">'+figureHTML(b.type)+'</div>' +
+      '<div class="cr-info"><b>'+b.name+'</b><span>'+fmtTime(b.dur)+' trabajo · '+fmtTime(b.rest)+' descanso</span></div>' +
+      '<button data-del="'+i+'" title="Eliminar">&#10005;</button></div>'
+    ).join("");
+    el.querySelectorAll("button[data-del]").forEach(btn => {
+      btn.addEventListener("click", () => { customBlocks.splice(+btn.dataset.del,1); saveCustom(); });
+    });
+  }
+
+  $("customAdd").addEventListener("click", () => {
+    const type = $("customType").value;
+    const dur = Math.max(5, Number($("customDur").value)||60);
+    const rest = Math.max(0, Number($("customRest").value)||20);
+    const t = TECHNIQUES.find(x => x.key===type);
+    customBlocks.push({name:t.name, type:type, dur:dur, rest:rest, cue:t.desc});
+    saveCustom();
+  });
+
+  $("customStart").addEventListener("click", () => {
+    if (!customBlocks.length) { toast("Anade al menos un ejercicio"); return; }
+    startTraining({mode:"custom", name:"MI RUTINA", blocks:customBlocks.map(b=>({name:b.name,type:b.type,dur:b.dur,rest:b.rest,cue:b.cue}))});
+  });
+
+  // Populate custom type select
+  function populateCustomSelect() {
+    const sel = $("customType");
+    sel.innerHTML = TECHNIQUES.map(t => '<option value="'+t.key+'">'+t.name+'</option>').join("");
+  }
+
+  // ---- HABITS ----
+  function loadHabits() { try { return JSON.parse(localStorage.getItem("mg_habits")||"{}"); } catch(e) { return {}; } }
+
+  function renderHabits() {
+    const store = loadHabits(); const key = dateKey(); const day = store[key]||{};
+    const done = HABITS.filter(h => day[h.key]).length;
+    $("habitsList").innerHTML =
+      '<div class="habit-progress"><b>'+done+'/'+HABITS.length+'</b><span>habitos de hoy</span></div>' +
+      HABITS.map(h =>
+        '<div class="habit-row'+(day[h.key]?" done":"")+'" data-habit="'+h.key+'">' +
+          '<span class="habit-emoji">'+h.emoji+'</span><b>'+h.label+'</b>' +
+          '<span class="habit-check">'+(day[h.key]?"&#10003;":"")+'</span></div>'
+      ).join("") +
+      '<p style="color:var(--text-dim);font-size:11px;margin-top:6px;">Toca cada habito al completarlo.</p>';
+    $("habitsList").querySelectorAll("[data-habit]").forEach(row => {
+      row.addEventListener("click", () => {
+        const s2=loadHabits(), k2=dateKey(), d2=s2[k2]||{};
+        d2[row.dataset.habit]=!d2[row.dataset.habit]; s2[k2]=d2;
+        localStorage.setItem("mg_habits", JSON.stringify(s2)); renderHabits(); renderHome();
+      });
+    });
+    // Week
+    const monday = mondayOf(new Date());
+    const weekHtml = [];
+    for (let i=0;i<7;i++) {
+      const d2=new Date(monday); d2.setDate(monday.getDate()+i); const k=dateKey(d2); const st=store[k]||{};
+      const c=HABITS.filter(h=>st[h.key]).length;
+      weekHtml.push('<div class="week-cell'+(k===dateKey()?" today":"")+'">' +
+        '<b>'+DAY_NAMES[dayKeyOf(d2)].charAt(0)+'</b><span>'+d2.getDate()+'</span>' +
+        '<i style="background:'+(c>=HABITS.length?"#ff1f1f":c>=5?"#8a0000":"#2a0000")+'">'+c+'/'+HABITS.length+'</i></div>');
+    }
+    $("habitsWeek").innerHTML = '<div class="week-grid">'+weekHtml.join("")+'</div>';
+    // Goals
+    $("goalsList").innerHTML = GOALS.map(g =>
+      '<div class="goal-row'+(day["g_"+g.key]?" done":"")+'" data-goal="'+g.key+'">' +
+        '<b>'+g.label+'</b><span class="habit-check">'+(day["g_"+g.key]?"&#10003;":"")+'</span></div>'
+    ).join("");
+    $("goalsList").querySelectorAll("[data-goal]").forEach(row => {
+      row.addEventListener("click", () => {
+        const s2=loadHabits(), k2=dateKey(), d2=s2[k2]||{};
+        d2["g_"+row.dataset.goal]=!d2["g_"+row.dataset.goal]; s2[k2]=d2;
+        localStorage.setItem("mg_habits", JSON.stringify(s2)); renderHabits();
+      });
+    });
+    renderFinance();
+  }
+
+  // ---- FINANCE ----
+  function loadFinance() { try { return JSON.parse(localStorage.getItem("mg_finance")||"{}"); } catch(e) { return {}; } }
+  function renderFinance() {
+    const f=loadFinance(); const ingresos=Number(f.ingresos)||0;
+    const gastos=["alimentacion","transporte","servicios","otros"].reduce((a,c)=>a+(Number(f[c])||0),0);
+    const balance=ingresos-gastos; const ahorro=Math.round(ingresos*0.1);
+    $("financeBody").innerHTML =
+      '<div class="fin-grid">' +
+        '<div class="fin-card"><b>INGRESOS</b><span class="fin-money">'+ingresos.toLocaleString("es-MX")+'</span></div>' +
+        '<div class="fin-card"><b>GASTOS</b><span class="fin-money">'+gastos.toLocaleString("es-MX")+'</span></div>' +
+        '<div class="fin-card"><b>AHORRO 10%</b><span class="fin-money">'+ahorro.toLocaleString("es-MX")+'</span></div>' +
+        '<div class="fin-card"><b>BALANCE</b><span class="fin-money">'+balance.toLocaleString("es-MX")+'</span></div>' +
+      '</div>' +
+      '<div class="fin-row"><span>Ingresos</span><input id="finIngresos" type="number" min="0" value="'+(f.ingresos||"")+'"></div>' +
+      '<div class="fin-row"><span>Alimentacion</span><input id="finAlimentacion" type="number" min="0" value="'+(f.alimentacion||"")+'"></div>' +
+      '<div class="fin-row"><span>Transporte</span><input id="finTransporte" type="number" min="0" value="'+(f.transporte||"")+'"></div>' +
+      '<div class="fin-row"><span>Servicios</span><input id="finServicios" type="number" min="0" value="'+(f.servicios||"")+'"></div>' +
+      '<div class="fin-row"><span>Otros</span><input id="finOtros" type="number" min="0" value="'+(f.otros||"")+'"></div>' +
+      '<p style="color:var(--text-dim);font-size:11px;margin-top:6px;">Ahorra minimo el 10% de cualquier ingreso.</p>';
+    ["ingresos","alimentacion","transporte","servicios","otros"].forEach(fld => {
+      const el=document.getElementById("fin"+fld.charAt(0).toUpperCase()+fld.slice(1));
+      if (el) el.addEventListener("input", () => { const nf=loadFinance(); nf[fld]=el.value; localStorage.setItem("mg_finance",JSON.stringify(nf)); renderFinance(); });
+    });
+  }
+
+  // ---- TRAINING ENGINE ----
+  let timerInt = null;
+  function startTraining(cfg) {
+    ensureAudio(); S.mode=cfg.mode; S.routineName=cfg.name; S.segs=buildSchedule(cfg.blocks);
+    S.idx=0; S.done=false; S.paused=false; S.running=true;
+    go("training"); enterSeg(true); engineStart(); keepAwake(true);
+  }
+  function enterSeg(announce) {
+    const seg=S.segs[S.idx]; S.segEnd=Date.now()+seg.dur*1000; S.remaining=seg.dur; S.lastSec=Math.ceil(seg.dur);
+    renderSeg(seg);
+    if (announce) {
+      if (seg.kind==="work") { alarmWork(); vibrate(S.idx===0?[200,80,200]:[150,50,150]); speak("Empieza "+seg.name+". "+(seg.cue||"")); }
+      else { alarmRest(); vibrate([100]); speak(seg.name+". Respira."); }
+      flash();
+    }
+  }
+  function engineStart() { S.running=true; if (timerInt) clearInterval(timerInt); timerInt=setInterval(engineTick,200); }
+  function engineStop() { if (timerInt){clearInterval(timerInt);timerInt=null;} S.running=false; keepAwake(false); }
+
+  function engineTick() {
+    const now=Date.now(); S.remaining=Math.max(0,(S.segEnd-now)/1000);
+    const sec=Math.ceil(S.remaining);
+    if (sec!==S.lastSec) { S.lastSec=sec; if (sec<=10&&sec>0){alarmTick(sec);vibrate(sec<=3?[60]:25);} }
+    if (S.remaining<=0) {
+      if (S.idx<S.segs.length-1) { S.idx++; enterSeg(true); }
+      else { finishTraining(); return; }
+    }
+    renderTimer();
+  }
+
+  function finishTraining() {
+    S.done=true; S.running=false; engineStop(); alarmFinish(); vibrate([300,100,300,100,500]);
+    flash(); speak("Rutina completada! Muy bien.");
+    $("trainBlockType").textContent="COMPLETADO";
+    $("trainBlockName").textContent="RUTINA COMPLETA!";
+    $("trainCue").textContent="Terminaste "+S.routineName+". Excelente trabajo!";
+    $("timerTime").textContent="00:00"; $("timerPhase").textContent="FINAL";
+    $("timerPhase").className="timer-phase";
+    $("timerProgress").setAttribute("stroke-dashoffset","0");
+    document.querySelectorAll(".train-controls .btn").forEach(b=>b.classList.add("hidden"));
+    $("scheduleStrip").innerHTML=""; toast("RUTINA COMPLETA!");
+    const hoy=dateKey(), store=loadHabits(), day=store[hoy]||{}; day.entrene=true; store[hoy]=day;
+    localStorage.setItem("mg_habits", JSON.stringify(store));
+  }
+
+  function renderSeg(seg) {
+    $("trainBlockType").textContent = seg.kind==="rest"?"DESCANSO":S.routineName;
+    $("trainBlockName").textContent = seg.name;
+    $("trainCue").textContent = seg.kind==="rest"?"Descansa, respira.":(seg.cue||"");
+    $("trainFigure").innerHTML = '<div class="figure-ring"></div><div class="figure-wrap">'+(seg.kind==="rest"?figureHTML("guardia"):figureHTML(seg.type))+'</div>';
+    renderStrip();
+    document.querySelectorAll(".train-controls .btn").forEach(b=>b.classList.remove("hidden"));
+  }
+
+  function renderStrip() {
+    $("scheduleStrip").innerHTML = S.segs.map((s,i) =>
+      '<div class="sched-cell'+(i===S.idx?" active":i<S.idx?" past":"")+'" id="sc-'+i+'">' +
+        '<span class="sc-time">'+fmtTime(s.start)+'</span>' +
+        '<span class="sc-name">'+(s.kind==="rest"?"Descanso":s.name)+'</span></div>'
+    ).join("");
+    const cur=$("sc-"+S.idx); if (cur&&cur.scrollIntoView) cur.scrollIntoView({inline:"nearest"});
+  }
+
+  function renderTimer() {
+    const seg=S.segs[S.idx]; if (!seg) return;
+    const frac=S.remaining/seg.dur;
+    $("timerTime").textContent=fmtTime(Math.ceil(S.remaining));
+    $("timerPhase").textContent=seg.kind==="rest"?"DESCANSO":"TRABAJO";
+    $("timerPhase").classList.toggle("rest",seg.kind==="rest");
+    $("timerProgress").setAttribute("stroke-dashoffset", Math.max(0,867.08*(1-frac)).toFixed(2));
+  }
+
+  // ---- Controls ----
+  $("btnPause").addEventListener("click", () => {
+    if (S.done) return;
+    if (S.paused) { S.paused=false; S.segEnd=Date.now()+S.remaining*1000; engineStart(); $("btnPause").textContent="PAUSA"; }
+    else { S.paused=true; engineStop(); $("btnPause").textContent="RESUMIR"; $("timerPhase").textContent="PAUSA"; $("timerPhase").classList.remove("rest"); }
+  });
+  $("btnSkip").addEventListener("click", () => {
+    if (S.done) return; if (S.idx<S.segs.length-1){S.idx++;enterSeg(true);engineStart();}else finishTraining();
+  });
+  $("btnReset").addEventListener("click", () => { if (S.done) return; S.idx=0; enterSeg(true); engineStart(); });
+  $("btnStop").addEventListener("click", () => { engineStop(); S.paused=false; S.done=false; toast("Detenido"); go("home"); });
+
+  // ---- Wake Lock ----
+  let wakeLock = null;
+  async function keepAwake(on) {
+    if (!("wakeLock" in navigator)) return;
+    try { if (on&&!wakeLock) wakeLock=await navigator.wakeLock.request("screen"); if (!on&&wakeLock){wakeLock.release();wakeLock=null;} } catch(e) {}
+  }
+  document.addEventListener("visibilitychange", () => { if (document.visibilityState==="visible"&&S.running&&!S.paused) keepAwake(true); });
+
+  // ---- SETTINGS ----
+  function renderSettings() {
+    const el=$("settingsBody");
+    el.innerHTML =
+      '<div class="setting-row"><div><b>Volumen</b><small>'+Math.round(settings.vol*100)+'%</small></div>' +
+        '<input type="range" id="setVol" min="0" max="100" value="'+Math.round(settings.vol*100)+'"></div>' +
+      '<div class="setting-row"><div><b>Alarmas</b><small>Pitidos en cada cambio</small></div>' +
+        '<label class="switch"><input type="checkbox" id="setAlarms" '+(settings.alarms?"checked":'')+'><span class="slider"></span></label></div>' +
+      '<div class="setting-row"><div><b>Voz guiada</b><small>Anuncia cada ejercicio</small></div>' +
+        '<label class="switch"><input type="checkbox" id="setVoice" '+(settings.voice?"checked":'')+'><span class="slider"></span></label></div>' +
+      '<div class="setting-row"><div><b>Vibracion</b><small>Alertas tactiles</small></div>' +
+        '<label class="switch"><input type="checkbox" id="setVibe" '+(settings.vibe?"checked":'')+'><span class="slider"></span></label></div>' +
+      '<div class="setting-row"><div><b>Modo Guerra</b><small>Glow y escaneo rojo</small></div>' +
+        '<label class="switch"><input type="checkbox" id="setWar" '+(settings.war?"checked":'')+'><span class="slider"></span></label></div>' +
+      '<div class="setting-row"><div><b>Sin brillo</b><small>Apaga animaciones</small></div>' +
+        '<label class="switch"><input type="checkbox" id="setNoGlow" '+(settings.noglow?"checked":'')+'><span class="slider"></span></label></div>' +
+      '<div class="setting-row" style="align-items:flex-start;flex-direction:column;">' +
+        '<b>Color de detalles</b><small>Fondo se mantiene negro</small>' +
+        '<div id="accSwatches" style="display:flex;gap:6px;margin-top:6px;flex-wrap:wrap;">' +
+        Object.keys(ACCENT_BASES).map(k =>
+          '<button data-acc="'+k+'" title="'+k+'" style="width:30px;height:30px;border-radius:50%;cursor:pointer;background:'+ACCENT_BASES[k]+';border:2px '+(settings.accent===k?"solid #fff":"solid transparent")+';"></button>'
+        ).join("") + '</div></div>' +
+      '<button id="btnTestAlarm" class="btn secondary" style="width:100%;margin-top:4px;">PROBAR ALARMA</button>' +
+      '<button id="btnEditScheduleFromSettings" class="btn secondary" style="width:100%;margin-top:6px;">EDITAR HORARIO SEMANAL</button>' +
+      '<button id="btnResetData" class="btn danger" style="width:100%;margin-top:6px;">BORRAR DATOS</button>';
+
+    $("setVol").addEventListener("input", e => { settings.vol=Number(e.target.value)/100; saveSettings(); });
+    $("setAlarms").addEventListener("change", e => { settings.alarms=e.target.checked; saveSettings(); });
+    $("setVoice").addEventListener("change", e => { settings.voice=e.target.checked; saveSettings(); });
+    $("setVibe").addEventListener("change", e => { settings.vibe=e.target.checked; saveSettings(); });
+    $("setWar").addEventListener("change", e => { settings.war=e.target.checked; saveSettings(); applyWar(); flash(); vibrate([80]); });
+    $("setNoGlow").addEventListener("change", e => { settings.noglow=e.target.checked; saveSettings(); applyNoGlow(); });
+    $("btnTestAlarm").addEventListener("click", () => { ensureAudio(); alarmFinish(); vibrate([200,100,200]); flash(); });
+    $("accSwatches").querySelectorAll("button").forEach(b => b.addEventListener("click", () => {
+      settings.accent=b.dataset.acc; saveSettings(); applyAccent(); renderSettings();
+    }));
+    $("btnEditScheduleFromSettings").addEventListener("click", () => go("schedule"));
+    $("btnResetData").addEventListener("click", () => {
+      localStorage.removeItem("sb_settings"); localStorage.removeItem("sb_custom");
+      localStorage.removeItem("mg_habits"); localStorage.removeItem("mg_finance"); location.reload();
+    });
+  }
+
+  function saveSettings() { localStorage.setItem("sb_settings", JSON.stringify(settings)); }
+  $("btnSettings").addEventListener("click", () => go("settings"));
+  $("btnWar").addEventListener("click", () => {
+    settings.war=!settings.war; saveSettings(); applyWar(); flash(); vibrate([80]);
+    toast(settings.war?"MODO GUERRA ACTIVADO":"Modo guerra desactivado");
+  });
+
+  // ---- PWA Install ----
+  let deferredPrompt = null;
+  window.addEventListener("beforeinstallprompt", e => {
+    e.preventDefault(); deferredPrompt=e;
+    if (!window.matchMedia("(display-mode:standalone)").matches) $("installBar").classList.remove("hidden");
+  });
+  window.addEventListener("appinstalled", () => { $("installBar").classList.add("hidden"); toast("App instalada"); });
+  $("installBtn").addEventListener("click", async () => {
+    if (!deferredPrompt) { toast("Abre en Edge o Chrome para instalar"); return; }
+    deferredPrompt.prompt(); await deferredPrompt.userChoice; deferredPrompt=null; $("installBar").classList.add("hidden");
+  });
+  $("installClose").addEventListener("click", () => $("installBar").classList.add("hidden"));
+
+  // ---- Service Worker ----
+  if ("serviceWorker" in navigator) { window.addEventListener("load", () => { navigator.serviceWorker.register("sw.js").catch(()=>{}); }); }
+
+  // ---- INIT ----
+  populateCustomSelect();
+  applyAccent();
+  applyNoGlow();
+  renderHome();
+  renderMilitary();
+  renderShadow();
+  renderCustom();
+  renderHabits();
+  renderSettings();
+  renderSchedTabs();
+  renderSchedEdit();
+  applyWar();
+  go("home");
+})();
+</script>
+</body>
+</html>
+

@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="theme-color" content="#000000">
 <title>0% LUCK 100% HARD — Modo Guerra</title>
-<meta name="description" content="Rutina militar diaria MODO GUERRA: plan de entrenamiento semanal, shadow box guiado, hábitos y disciplina. 0% suerte, 100% esfuerzo.">
+<meta name="description" content="Rutina militar diaria MODO GUERRA: entrenamiento, shadow box, habitos y disciplina.">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -20,84 +20,82 @@
 <body>
 
 <div id="installBar" class="install-bar hidden">
-  <span class="install-ico">🥊</span>
+  <span class="install-ico">&#127947;</span>
   <span id="installText">Instala la app en tu dispositivo</span>
   <button id="installBtn" class="btn primary small">Instalar</button>
-  <button id="installClose" class="install-close" aria-label="Cerrar">✕</button>
+  <button id="installClose" class="install-close" aria-label="Cerrar">&#10005;</button>
 </div>
 
 <header id="appHeader">
   <div class="header-brand">
-    <span class="brand-logo">🥊</span>
+    <span class="brand-logo">&#127947;</span>
     <span id="headerTitle">0%&nbsp;LUCK&nbsp;100%&nbsp;HARD</span>
   </div>
   <div class="header-actions">
-    <button id="btnWar" class="chip" title="Modo guerra">⚡</button>
-    <button id="btnBack" class="chip hidden" title="Volver">‹ VOLVER</button>
-    <button id="btnSettings" class="chip" title="Ajustes">⚙️</button>
+    <button id="btnWar" class="chip" title="Modo guerra">&#9889;</button>
+    <button id="btnBack" class="chip hidden" title="Volver">&#8249; VOLVER</button>
+    <button id="btnSettings" class="chip" title="Ajustes">&#9881;</button>
   </div>
 </header>
 
 <main id="app">
 
-  <!-- ===================== HOY ===================== -->
   <section id="view-home" class="view active">
+    <div id="rankBar" class="rank-bar"></div>
+    <div id="discStats" class="disc-stats"></div>
     <div class="view-head">
       <h1 id="todayTitle">HOY</h1>
-      <p class="subtitle" id="todaySub">MODO GUERRA · disciplina hoy, libertad mañana</p>
+      <p class="subtitle" id="todaySub">MODO GUERRA</p>
     </div>
     <div id="homeHero"></div>
-    <div class="section-title">🗓 HORARIO MODO GUERRA <button id="btnEditSchedule" class="btn secondary small" style="float:right;">✏️ EDITAR</button></div>
+    <div class="section-title">HORARIO MODO GUERRA <button id="btnEditSchedule" class="btn secondary small" style="float:right;">&#9998; EDITAR</button></div>
     <div id="scheduleList"></div>
   </section>
 
-  <!-- ===================== ENTRENAMIENTO MILITAR ===================== -->
   <section id="view-military" class="view">
     <div class="view-head">
-      <h2>💪 ENTRENAMIENTO MILITAR</h2>
-      <p class="subtitle">Plan semanal '11-11'. Entrena el día que te toque y descansa el domingo.</p>
+      <h2>ENTRENAMIENTO MILITAR</h2>
+      <p class="subtitle">Plan semanal 11-11. Entrena el dia que te toque.</p>
     </div>
     <div id="militaryGrid"></div>
   </section>
 
-  <!-- ===================== HORARIO (editable) ===================== -->
   <section id="view-schedule" class="view">
     <div class="view-head">
-      <h2>🕐 HORARIO</h2>
-      <p class="subtitle">Cada día tiene su propio horario. Sábado y domingo no hay escuela: ajusta lo que quieras.</p>
+      <h2>HORARIO</h2>
+      <p class="subtitle">Cada dia tiene su propio horario.</p>
     </div>
     <div id="schedDayTabs"></div>
     <div id="schedEditList"></div>
-    <button id="schedAdd" class="btn secondary" style="width:100%; margin-top:10px;">➕ AÑADIR BLOQUE</button>
-    <button id="schedReset" class="btn danger" style="width:100%; margin-top:8px;">↺ RESTAURAR HORARIO DE ESTE DÍA</button>
+    <button id="schedSave" class="btn primary" style="width:100%; margin-top:10px;">GUARDAR Y APLICAR</button>
+    <button id="schedAdd" class="btn secondary" style="width:100%; margin-top:8px;">+ ANADIR BLOQUE</button>
+    <button id="schedReset" class="btn danger" style="width:100%; margin-top:8px;">RESTAURAR</button>
   </section>
 
-  <!-- ===================== SHADOW BOX ===================== -->
   <section id="view-shadow" class="view">
     <div class="view-head">
-      <h2>🥊 SHADOW BOX</h2>
-      <p class="subtitle">Rutinas guiadas con temporizador, alarmas y voz en el tiempo exacto</p>
+      <h2>SHADOW BOX</h2>
+      <p class="subtitle">Rutinas guiadas con temporizador y voz</p>
     </div>
     <div id="shadowNote"></div>
+    <div id="sportTabs" class="sport-tabs"></div>
     <div id="routineGrid"></div>
-    <div class="section-title">📖 TÉCNICAS</div>
+    <div class="section-title">TECNICAS</div>
     <div id="techniqueGrid"></div>
-    <div class="section-title">✏️ RUTINA PERSONALIZADA</div>
+    <div class="section-title">RUTINA PERSONALIZADA</div>
     <div id="customMini"></div>
-    <button id="btnCustomGo" class="btn secondary" style="width:100%; margin-top:10px;">✏️ EDITAR MI RUTINA</button>
+    <button id="btnCustomGo" class="btn secondary" style="width:100%; margin-top:8px;">EDITAR MI RUTINA</button>
   </section>
 
-  <!-- ===================== LIBRERÍA TÉCNICAS ===================== -->
   <section id="view-library" class="view">
     <div class="view-head">
-      <h2 id="libTitle">Técnica</h2>
+      <h2 id="libTitle">Tecnica</h2>
     </div>
     <div id="libFigure" class="figure-wrap"></div>
     <div id="libBody"></div>
-    <button id="libPractice" class="btn primary big">▶ PRACTICAR 1 MINUTO</button>
+    <button id="libPractice" class="btn primary big">PRACTICAR 1 MINUTO</button>
   </section>
 
-  <!-- ===================== DETALLE RUTINA ===================== -->
   <section id="view-routine" class="view">
     <div class="view-head">
       <h2 id="routineTitle"></h2>
@@ -105,10 +103,9 @@
     </div>
     <div id="routineSummary" class="summary-card"></div>
     <div id="routinePlan"></div>
-    <button id="btnStart" class="btn primary big">▶ INICIAR RUTINA</button>
+    <button id="btnStart" class="btn primary big">INICIAR RUTINA</button>
   </section>
 
-  <!-- ===================== ENTRENAMIENTO ===================== -->
   <section id="view-training" class="view">
     <div id="trainFigure" class="figure-wrap"></div>
     <div class="train-info">
@@ -118,15 +115,8 @@
     </div>
     <div class="timer-wrap">
       <svg id="timerRing" viewBox="0 0 320 320">
-        <defs>
-          <radialGradient id="timerGlow" cx="50%" cy="50%" r="50%">
-            <stop offset="0%" stop-color="#ff1f1f" stop-opacity="0.55"/>
-            <stop offset="55%" stop-color="#8a0000" stop-opacity="0.25"/>
-            <stop offset="100%" stop-color="#000000" stop-opacity="0"/>
-          </radialGradient>
-        </defs>
-        <circle cx="160" cy="160" r="138" fill="none" stroke="#330000" stroke-width="10"/>
-        <circle id="timerProgress" cx="160" cy="160" r="138" fill="none" stroke="#ff1f1f" stroke-width="12" stroke-linecap="round"
+        <circle cx="160" cy="160" r="138" fill="none" stroke="#330000" stroke-width="8"/>
+        <circle id="timerProgress" cx="160" cy="160" r="138" fill="none" stroke="#ff1f1f" stroke-width="10" stroke-linecap="round"
                 stroke-dasharray="867" stroke-dashoffset="0" transform="rotate(-90 160 160)"/>
       </svg>
       <div id="timerTime" class="timer-time">00:00</div>
@@ -134,57 +124,45 @@
     </div>
     <div id="scheduleStrip"></div>
     <div class="train-controls">
-      <button id="btnPause" class="btn secondary">⏸ PAUSA</button>
-      <button id="btnSkip" class="btn secondary">⏭ SALTAR</button>
-      <button id="btnStop" class="btn danger">■ DETENER</button>
-      <button id="btnReset" class="btn secondary">↺ REINICIAR</button>
+      <button id="btnPause" class="btn secondary">PAUSA</button>
+      <button id="btnSkip" class="btn secondary">SALTAR</button>
+      <button id="btnStop" class="btn danger">DETENER</button>
+      <button id="btnReset" class="btn secondary">REINICIAR</button>
     </div>
   </section>
 
-  <!-- ===================== RUTINA PERSONALIZADA ===================== -->
   <section id="view-custom" class="view">
     <div class="view-head">
       <h2>Rutina Personalizada</h2>
-      <p class="subtitle">Crea tus propios ejercicios con tiempos exactos y alarmas</p>
+      <p class="subtitle">Crea tus propios ejercicios con tiempos exactos</p>
     </div>
     <div id="customList"></div>
     <div class="custom-add">
-      <select id="customType">
-        <option value="guardia">Posición de guardia</option>
-        <option value="jab">Jab</option>
-        <option value="cross">Directo de derecha</option>
-        <option value="hook">Gancho</option>
-        <option value="uppercut">Uppercut</option>
-        <option value="defensa">Defensa</option>
-        <option value="bob">Esquiva</option>
-        <option value="footwork">Juego de pies</option>
-      </select>
-      <input id="customDur" type="number" min="5" max="900" value="60" title="Duración (segundos)">
+      <select id="customType"></select>
+      <input id="customDur" type="number" min="5" max="900" value="60" title="Duracion (segundos)">
       <input id="customRest" type="number" min="0" max="300" value="20" title="Descanso (segundos)">
-      <button id="customAdd" class="btn primary small">+ AÑADIR</button>
+      <button id="customAdd" class="btn primary small">+ ANADIR</button>
     </div>
-    <button id="customStart" class="btn primary big">▶ INICIAR MI RUTINA</button>
+    <button id="customStart" class="btn primary big">INICIAR MI RUTINA</button>
   </section>
 
-  <!-- ===================== HÁBITOS ===================== -->
   <section id="view-habits" class="view">
     <div class="view-head">
-      <h2>✅ HÁBITOS</h2>
-      <p class="subtitle">Tracker diario MODO GUERRA · sé constante</p>
+      <h2>HABITOS</h2>
+      <p class="subtitle">Tracker diario MODO GUERRA</p>
     </div>
     <div id="habitsList"></div>
-    <div class="section-title">📅 SEMANA</div>
+    <div class="section-title">SEMANA</div>
     <div id="habitsWeek"></div>
-    <div class="section-title">🎯 OBJETIVOS DIARIOS</div>
+    <div class="section-title">OBJETIVOS DIARIOS</div>
     <div id="goalsList"></div>
-    <div class="section-title">💸 CONTROL DE TU DINERO</div>
+    <div class="section-title">CONTROL DE TU DINERO</div>
     <div id="financeBody"></div>
   </section>
 
-  <!-- ===================== AJUSTES ===================== -->
   <section id="view-settings" class="view">
     <div class="view-head">
-      <h2>⚙️ Ajustes</h2>
+      <h2>Ajustes</h2>
     </div>
     <div id="settingsBody"></div>
   </section>
@@ -192,11 +170,11 @@
 </main>
 
 <nav id="bottomNav">
-  <button class="nav-btn active" data-nav="home">🏠<span>HOY</span></button>
-  <button class="nav-btn" data-nav="military">💪<span>ENTRENA</span></button>
-  <button class="nav-btn" data-nav="shadow">🥊<span>SOMBRA</span></button>
-  <button class="nav-btn" data-nav="habits">✅<span>HÁBITOS</span></button>
-  <button class="nav-btn" data-nav="settings">⚙️<span>AJUSTES</span></button>
+  <button class="nav-btn active" data-nav="home"><span class="emoji">&#127968;</span><span>HOY</span></button>
+  <button class="nav-btn" data-nav="military"><span class="emoji">&#128170;</span><span>ENTRENA</span></button>
+  <button class="nav-btn" data-nav="shadow"><span class="emoji">&#127947;</span><span>SOMBRA</span></button>
+  <button class="nav-btn" data-nav="habits"><span class="emoji">&#9989;</span><span>HABITOS</span></button>
+  <button class="nav-btn" data-nav="settings"><span class="emoji">&#9881;</span><span>AJUSTES</span></button>
 </nav>
 
 <div id="warFx"></div>
