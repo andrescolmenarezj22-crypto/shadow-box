@@ -727,8 +727,6 @@
         ).join("") + '</div></div>' +
       '<button id="btnTestAlarm" class="btn secondary" style="width:100%;margin-top:4px;">PROBAR ALARMA</button>' +
       '<button id="btnEditScheduleFromSettings" class="btn secondary" style="width:100%;margin-top:6px;">EDITAR HORARIO SEMANAL</button>' +
-      (typeof Auth !== "undefined" && Auth.isLoggedIn() ?
-        '<button id="btnProfileFromSettings" class="btn secondary" style="width:100%;margin-top:6px;">&#128100; MI CUENTA ('+Auth.getUser().displayName+')</button>' : '') +
       '<button id="btnResetData" class="btn danger" style="width:100%;margin-top:6px;">BORRAR DATOS</button>';
 
     $("setVol").addEventListener("input", e => { settings.vol=Number(e.target.value)/100; saveSettings(); });
@@ -742,7 +740,6 @@
       settings.accent=b.dataset.acc; saveSettings(); applyAccent(); renderSettings();
     }));
     $("btnEditScheduleFromSettings").addEventListener("click", () => go("schedule"));
-    $("btnProfileFromSettings").addEventListener("click", () => go("profile"));
     $("btnResetData").addEventListener("click", () => {
       localStorage.removeItem("sb_settings"); localStorage.removeItem("sb_custom");
       localStorage.removeItem("mg_habits"); localStorage.removeItem("mg_finance"); location.reload();
@@ -773,111 +770,14 @@
   if ("serviceWorker" in navigator) { window.addEventListener("load", () => { navigator.serviceWorker.register("sw.js").catch(()=>{}); }); }
 
   // ---- PROFILE ----
-  function renderProfile() {
-    var u = (typeof Auth !== "undefined") ? Auth.getUser() : null;
-    if (!u) { go("settings"); return; }
-    $("profileBody").innerHTML =
-      '<div class="profile-card">' +
-        '<div class="profile-avatar" style="display:flex;align-items:center;justify-content:center;font-size:32px;background:var(--grad4);">&#128100;</div>' +
-        '<h3 class="profile-name">'+escHtml(u.displayName)+'</h3>' +
-        '<p class="profile-email">@'+escHtml(u.username)+'</p>' +
-        '<div class="profile-sync-status synced">&#10003; Datos guardados localmente</div>' +
-      '</div>' +
-      '<button id="btnLogout" class="btn danger" style="width:100%;">CERRAR SESION</button>';
-    $("btnLogout").addEventListener("click", function () {
-      Auth.logout();
-      toast("Sesion cerrada");
-    });
-  }
+  function renderProfile() { go("settings"); }
 
-  // ---- AUTH INIT ----
-  function showAuthView() {
-    $("view-login").classList.add("active");
-    $("appContainer").classList.add("hidden");
-    document.querySelectorAll("#bottomNav .nav-btn").forEach(function(b){b.classList.remove("active");});
-  }
-  function showApp() {
-    $("view-login").classList.remove("active");
-    $("appContainer").classList.remove("hidden");
-    go("home");
-  }
-  function showAuthError(msg) {
-    var el = $("authError"); el.textContent = msg; el.classList.remove("hidden");
-  }
-  function hideAuthError() { $("authError").classList.add("hidden"); }
+  // ---- AUTH INIT (skip) ----
+  function initAuth() { showApp(); }
 
-  function initAuth() {
-    if (typeof Auth === "undefined") { showApp(); return; }
-    Auth.init();
-    Auth.onAuthChange(function (u) {
-      if (u) {
-        loadUserDataFor(u.username);
-        showApp();
-        renderHome(); renderMilitary(); renderShadow(); renderCustom();
-        renderHabits(); renderSettings(); renderSchedTabs(); renderSchedEdit();
-        toast("Bienvenido, " + u.displayName);
-      } else {
-        loadDefaultData();
-        showAuthView();
-      }
-    });
-
-    // Login
-    $("btnAuthLogin").addEventListener("click", function () {
-      hideAuthError();
-      var user = $("authUser").value.trim();
-      if (!user) { showAuthError("Escribe tu usuario"); return; }
-      try { Auth.login(user); } catch (e) { showAuthError(e.message); }
-    });
-
-    // Register
-    $("btnAuthRegister").addEventListener("click", function () {
-      hideAuthError();
-      var user = $("authRegUser").value.trim();
-      if (!user) { showAuthError("Escribe un nombre de usuario"); return; }
-      try { Auth.register(user); } catch (e) { showAuthError(e.message); }
-    });
-
-    // Form switching
-    $("btnShowRegister").addEventListener("click", function () {
-      $("authLoginForm").classList.add("hidden");
-      $("authRegisterForm").classList.remove("hidden");
-      hideAuthError();
-    });
-    $("btnShowLogin").addEventListener("click", function () {
-      $("authLoginForm").classList.remove("hidden");
-      $("authRegisterForm").classList.add("hidden");
-      hideAuthError();
-    });
-
-    // Skip
-    // (no skip button needed — user must create/select a user)
-  }
-
-  /* ---- Cargar datos del usuario ---- */
-  function loadUserDataFor(username) {
-    ["sb_settings","mg_habits","mg_finance","mg_schedule","sb_custom"].forEach(function (lsKey) {
-      var data = Auth.loadData(lsKey);
-      if (data !== null) {
-        localStorage.setItem(lsKey, typeof data === "string" ? data : JSON.stringify(data));
-      }
-    });
-    // Reload settings
-    try { Object.assign(settings, DEFAULTS, JSON.parse(localStorage.getItem("sb_settings") || "{}")); } catch(e){}
-    try { customBlocks = JSON.parse(localStorage.getItem("sb_custom") || "[]"); } catch(e){ customBlocks = []; }
-    applyAccent(); applyNoGlow(); applyWar();
-  }
-  function loadDefaultData() {
-    // Keep whatever is in localStorage (guest mode)
-  }
-
-  /* ---- Guardar con sync automatico ---- */
+  /* ---- Guardar datos ---- */
   function saveUserKey(lsKey, value) {
-    if (typeof Auth !== "undefined" && Auth.isLoggedIn()) {
-      Auth.saveAndSync(lsKey, value);
-    } else {
-      localStorage.setItem(lsKey, typeof value === "string" ? value : JSON.stringify(value));
-    }
+    localStorage.setItem(lsKey, typeof value === "string" ? value : JSON.stringify(value));
   }
 
   // ---- INIT ----

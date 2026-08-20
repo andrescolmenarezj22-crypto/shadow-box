@@ -1,5 +1,5 @@
 /* Shadow Box — Service Worker (instalable en Windows y Android, funciona sin conexión) */
-const CACHE = 'shadow-box-v13';
+const CACHE = 'shadow-box-v14';
 const ASSETS = [
   './',
   './index.html',
@@ -8,7 +8,6 @@ const ASSETS = [
   './js/boxer.js',
   './js/routines.js',
   './js/app.js',
-  './js/auth.js',
   './images/rutina-modo-guerra.png',
   './images/guardia.png',
   './images/jab.png',
