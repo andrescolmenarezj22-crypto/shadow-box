@@ -1,5 +1,5 @@
 /* Shadow Box — Service Worker (instalable en Windows y Android, funciona sin conexión) */
-const CACHE = 'shadow-box-v11';
+const CACHE = 'shadow-box-v12';
 const ASSETS = [
   './',
   './index.html',
