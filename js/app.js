@@ -382,11 +382,7 @@
   function saveSchedModel() {
     const store = loadScheduleStore();
     store[schedDay] = getEditableSchedule(schedDay);
-    if (typeof Auth !== "undefined" && Auth.isLoggedIn()) {
-      Auth.saveAndSync("mg_schedule", store);
-    } else {
-      localStorage.setItem("mg_schedule", JSON.stringify(store));
-    }
+    saveUserKey("mg_schedule", store);
   }
 
   function renderSchedTabs() {
@@ -457,11 +453,7 @@
 
   $("schedReset").addEventListener("click", () => {
     const store = loadScheduleStore(); delete store[schedDay];
-    if (typeof Auth !== "undefined" && Auth.isLoggedIn()) {
-      Auth.saveAndSync("mg_schedule", store);
-    } else {
-      localStorage.setItem("mg_schedule", JSON.stringify(store));
-    }
+    saveUserKey("mg_schedule", store);
     renderSchedEdit();
     toast("Horario de "+DAY_NAMES[schedDay].toLowerCase()+" restaurado");
   });
@@ -508,8 +500,7 @@
 
   // ---- CUSTOM ----
   function saveCustom() {
-    if (typeof Auth !== "undefined" && Auth.isLoggedIn()) { Auth.saveAndSync("sb_custom", customBlocks); }
-    else { localStorage.setItem("sb_custom", JSON.stringify(customBlocks)); }
+    saveUserKey("sb_custom", customBlocks);
     renderCustom(); renderShadow();
   }
   function renderCustom() {
@@ -547,13 +538,7 @@
 
   // ---- HABITS ----
   function loadHabits() { try { return JSON.parse(localStorage.getItem("mg_habits")||"{}"); } catch(e) { return {}; } }
-  function saveHabits(store) {
-    if (typeof Auth !== "undefined" && Auth.isLoggedIn()) {
-      Auth.saveAndSync("mg_habits", store);
-    } else {
-      localStorage.setItem("mg_habits", JSON.stringify(store));
-    }
-  }
+  function saveHabits(store) { saveUserKey("mg_habits", store); }
 
   function renderHabits() {
     const store = loadHabits(); const key = dateKey(); const day = store[key]||{};
@@ -621,8 +606,7 @@
     ["ingresos","alimentacion","transporte","servicios","otros"].forEach(fld => {
       const el=document.getElementById("fin"+fld.charAt(0).toUpperCase()+fld.slice(1));
       if (el) el.addEventListener("input", () => { const nf=loadFinance(); nf[fld]=el.value;
-        if (typeof Auth !== "undefined" && Auth.isLoggedIn()) { Auth.saveAndSync("mg_finance", nf); }
-        else { localStorage.setItem("mg_finance",JSON.stringify(nf)); }
+        saveUserKey("mg_finance", nf);
         renderFinance(); });
     });
   }
@@ -743,7 +727,8 @@
         ).join("") + '</div></div>' +
       '<button id="btnTestAlarm" class="btn secondary" style="width:100%;margin-top:4px;">PROBAR ALARMA</button>' +
       '<button id="btnEditScheduleFromSettings" class="btn secondary" style="width:100%;margin-top:6px;">EDITAR HORARIO SEMANAL</button>' +
-      '<button id="btnProfileFromSettings" class="btn secondary" style="width:100%;margin-top:6px;">&#128100; MI CUENTA</button>' +
+      (typeof Auth !== "undefined" && Auth.isLoggedIn() ?
+        '<button id="btnProfileFromSettings" class="btn secondary" style="width:100%;margin-top:6px;">&#128100; MI CUENTA ('+Auth.getUser().displayName+')</button>' : '') +
       '<button id="btnResetData" class="btn danger" style="width:100%;margin-top:6px;">BORRAR DATOS</button>';
 
     $("setVol").addEventListener("input", e => { settings.vol=Number(e.target.value)/100; saveSettings(); });
@@ -764,13 +749,7 @@
     });
   }
 
-  function saveSettings() {
-    if (typeof Auth !== "undefined" && Auth.isLoggedIn()) {
-      Auth.saveAndSync("sb_settings", settings);
-    } else {
-      localStorage.setItem("sb_settings", JSON.stringify(settings));
-    }
-  }
+  function saveSettings() { saveUserKey("sb_settings", settings); }
   $("btnSettings").addEventListener("click", () => go("settings"));
   $("btnWar").addEventListener("click", () => {
     settings.war=!settings.war; saveSettings(); applyWar(); flash(); vibrate([80]);
@@ -797,30 +776,17 @@
   function renderProfile() {
     var u = (typeof Auth !== "undefined") ? Auth.getUser() : null;
     if (!u) { go("settings"); return; }
-    var avatar = u.photoURL ? '<img class="profile-avatar" src="'+u.photoURL+'" alt="avatar">' : '<div class="profile-avatar" style="display:flex;align-items:center;justify-content:center;font-size:28px;background:var(--grad4);">&#128100;</div>';
-    var name = u.displayName || "Guerrero";
-    var email = u.email || "";
-    var provider = u.providerData && u.providerData[0] ? u.providerData[0].providerId : "";
-    var providerLabel = provider === "google.com" ? "Google" : provider === "password" ? "Correo electronico" : provider;
     $("profileBody").innerHTML =
-      '<div class="profile-card">' + avatar +
-        '<h3 class="profile-name">'+escHtml(name)+'</h3>' +
-        '<p class="profile-email">'+escHtml(email)+'</p>' +
-        '<p class="profile-email" style="font-size:11px;opacity:.6;">Conectado con '+providerLabel+'</p>' +
-        '<div class="profile-sync-status" id="syncStatus">&#128260; Sincronizado</div>' +
+      '<div class="profile-card">' +
+        '<div class="profile-avatar" style="display:flex;align-items:center;justify-content:center;font-size:32px;background:var(--grad4);">&#128100;</div>' +
+        '<h3 class="profile-name">'+escHtml(u.displayName)+'</h3>' +
+        '<p class="profile-email">@'+escHtml(u.username)+'</p>' +
+        '<div class="profile-sync-status synced">&#10003; Datos guardados localmente</div>' +
       '</div>' +
-      '<button id="btnSyncNow" class="btn primary" style="width:100%;margin-bottom:8px;">&#128260; SINCRONIZAR AHORA</button>' +
       '<button id="btnLogout" class="btn danger" style="width:100%;">CERRAR SESION</button>';
-    $("btnSyncNow").addEventListener("click", function () {
-      Auth.syncToCloud().then(function () {
-        var st = $("syncStatus"); if (st) { st.innerHTML = "&#10003; Sincronizado"; st.classList.add("synced"); }
-        toast("Datos sincronizados");
-      }).catch(function (e) { toast("Error: " + e.message); });
-    });
     $("btnLogout").addEventListener("click", function () {
-      Auth.syncToCloud().then(function () { return Auth.logout(); }).then(function () {
-        toast("Sesion cerrada");
-      }).catch(function () { Auth.logout(); toast("Sesion cerrada"); });
+      Auth.logout();
+      toast("Sesion cerrada");
     });
   }
 
@@ -841,117 +807,79 @@
   function hideAuthError() { $("authError").classList.add("hidden"); }
 
   function initAuth() {
-    if (typeof Auth === "undefined" || !Auth.isReady()) {
-      showApp();
-      return;
-    }
+    if (typeof Auth === "undefined") { showApp(); return; }
     Auth.init();
     Auth.onAuthChange(function (u) {
       if (u) {
-        Auth.syncFromCloud().then(function () {
-          showApp();
-          renderHome(); renderMilitary(); renderShadow(); renderCustom();
-          renderHabits(); renderSettings(); renderSchedTabs(); renderSchedEdit();
-          toast("Bienvenido, " + (u.displayName || u.email || "Guerrero"));
-        }).catch(function () { showApp(); });
+        loadUserDataFor(u.username);
+        showApp();
+        renderHome(); renderMilitary(); renderShadow(); renderCustom();
+        renderHabits(); renderSettings(); renderSchedTabs(); renderSchedEdit();
+        toast("Bienvenido, " + u.displayName);
       } else {
+        loadDefaultData();
         showAuthView();
       }
     });
 
-    // Login form
+    // Login
     $("btnAuthLogin").addEventListener("click", function () {
       hideAuthError();
-      var email = $("authEmail").value.trim();
+      var user = $("authUser").value.trim();
       var pass = $("authPass").value;
-      if (!email || !pass) { showAuthError("Ingresa correo y contrasena"); return; }
-      Auth.loginEmail(email, pass).catch(function (e) {
-        var msg = e.code === "auth/user-not-found" ? "Usuario no encontrado" :
-                  e.code === "auth/wrong-password" ? "Contrasena incorrecta" :
-                  e.code === "auth/invalid-email" ? "Correo invalido" :
-                  e.code === "auth/too-many-requests" ? "Demasiados intentos. Espera." :
-                  "Error: " + e.message;
-        showAuthError(msg);
-      });
+      if (!user || !pass) { showAuthError("Ingresa usuario y contrasena"); return; }
+      Auth.login(user, pass).catch(function (e) { showAuthError(e.message); });
     });
 
-    // Register form
+    // Register
     $("btnAuthRegister").addEventListener("click", function () {
       hideAuthError();
-      var name = $("authRegName").value.trim();
-      var email = $("authRegEmail").value.trim();
+      var user = $("authRegUser").value.trim();
       var pass = $("authRegPass").value;
-      if (!email || !pass) { showAuthError("Ingresa correo y contrasena"); return; }
-      if (pass.length < 6) { showAuthError("La contrasena debe tener 6+ caracteres"); return; }
-      Auth.registerEmail(email, pass, name).catch(function (e) {
-        var msg = e.code === "auth/email-already-in-use" ? "Este correo ya esta registrado" :
-                  e.code === "auth/invalid-email" ? "Correo invalido" :
-                  e.code === "auth/weak-password" ? "Contrasena muy debil" :
-                  "Error: " + e.message;
-        showAuthError(msg);
-      });
-    });
-
-    // Google login
-    $("btnAuthGoogle").addEventListener("click", function () {
-      hideAuthError();
-      Auth.loginGoogle().catch(function (e) {
-        if (e.code === "auth/popup-blocked") showAuthError(" bloqueada. Permite popups.");
-        else if (e.code !== "auth/popup-closed-by-user") showAuthError("Error: " + e.message);
-      });
-    });
-    $("btnAuthGoogleReg").addEventListener("click", function () {
-      hideAuthError();
-      Auth.loginGoogle().catch(function (e) {
-        if (e.code === "auth/popup-blocked") showAuthError("Popup bloqueada. Permite popups.");
-        else if (e.code !== "auth/popup-closed-by-user") showAuthError("Error: " + e.message);
-      });
-    });
-
-    // Forgot password
-    $("btnAuthForgot").addEventListener("click", function () {
-      hideAuthError();
-      var email = $("authForgotEmail").value.trim();
-      if (!email) { showAuthError("Ingresa tu correo"); return; }
-      Auth.resetPassword(email).then(function () {
-        toast("Correo de recuperacion enviado");
-        $("authForgotForm").classList.add("hidden");
-        $("authLoginForm").classList.remove("hidden");
-      }).catch(function (e) {
-        showAuthError(e.code === "auth/user-not-found" ? "Usuario no encontrado" : e.message);
-      });
+      if (!user || !pass) { showAuthError("Ingresa usuario y contrasena"); return; }
+      Auth.register(user, pass).catch(function (e) { showAuthError(e.message); });
     });
 
     // Form switching
     $("btnShowRegister").addEventListener("click", function () {
       $("authLoginForm").classList.add("hidden");
       $("authRegisterForm").classList.remove("hidden");
-      $("authForgotForm").classList.add("hidden");
       hideAuthError();
     });
     $("btnShowLogin").addEventListener("click", function () {
       $("authLoginForm").classList.remove("hidden");
       $("authRegisterForm").classList.add("hidden");
-      $("authForgotForm").classList.add("hidden");
-      hideAuthError();
-    });
-    $("btnShowForgot").addEventListener("click", function () {
-      $("authLoginForm").classList.add("hidden");
-      $("authRegisterForm").classList.add("hidden");
-      $("authForgotForm").classList.remove("hidden");
-      hideAuthError();
-    });
-    $("btnBackToLogin").addEventListener("click", function () {
-      $("authLoginForm").classList.remove("hidden");
-      $("authRegisterForm").classList.add("hidden");
-      $("authForgotForm").classList.add("hidden");
       hideAuthError();
     });
 
-    // Skip auth (continue without account)
-    $("btnSkipAuth").addEventListener("click", function () {
-      showApp();
+    // Skip
+    $("btnSkipAuth").addEventListener("click", function () { showApp(); });
+  }
+
+  /* ---- Cargar datos del usuario ---- */
+  function loadUserDataFor(username) {
+    ["sb_settings","mg_habits","mg_finance","mg_schedule","sb_custom"].forEach(function (lsKey) {
+      var data = Auth.loadData(lsKey);
+      if (data !== null) {
+        localStorage.setItem(lsKey, typeof data === "string" ? data : JSON.stringify(data));
+      }
     });
+    // Reload settings
+    try { Object.assign(settings, DEFAULTS, JSON.parse(localStorage.getItem("sb_settings") || "{}")); } catch(e){}
+    try { customBlocks = JSON.parse(localStorage.getItem("sb_custom") || "[]"); } catch(e){ customBlocks = []; }
+    applyAccent(); applyNoGlow(); applyWar();
+  }
+  function loadDefaultData() {
+    // Keep whatever is in localStorage (guest mode)
+  }
+
+  /* ---- Guardar con sync automatico ---- */
+  function saveUserKey(lsKey, value) {
+    if (typeof Auth !== "undefined" && Auth.isLoggedIn()) {
+      Auth.saveAndSync(lsKey, value);
+    } else {
+      localStorage.setItem(lsKey, typeof value === "string" ? value : JSON.stringify(value));
+    }
   }
 
   // ---- INIT ----

@@ -1,163 +1,144 @@
-/* auth.js — Autenticacion (Google + Correo) y sincronizacion con Firestore */
+/* auth.js — Registro e inicio de sesion local (usuario + contrasena) */
 
 var Auth = (function () {
   "use strict";
 
-  var user = null;
-  var db = null;
-  var auth = null;
+  var USERS_KEY = "sb_users";
+  var SESSION_KEY = "sb_session";
+  var currentUser = null;
   var listeners = [];
 
-  function isReady() {
-    return typeof firebase !== "undefined" &&
-           typeof FIREBASE_CONFIG !== "undefined" &&
-           FIREBASE_CONFIG.apiKey !== "TU_API_KEY";
+  function getUsers() {
+    try { return JSON.parse(localStorage.getItem(USERS_KEY) || "{}"); } catch (e) { return {}; }
+  }
+  function saveUsers(u) { localStorage.setItem(USERS_KEY, JSON.stringify(u)); }
+
+  function getSession() {
+    try { return JSON.parse(localStorage.getItem(SESSION_KEY) || "null"); } catch (e) { return null; }
+  }
+  function saveSession(s) {
+    if (s) localStorage.setItem(SESSION_KEY, JSON.stringify(s));
+    else localStorage.removeItem(SESSION_KEY);
   }
 
-  function init() {
-    if (!isReady()) return false;
-    auth = firebase.auth();
-    db = firebase.firestore();
-    try { db.enablePersistence({ synchronizeTabs: true }); } catch (e) {}
-    auth.onAuthStateChanged(function (u) {
-      user = u;
-      listeners.forEach(function (fn) { fn(user); });
-    });
-    return true;
+  /* Hash SHA-256 de contrasena */
+  async function hashPass(pass) {
+    var enc = new TextEncoder().encode(pass);
+    var buf = await crypto.subtle.digest("SHA-256", enc);
+    return Array.from(new Uint8Array(buf)).map(function(b){return b.toString(16).padStart(2,"0");}).join("");
   }
 
-  function onAuthChange(fn) { listeners.push(fn); if (user !== null) fn(user); }
-  function getUser() { return user; }
-  function isLoggedIn() { return !!user; }
+  /* Registrar nuevo usuario */
+  async function register(username, pass) {
+    username = (username || "").trim().toLowerCase();
+    if (!username || !pass) throw new Error("Ingresa usuario y contrasena");
+    if (username.length < 3) throw new Error("El usuario debe tener 3+ caracteres");
+    if (pass.length < 4) throw new Error("La contrasena debe tener 4+ caracteres");
+    if (!/^[a-z0-9_]+$/.test(username)) throw new Error("Solo letras, numeros y guion bajo");
 
-  /* ---- Login con Google ---- */
-  function loginGoogle() {
-    if (!auth) return Promise.reject("No Firebase");
-    var provider = new firebase.auth.GoogleAuthProvider();
-    return auth.signInWithPopup(provider);
+    var users = getUsers();
+    if (users[username]) throw new Error("Este usuario ya existe");
+
+    var hash = await hashPass(pass);
+    users[username] = {
+      hash: hash,
+      created: Date.now(),
+      displayName: username
+    };
+    saveUsers(users);
+
+    currentUser = { username: username, displayName: username };
+    saveSession(currentUser);
+    notifyListeners();
+    return currentUser;
   }
 
-  /* ---- Login con correo ---- */
-  function loginEmail(email, pass) {
-    if (!auth) return Promise.reject("No Firebase");
-    return auth.signInWithEmailAndPassword(email, pass);
+  /* Iniciar sesion */
+  async function login(username, pass) {
+    username = (username || "").trim().toLowerCase();
+    if (!username || !pass) throw new Error("Ingresa usuario y contrasena");
+
+    var users = getUsers();
+    var user = users[username];
+    if (!user) throw new Error("Usuario no encontrado");
+
+    var hash = await hashPass(pass);
+    if (user.hash !== hash) throw new Error("Contrasena incorrecta");
+
+    currentUser = { username: username, displayName: user.displayName || username };
+    saveSession(currentUser);
+    notifyListeners();
+    return currentUser;
   }
 
-  /* ---- Registro con correo ---- */
-  function registerEmail(email, pass, displayName) {
-    if (!auth) return Promise.reject("No Firebase");
-    return auth.createUserWithEmailAndPassword(email, pass).then(function (cred) {
-      if (displayName) return cred.user.updateProfile({ displayName: displayName });
-    });
-  }
-
-  /* ---- Recuperar contrasena ---- */
-  function resetPassword(email) {
-    if (!auth) return Promise.reject("No Firebase");
-    return auth.sendPasswordResetEmail(email);
-  }
-
-  /* ---- Cerrar sesion ---- */
+  /* Cerrar sesion */
   function logout() {
-    if (!auth) return Promise.resolve();
-    return auth.signOut();
+    currentUser = null;
+    saveSession(null);
+    notifyListeners();
   }
 
-  /* ---- Firestore: Guardar datos del usuario ---- */
-  function saveUserData(data) {
-    if (!db || !user) return Promise.resolve();
-    return db.collection("users").doc(user.uid).set(data, { merge: true });
+  /* Obtener usuario actual */
+  function getUser() { return currentUser; }
+  function isLoggedIn() { return !!currentUser; }
+
+  /* Escuchar cambios de sesion */
+  function onAuthChange(fn) {
+    listeners.push(fn);
+    if (currentUser !== null || getSession()) fn(currentUser);
+  }
+  function notifyListeners() {
+    listeners.forEach(function (fn) { fn(currentUser); });
   }
 
-  /* ---- Firestore: Cargar datos del usuario ---- */
-  function loadUserData() {
-    if (!db || !user) return Promise.resolve(null);
-    return db.collection("users").doc(user.uid).get().then(function (doc) {
-      return doc.exists ? doc.data() : null;
-    });
-  }
-
-  /* ---- Sincronizar todo el estado local a Firestore ---- */
-  function syncToCloud() {
-    if (!isLoggedIn()) return Promise.resolve();
-    var data = {};
-    try {
-      data.settings = JSON.parse(localStorage.getItem("sb_settings") || "{}");
-      data.habits = JSON.parse(localStorage.getItem("mg_habits") || "{}");
-      data.finance = JSON.parse(localStorage.getItem("mg_finance") || "{}");
-      data.schedule = JSON.parse(localStorage.getItem("mg_schedule") || "{}");
-      data.custom = JSON.parse(localStorage.getItem("sb_custom") || "[]");
-      data.lastSync = Date.now();
-    } catch (e) {}
-    return saveUserData(data);
-  }
-
-  /* ---- Cargar desde Firestore y aplicar al localStorage ---- */
-  function syncFromCloud() {
-    if (!isLoggedIn()) return Promise.resolve(false);
-    return loadUserData().then(function (data) {
-      if (!data) return false;
-      var changed = false;
-      ["settings", "habits", "finance", "schedule"].forEach(function (key) {
-        var lsKey = key === "settings" ? "sb_settings" :
-                    key === "habits" ? "mg_habits" :
-                    key === "finance" ? "mg_finance" :
-                    key === "schedule" ? "mg_schedule" : key;
-        if (data[key] && Object.keys(data[key]).length > 0) {
-          var local = localStorage.getItem(lsKey);
-          var localObj;
-          try { localObj = JSON.parse(local || "{}"); } catch (e) { localObj = {}; }
-          var cloudObj = data[key];
-          var cloudTime = data.lastSync || 0;
-          var localTime = data._localTimes && data._localTimes[key] || 0;
-          if (cloudTime >= localTime || Object.keys(localObj).length === 0) {
-            localStorage.setItem(lsKey, JSON.stringify(cloudObj));
-            changed = true;
-          }
-        }
-      });
-      if (data.custom && Array.isArray(data.custom) && data.custom.length > 0) {
-        localStorage.setItem("sb_custom", JSON.stringify(data.custom));
-        changed = true;
-      }
-      return changed;
-    });
-  }
-
-  /* ---- Wrapper para guardar con sync automatico ---- */
-  function saveAndSync(lsKey, value) {
-    localStorage.setItem(lsKey, typeof value === "string" ? value : JSON.stringify(value));
-    if (isLoggedIn()) {
-      var fieldMap = {
-        sb_settings: "settings",
-        mg_habits: "habits",
-        mg_finance: "finance",
-        mg_schedule: "schedule",
-        sb_custom: "custom"
-      };
-      var field = fieldMap[lsKey];
-      if (field) {
-        var data = {};
-        data[field] = typeof value === "string" ? JSON.parse(value) : value;
-        data.lastSync = Date.now();
-        saveUserData(data).catch(function () {});
+  /* Restaurar sesion al iniciar */
+  function restoreSession() {
+    var s = getSession();
+    if (s && s.username) {
+      var users = getUsers();
+      if (users[s.username]) {
+        currentUser = s;
+      } else {
+        saveSession(null);
       }
     }
   }
 
+  /* Prefijo de almacenamiento por usuario */
+  function key(name) {
+    if (!currentUser) return "sb_default_" + name;
+    return "sb_user_" + currentUser.username + "_" + name;
+  }
+
+  /* Guardar datos del usuario */
+  function saveData(lsKey, value) {
+    localStorage.setItem(key(lsKey), typeof value === "string" ? value : JSON.stringify(value));
+  }
+
+  /* Cargar datos del usuario */
+  function loadData(lsKey) {
+    try {
+      var v = localStorage.getItem(key(lsKey));
+      return v ? JSON.parse(v) : null;
+    } catch (e) { return null; }
+  }
+
+  /* Guardar con alias (compatible con el sistema actual) */
+  function saveAndSync(lsKey, value) {
+    saveData(lsKey, value);
+  }
+
   return {
-    init: init,
-    isReady: isReady,
+    init: function () { restoreSession(); },
     isLoggedIn: isLoggedIn,
     getUser: getUser,
     onAuthChange: onAuthChange,
-    loginGoogle: loginGoogle,
-    loginEmail: loginEmail,
-    registerEmail: registerEmail,
-    resetPassword: resetPassword,
+    register: register,
+    login: login,
     logout: logout,
-    syncToCloud: syncToCloud,
-    syncFromCloud: syncFromCloud,
-    saveAndSync: saveAndSync
+    saveAndSync: saveAndSync,
+    loadData: loadData,
+    saveData: saveData,
+    key: key
   };
 })();
