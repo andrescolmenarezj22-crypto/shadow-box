@@ -1,607 +1,541 @@
 /* routines.js — Shadow Box: rutinas, deportes, disciplina */
 
-// ═══════════════════════════════════════════════════════════════════
-//  TECHNIQUES
-// ═══════════════════════════════════════════════════════════════════
-
 var TECHNIQUES = [
-  { key: "guardia", name: "Posicion de Guardia", desc: "Postura base de combate" },
-  { key: "jab", name: "Jab", desc: "Golpe rapido con mano delantera" },
-  { key: "cross", name: "Directo de Derecha", desc: "Golpe de poder con mano trasera" },
-  { key: "hook", name: "Gancho (Hook)", desc: "Gancho lateral" },
-  { key: "uppercut", name: "Uppercut", desc: "Golpe ascendente" },
-  { key: "defensa", name: "Defensa / Cobertura", desc: "Bloqueo y cobertura" },
-  { key: "bob", name: "Esquiva (Bob & Weave)", desc: "Esquivar agachandose en zigzag" },
-  { key: "footwork", name: "Juego de Pies", desc: "Movimiento de pies" },
-  { key: "dribble", name: "Drible", desc: "Driblar balon en basket/futbol" },
-  { key: "tiro", name: "Tiro", desc: "Disparo a porteria o aro" },
-  { key: "pase", name: "Pase", desc: "Pase del balon" },
-  { key: "regate", name: "Regate", desc: "Regatear al rival" },
-  { key: "remate", name: "Remate de Cabeza", desc: "Remate de cabeza en futbol" },
-  { key: "defensa_fut", name: "Defensa Futbol", desc: "Defensa en futbol" },
-  { key: "natacion", name: "Natacion", desc: "Nado de piscina" },
-  { key: "ciclismo", name: "Ciclismo", desc: "Pedaleo en bicicleta" },
-  { key: "patada", name: "Patada", desc: "Patada de artes marciales" },
-  { key: "puno", name: "Punetazo", desc: "Punetazo de artes marciales" },
-  { key: "codazo", name: "Codazo", desc: "Golpe de codo" },
-  { key: "rodillazo", name: "Rodillazo", desc: "Golpe de rodilla" }
+  { key: "guardia", name: "Posicion de Guardia", desc: "Manos arriba protegiendo el menton, codos pegados, rodillas semiflexionadas." },
+  { key: "jab", name: "Jab", desc: "Golpe rapido con la mano delantera, rotando ligeramente el puno." },
+  { key: "cross", name: "Directo de Derecha", desc: "Golpe de potencia con la mano trasera. Gira cadera y hombro." },
+  { key: "hook", name: "Gancho (Hook)", desc: "Gancho corto lateral con el codo a la altura del puno." },
+  { key: "uppercut", name: "Uppercut", desc: "Golpe ascendente desde abajo, flexionando las rodillas." },
+  { key: "defensa", name: "Defensa / Cobertura", desc: "Cubre cabeza y torso con los guantes, barbilla al pecho." },
+  { key: "bob", name: "Esquiva (Bob & Weave)", desc: "Agachate flexionando las piernas y desplazate en zigzag." },
+  { key: "footwork", name: "Juego de Pies", desc: "Pasos cortos y rapidos: avanza, retrocede y lateral." },
+  { key: "dribble", name: "Drible", desc: "Controla el balon con toques cortos, cambia de direccion rapido." },
+  { key: "tiro", name: "Tiro", desc: "Dispara con precision al arco o aro." },
+  { key: "pase", name: "Pase", desc: "Pase preciso al companero. Interior del pie o mano." },
+  { key: "regate", name: "Regate", desc: "Desplazate con el balon, cambia de ritmo y direccion." },
+  { key: "remate", name: "Remate de Cabeza", desc: "Golpea el balon con la frente, mira el balon." },
+  { key: "defensa_fut", name: "Defensa Futbol", desc: "Posicionate entre el rival y tu arco." },
+  { key: "natacion", name: "Natacion", desc: "Brazada de crol, respiracion lateral. Cuerpo alineado." },
+  { key: "ciclismo", name: "Ciclismo", desc: "Pedaleo constante, postura erguida, ritmo controlado." },
+  { key: "patada", name: "Patada", desc: "Golpea con la canilla o empenine. Cadera hacia adelante." },
+  { key: "puno", name: "Punetazo", desc: "Golpe directo con el puño cerrado, cadera rotando." },
+  { key: "codazo", name: "Codazo", desc: "Golpe lateral con el codo, corta distancia." },
+  { key: "rodillazo", name: "Rodillazo", desc: "Rodilla hacia arriba, agarre imaginario del rival." }
 ];
-
-// ═══════════════════════════════════════════════════════════════════
-//  SPORTS
-// ═══════════════════════════════════════════════════════════════════
 
 var SPORTS = {
   boxeo: {
-    name: "Boxeo",
+    name: "BOXEO",
     icon: "\uD83E\uDD4A",
-    desc: "Entrenamiento de boxeo",
-    routines: ["fundamentos", "combinaciones", "defensa", "acondicionamiento", "completa"]
+    desc: "Sombras, golpes, defensa",
+    routines: ["fundamentos", "combinaciones", "defensa_r", "acondicionamiento", "completa"]
   },
   futbol: {
-    name: "Futbol",
+    name: "FUTBOL",
     icon: "\u26BD",
-    desc: "Entrenamiento de futbol",
+    desc: "Drible, tiro, pase, regate",
     routines: ["fut_tecnica", "fut_fisico", "fut_completa"]
   },
   basquet: {
-    name: "Basquetbol",
+    name: "BASQUET",
     icon: "\uD83C\uDFC0",
-    desc: "Entrenamiento de basquetbol",
+    desc: "Drible, tiro, defensa, agilidad",
     routines: ["basq_tecnica", "basq_fisico", "basq_completa"]
   },
   natacion: {
-    name: "Natacion",
+    name: "NATACION",
     icon: "\uD83C\uDFCA",
-    desc: "Entrenamiento de natacion",
+    desc: "Tecnica, resistencia, velocidad",
     routines: ["nat_tecnica", "nat_resistencia"]
   },
   artes_marciales: {
-    name: "Artes Marciales",
+    name: "ARTES MARCIALES",
     icon: "\uD83E\uDD4B",
-    desc: "Entrenamiento de artes marciales",
+    desc: "Patadas, punos, codazos, rodillazos",
     routines: ["am_tecnica", "am_fisico", "am_completa"]
   },
   ciclismo: {
-    name: "Ciclismo",
+    name: "CICLISMO",
     icon: "\uD83D\uDEB4",
-    desc: "Entrenamiento de ciclismo",
+    desc: "Resistencia, sprints, colinas",
     routines: ["cic_resistencia", "cic_sprints"]
   }
 };
 
-// ═══════════════════════════════════════════════════════════════════
-//  ROUTINES
-// ═══════════════════════════════════════════════════════════════════
-
 var ROUTINES = {
-
-  // ─── BOXEO ─────────────────────────────────────────────────────
-
-  boxeo: {
-
-    fundamentos: {
-      name: "Fundamentos de Boxeo",
-      sport: "boxeo",
-      emoji: "\uD83E\uDD4A",
-      desc: "Aprende y perfecciona cada golpe y movimiento base",
-      blocks: [
-        { name: "Guardia Base", type: "guardia", dur: 45, rest: 15, cue: "Manos arriba, barbilla abajo, codos pegados" },
-        { name: "Jab", type: "jab", dur: 60, rest: 15, cue: "Extiende rapido y vuelve a la cara" },
-        { name: "Directo de Derecha", type: "cross", dur: 60, rest: 15, cue: "Gira la cadera, golpea fuerte" },
-        { name: "Gancho", type: "hook", dur: 60, rest: 15, cue: "Codo alineado, gira el torso" },
-        { name: "Uppercut", type: "uppercut", dur: 60, rest: 15, cue: "Sube con las piernas, no solo brazos" },
-        { name: "Defensa", type: "defensa", dur: 60, rest: 15, cue: "Cubrir bien la cara, cerrar codos" },
-        { name: "Bob & Weave", type: "bob", dur: 60, rest: 15, cue: "Esquivar con piernas, no espalda" },
-        { name: "Juego de Pies", type: "footwork", dur: 60, rest: 15, cue: "Ligero, nunca plantar los pies" },
-        { name: "Guardia - Enfriamiento", type: "guardia", dur: 90, rest: 0, cue: "Respirar profundo, mantener postura" }
-      ]
-    },
-
-    combinaciones: {
-      name: "Combinaciones de Golpes",
-      sport: "boxeo",
-      emoji: "\uD83D\uDC4A",
-      desc: "Combina golpes en secuencias fluidas",
-      blocks: [
-        { name: "1-2  Jab-Directo", type: "jab", dur: 60, rest: 20, cue: "Fluidez, uno tras otro sin pausa" },
-        { name: "1-2-3  Jab-Directo-Gancho", type: "hook", dur: 60, rest: 20, cue: "Cadena los tres golpes con giro" },
-        { name: "1-1-2  Jab-Jab-Directo", type: "jab", dur: 60, rest: 20, cue: "Doble jab para abrir la guardia" },
-        { name: "3-2  Gancho-Directo", type: "cross", dur: 60, rest: 20, cue: "Gancho lateral seguido de directo" },
-        { name: "1-2-5-2  Jab-Directo-Uppercut-Directo", type: "uppercut", dur: 60, rest: 20, cue: "Combinacion larga, mantener ritmo" },
-        { name: "5-6  Uppercut-Uppercut", type: "uppercut", dur: 60, rest: 20, cue: "Uppercuts alternos, subir con piernas" },
-        { name: "1-2-3-2-1  Completa", type: "hook", dur: 60, rest: 20, cue: "Combo largo, fluidez y potencia" },
-        { name: "Combos Libres", type: "jab", dur: 60, rest: 20, cue: "Inventa tus propias combinaciones" },
-        { name: "Enfriamiento", type: "guardia", dur: 90, rest: 0, cue: "Respirar, soltar tension, estirar" }
-      ]
-    },
-
-    defensa: {
-      name: "Defensa y Contragolpe",
-      sport: "boxeo",
-      emoji: "\uD83D\uDEE1\uFE0F",
-      desc: "Bloqueos, esquivas y respuestas defensivas",
-      blocks: [
-        { name: "Cobertura", type: "defensa", dur: 60, rest: 20, cue: "Manos firmes protegiendo la cara" },
-        { name: "Esquiva Lateral", type: "bob", dur: 60, rest: 20, cue: "Mover cabeza lateralmente con piernas" },
-        { name: "Bloqueo + Jab", type: "defensa", dur: 60, rest: 20, cue: "Bloquear y responder con jab rapido" },
-        { name: "Retroceso + 1-2", type: "footwork", dur: 60, rest: 20, cue: "Retroceder y contraatacar" },
-        { name: "Circulo de Pies", type: "footwork", dur: 60, rest: 20, cue: "Circular manteniendo distancia" },
-        { name: "Simulacion de Pelea", type: "defensa", dur: 60, rest: 20, cue: "Imagina un rival, reacciona" },
-        { name: "Enfriamiento", type: "guardia", dur: 90, rest: 0, cue: "Respirar profundo, relajar" }
-      ]
-    },
-
-    acondicionamiento: {
-      name: "Acondicionamiento Fisico",
-      sport: "boxeo",
-      emoji: "\uD83D\uDCAA",
-      desc: "8 rondas de alta intensidad para resistencia",
-      blocks: [
-        { name: "Calentamiento", type: "footwork", dur: 120, rest: 10, cue: "Activar cuerpo suavemente" },
-        { name: "Ronda 1", type: "jab", dur: 40, rest: 20, cue: "Ritmo constante, sin parar" },
-        { name: "Ronda 2", type: "cross", dur: 40, rest: 20, cue: "Golpes fuertes, respirar" },
-        { name: "Ronda 3", type: "hook", dur: 40, rest: 20, cue: "Ganchos con potencia" },
-        { name: "Ronda 4", type: "uppercut", dur: 40, rest: 20, cue: "Uppercuts rapidos" },
-        { name: "Ronda 5", type: "jab", dur: 40, rest: 20, cue: "Velocidad y precision" },
-        { name: "Ronda 6", type: "cross", dur: 40, rest: 20, cue: "Gira la cadera, golpea" },
-        { name: "Ronda 7", type: "hook", dur: 40, rest: 20, cue: "Casi terminamos, dalo todo" },
-        { name: "Ronda 8", type: "uppercut", dur: 40, rest: 20, cue: "Ultima ronda, intensidad maxima" },
-        { name: "Enfriamiento", type: "guardia", dur: 90, rest: 0, cue: "Bajar ritmo, respirar, estirar" }
-      ]
-    },
-
-    completa: {
-      name: "Rutina Completa de Boxeo",
-      sport: "boxeo",
-      emoji: "\u2B50",
-      desc: "Sesion completa: calentamiento, tecnicas, combos y cierre",
-      blocks: [
-        { name: "Calentamiento", type: "footwork", dur: 120, rest: 10, cue: "Movilizar articulaciones y elevar pulso" },
-        { name: "Guardia Base", type: "guardia", dur: 45, rest: 15, cue: "Postura solida, manos arriba" },
-        { name: "Jab", type: "jab", dur: 60, rest: 15, cue: "Rapido y directo, vuelve a la cara" },
-        { name: "Directo de Derecha", type: "cross", dur: 60, rest: 15, cue: "Gira cadera con el golpe" },
-        { name: "Gancho + Uppercut", type: "hook", dur: 60, rest: 15, cue: "Combina los dos en fluido" },
-        { name: "Defensa", type: "defensa", dur: 60, rest: 15, cue: "Cubrir y esquivar" },
-        { name: "Combo 1-2-3", type: "hook", dur: 60, rest: 15, cue: "Jab directo gancho sin pausa" },
-        { name: "Combo 1-1-2", type: "jab", dur: 60, rest: 15, cue: "Doble jab directo" },
-        { name: "Ronda Intensa", type: "cross", dur: 40, rest: 20, cue: "Golpes fuertes, sin descanso" },
-        { name: "Ronda Intensa 2", type: "uppercut", dur: 40, rest: 20, cue: "Ultimo esfuerzo, dalo todo" },
-        { name: "Enfriamiento", type: "guardia", dur: 90, rest: 0, cue: "Respirar, estirar, relajar" }
-      ]
-    }
+  fundamentos: {
+    name: "FUNDAMENTOS",
+    sport: "boxeo",
+    emoji: "\uD83C\uDF93",
+    desc: "Base: guardia, golpes, defensa y juego de pies.",
+    blocks: [
+      { name: "Posicion de Guardia", type: "guardia", dur: 45, rest: 15, cue: "Manos arriba, barbilla baja." },
+      { name: "Jab", type: "jab", dur: 60, rest: 15, cue: "Jabs rapidos al frente." },
+      { name: "Directo de Derecha", type: "cross", dur: 60, rest: 15, cue: "Gira cadera y hombro." },
+      { name: "Gancho", type: "hook", dur: 60, rest: 15, cue: "Gancho corto con rotacion." },
+      { name: "Uppercut", type: "uppercut", dur: 60, rest: 15, cue: "Sube el puno desde abajo." },
+      { name: "Defensa", type: "defensa", dur: 60, rest: 15, cue: "Cubre cabeza y torso." },
+      { name: "Esquiva", type: "bob", dur: 60, rest: 15, cue: "Agachate y muévete en zigzag." },
+      { name: "Juego de Pies", type: "footwork", dur: 60, rest: 15, cue: "Pasos cortos y rapidos." },
+      { name: "Enfriamiento", type: "guardia", dur: 90, rest: 0, cue: "Respira profundo." }
+    ]
   },
-
-  // ─── FUTBOL ────────────────────────────────────────────────────
-
-  futbol: {
-
-    fut_tecnica: {
-      name: "Tecnica de Futbol",
-      sport: "futbol",
-      emoji: "\u26BD",
-      desc: "Dribling, pase, tiro y juego aereo",
-      blocks: [
-        { name: "Dribling Controlado", type: "dribble", dur: 60, rest: 15, cue: "Control del balon, cabeza arriba" },
-        { name: "Tiro a Porteria", type: "tiro", dur: 60, rest: 15, cue: "Mirar el arco, pie firme en el impacto" },
-        { name: "Pase Corto y Largo", type: "pase", dur: 60, rest: 15, cue: "Precision y timing en cada pase" },
-        { name: "Regate", type: "regate", dur: 60, rest: 15, cue: "Cambio de ritmo y direccion" },
-        { name: "Remate de Cabeza", type: "remate", dur: 60, rest: 15, cue: "Timing perfecto con la frente" },
-        { name: "Defensa Posicional", type: "defensa_fut", dur: 60, rest: 15, cue: "Posicionarse bien, angulo correcto" },
-        { name: "Enfriamiento", type: "footwork", dur: 90, rest: 0, cue: "Trote suave, respirar profundo" }
-      ]
-    },
-
-    fut_fisico: {
-      name: "Fisico de Futbol",
-      sport: "futbol",
-      emoji: "\uD83C\uDFC3",
-      desc: "Sprints, resistencia y agilidad para futbol",
-      blocks: [
-        { name: "Calentamiento con Pies", type: "footwork", dur: 60, rest: 10, cue: "Pies rapidos, lubricar articulaciones" },
-        { name: "Sprint con Balon 1", type: "dribble", dur: 30, rest: 20, cue: "Velocidad maxima con control" },
-        { name: "Sprint con Balon 2", type: "dribble", dur: 30, rest: 20, cue: "Acelerar y frenar" },
-        { name: "Sprint con Balon 3", type: "dribble", dur: 30, rest: 20, cue: "Cambio de direccion rapido" },
-        { name: "Sprint con Balon 4", type: "dribble", dur: 30, rest: 20, cue: "Driblear y acelerar" },
-        { name: "Defensa Activa", type: "defensa_fut", dur: 60, rest: 15, cue: "Entradas limpias, cuerpo en balance" },
-        { name: "Footwork Intenso", type: "footwork", dur: 60, rest: 15, cue: "Cambios de ritmo, agilidad pura" },
-        { name: "Enfriamiento", type: "footwork", dur: 90, rest: 0, cue: "Trote suave, estirar piernas" }
-      ]
-    },
-
-    fut_completa: {
-      name: "Rutina Completa de Futbol",
-      sport: "futbol",
-      emoji: "\u2B50",
-      desc: "Sesion completa: tecnica, fisico y juego",
-      blocks: [
-        { name: "Calentamiento", type: "footwork", dur: 120, rest: 10, cue: "Movilizar todo el cuerpo" },
-        { name: "Dribling", type: "dribble", dur: 60, rest: 15, cue: "Control cercano, cabeza arriba" },
-        { name: "Tiro", type: "tiro", dur: 60, rest: 15, cue: "Disparo con potencia y precision" },
-        { name: "Regate", type: "regate", dur: 60, rest: 15, cue: "Vencer al rival con movimiento" },
-        { name: "Sprint 1", type: "dribble", dur: 30, rest: 20, cue: "Explosividad pura" },
-        { name: "Sprint 2", type: "dribble", dur: 30, rest: 20, cue: "Sin bajar la intensidad" },
-        { name: "Pase", type: "pase", dur: 60, rest: 15, cue: "Precision en cada entrega" },
-        { name: "Remate de Cabeza", type: "remate", dur: 60, rest: 15, cue: "Saltar y conectar bien" },
-        { name: "Defensa", type: "defensa_fut", dur: 60, rest: 15, cue: "Posicion defensiva solida" },
-        { name: "Enfriamiento", type: "footwork", dur: 90, rest: 0, cue: "Relajar piernas, respirar" }
-      ]
-    }
+  combinaciones: {
+    name: "COMBINACIONES",
+    sport: "boxeo",
+    emoji: "\uD83D\uDD25",
+    desc: "Encadena golpes con ritmo.",
+    blocks: [
+      { name: "1-2 (Jab + Cross)", type: "cross", dur: 60, rest: 20, cue: "Jab + cross." },
+      { name: "1-2-3 (Jab + Cross + Gancho)", type: "hook", dur: 60, rest: 20, cue: "Jab, cross, gancho." },
+      { name: "1-1-2 (Doble Jab + Cross)", type: "cross", dur: 60, rest: 20, cue: "Doble jab + cross." },
+      { name: "3-2 (Gancho + Cross)", type: "hook", dur: 60, rest: 20, cue: "Gancho + cross." },
+      { name: "1-2-5-2 (Uppercut)", type: "uppercut", dur: 60, rest: 20, cue: "Jab, cross, uppercut, cross." },
+      { name: "5-6 (Doble Uppercut)", type: "uppercut", dur: 60, rest: 20, cue: "Uppercut izq + der." },
+      { name: "1-2-3-2-1 (Clasico)", type: "cross", dur: 60, rest: 20, cue: "Jab, cross, gancho, cross, jab." },
+      { name: "Combo Libre", type: "jab", dur: 60, rest: 20, cue: "Combina todo a maxima velocidad." },
+      { name: "Enfriamiento", type: "guardia", dur: 90, rest: 0, cue: "Respira y relaja." }
+    ]
   },
-
-  // ─── BASQUETBOL ────────────────────────────────────────────────
-
-  basquet: {
-
-    basq_tecnica: {
-      name: "Tecnica de Basquetbol",
-      sport: "basquet",
-      emoji: "\uD83C\uDFC0",
-      desc: "Dribling, tiro, pase y defensa de basket",
-      blocks: [
-        { name: "Dribling Bajo", type: "dribble", dur: 60, rest: 15, cue: "Cabeza arriba, cambios de mano" },
-        { name: "Tiro en Salto", type: "tiro", dur: 60, rest: 15, cue: "Buen release, follow through" },
-        { name: "Pase y Corte", type: "pase", dur: 60, rest: 15, cue: "Pase firme, cortar rapido" },
-        { name: "Regate Avanzado", type: "regate", dur: 60, rest: 15, cue: "Crossover rapido, cambio de ritmo" },
-        { name: "Defensa Activa", type: "defensa_fut", dur: 60, rest: 15, cue: "Manos arriba, pies activos" },
-        { name: "Juego de Pies", type: "footwork", dur: 60, rest: 15, cue: "Pies rapidos, base solida" },
-        { name: "Enfriamiento", type: "bob", dur: 90, rest: 0, cue: "Trote suave, respirar profundo" }
-      ]
-    },
-
-    basq_fisico: {
-      name: "Fisico de Basquetbol",
-      sport: "basquet",
-      emoji: "\uD83D\uDCAA",
-      desc: "Agilidad, sprints y resistencia para basket",
-      blocks: [
-        { name: "Calentamiento Pies", type: "footwork", dur: 60, rest: 10, cue: "Pies ligeros, activar" },
-        { name: "Deflexion y Correr", type: "bob", dur: 45, rest: 15, cue: "Esquivar y acelerar" },
-        { name: "Sprint Dribble 1", type: "dribble", dur: 30, rest: 20, cue: "Velocidad con control total" },
-        { name: "Sprint Dribble 2", type: "dribble", dur: 30, rest: 20, cue: "Cancha completa rapido" },
-        { name: "Sprint Dribble 3", type: "dribble", dur: 30, rest: 20, cue: "Sin perder el balon" },
-        { name: "Tiro Rapido", type: "tiro", dur: 60, rest: 15, cue: "Disparo rapido bajo presion" },
-        { name: "Defensa Intensa", type: "defensa_fut", dur: 60, rest: 15, cue: "Full court defense" },
-        { name: "Enfriamiento", type: "footwork", dur: 90, rest: 0, cue: "Relajar, respirar, estirar" }
-      ]
-    },
-
-    basq_completa: {
-      name: "Rutina Completa de Basquetbol",
-      sport: "basquet",
-      emoji: "\u2B50",
-      desc: "Sesion completa: habilidades, fisico y juego",
-      blocks: [
-        { name: "Calentamiento", type: "footwork", dur: 120, rest: 10, cue: "Movilizar todo el cuerpo" },
-        { name: "Dribling", type: "dribble", dur: 60, rest: 15, cue: "Control y velocidad" },
-        { name: "Tiro", type: "tiro", dur: 60, rest: 15, cue: "Forma correcta, follow through" },
-        { name: "Pase", type: "pase", dur: 60, rest: 15, cue: "Pases rapidos y precisos" },
-        { name: "Regate", type: "regate", dur: 60, rest: 15, cue: "Vencer al defensor" },
-        { name: "Bob & Weave", type: "bob", dur: 45, rest: 15, cue: "Esquivar picks, mantener posicion" },
-        { name: "Sprint 1", type: "dribble", dur: 30, rest: 20, cue: "Explosividad cancha completa" },
-        { name: "Sprint 2", type: "dribble", dur: 30, rest: 20, cue: "Ultimo sprint, dalo todo" },
-        { name: "Defensa", type: "defensa_fut", dur: 60, rest: 15, cue: "Defensa solida al final" },
-        { name: "Enfriamiento", type: "footwork", dur: 90, rest: 0, cue: "Relajar, respirar, estirar" }
-      ]
-    }
+  defensa_r: {
+    name: "DEFENSA",
+    sport: "boxeo",
+    emoji: "\uD83D\uDEE1\uFE0F",
+    desc: "Bloqueos, esquivas y contraataques.",
+    blocks: [
+      { name: "Cobertura Alta", type: "defensa", dur: 60, rest: 20, cue: "Guantes pegados a la cara." },
+      { name: "Esquiva Lateral", type: "bob", dur: 60, rest: 20, cue: "Desplazate de lado." },
+      { name: "Bloqueo + Jab", type: "jab", dur: 60, rest: 20, cue: "Bloquea y responde con jab." },
+      { name: "Retroceso + 1-2", type: "cross", dur: 60, rest: 20, cue: "Retrocede y contraataca." },
+      { name: "Circulo de Pies", type: "footwork", dur: 60, rest: 20, cue: "Rodea al rival imaginario." },
+      { name: "Simulacion de Combate", type: "guardia", dur: 60, rest: 20, cue: "Defiende y contraataca." },
+      { name: "Enfriamiento", type: "guardia", dur: 90, rest: 0, cue: "Respira hondo." }
+    ]
   },
-
-  // ─── NATACION ──────────────────────────────────────────────────
-
-  natacion: {
-
-    nat_tecnica: {
-      name: "Tecnica de Natacion",
-      sport: "natacion",
-      emoji: "\uD83C\uDFCA",
-      desc: "Perfecciona cada estilo de nado",
-      blocks: [
-        { name: "Crol (Front Crawl)", type: "natacion", dur: 120, rest: 15, cue: "Brazada larga, respiracion ritmica" },
-        { name: "Espalda", type: "natacion", dur: 120, rest: 15, cue: "Cuerpo recto, brazada por encima" },
-        { name: "Pecho (Breaststroke)", type: "natacion", dur: 120, rest: 15, cue: "Coordinacion brazos-piernas" },
-        { name: "Mariposa", type: "natacion", dur: 90, rest: 15, cue: "Ondulacion fluida, brazada fuerte" },
-        { name: "Enfriamiento", type: "natacion", dur: 90, rest: 0, cue: "Nado suave, relajar musculos" }
-      ]
-    },
-
-    nat_resistencia: {
-      name: "Resistencia Acuatica",
-      sport: "natacion",
-      emoji: "\uD83C\uDCA6",
-      desc: "Volumen y resistencia en el agua",
-      blocks: [
-        { name: "Nado Largo 1", type: "natacion", dur: 180, rest: 15, cue: "Ritmo constante, sin apresurar" },
-        { name: "Nado Largo 2", type: "natacion", dur: 180, rest: 15, cue: "Mantener tecnica con cansancio" },
-        { name: "Intervalos 1", type: "natacion", dur: 60, rest: 30, cue: "Rapido en el tramo, recuperar" },
-        { name: "Intervalos 2", type: "natacion", dur: 60, rest: 30, cue: "Aumentar ritmo en cada vuelta" },
-        { name: "Nado Largo 3", type: "natacion", dur: 180, rest: 15, cue: "Ultimo tramo largo, no parar" },
-        { name: "Enfriamiento", type: "natacion", dur: 90, rest: 0, cue: "Nado suave, respirar profundo" }
-      ]
-    }
+  acondicionamiento: {
+    name: "ACONDICIONAMIENTO",
+    sport: "boxeo",
+    emoji: "\u26A1",
+    desc: "Rondas intensas: explosividad y resistencia.",
+    blocks: [
+      { name: "Calentamiento", type: "guardia", dur: 120, rest: 10, cue: "Trote en el sitio." },
+      { name: "Ronda 1 - Jabs", type: "jab", dur: 40, rest: 20, cue: "Jabs sin parar." },
+      { name: "Ronda 2 - Combos", type: "cross", dur: 40, rest: 20, cue: "1-2-3 a toda potencia." },
+      { name: "Ronda 3 - Agachadas", type: "bob", dur: 40, rest: 20, cue: "Bob & weave intenso." },
+      { name: "Ronda 4 - Poder", type: "hook", dur: 40, rest: 20, cue: "Ganchos y uppercuts." },
+      { name: "Ronda 5 - Pies", type: "footwork", dur: 40, rest: 20, cue: "Muévete rapido." },
+      { name: "Ronda 6 - Defensa", type: "defensa", dur: 40, rest: 20, cue: "Cubre y contraataca." },
+      { name: "Ronda 7 - Doble ritmo", type: "jab", dur: 40, rest: 20, cue: "Jabs dobles." },
+      { name: "Ronda 8 - Todo", type: "uppercut", dur: 40, rest: 20, cue: "Combina sin parar." },
+      { name: "Enfriamiento", type: "guardia", dur: 90, rest: 0, cue: "Camina y estira." }
+    ]
   },
-
-  // ─── ARTES MARCIALES ───────────────────────────────────────────
-
-  artes_marciales: {
-
-    am_tecnica: {
-      name: "Tecnica de Artes Marciales",
-      sport: "artes_marciales",
-      emoji: "\uD83E\uDD4B",
-      desc: "Golpes, patadas y movimientos fundamentales",
-      blocks: [
-        { name: "Guardia Base", type: "guardia", dur: 45, rest: 15, cue: "Siempre volver a guardia" },
-        { name: "Punetazos", type: "puno", dur: 60, rest: 15, cue: "Golpe directo, volver a guardia" },
-        { name: "Patadas Frontales", type: "patada", dur: 60, rest: 15, cue: "Cadera alineada, golpe seco" },
-        { name: "Codazos", type: "codazo", dur: 60, rest: 15, cue: "Corto y potente, de cerca" },
-        { name: "Rodillazos", type: "rodillazo", dur: 60, rest: 15, cue: "Empujar cadera, impacto fuerte" },
-        { name: "Combinacion Puño-Patada", type: "puno", dur: 60, rest: 15, cue: "Encadenar golpes y patadas" },
-        { name: "Enfriamiento", type: "guardia", dur: 90, rest: 0, cue: "Respirar, relajar, mantener guardia" }
-      ]
-    },
-
-    am_fisico: {
-      name: "Fisico de Artes Marciales",
-      sport: "artes_marciales",
-      emoji: "\uD83D\uDCAA",
-      desc: "Velocidad, potencia y resistencia combativa",
-      blocks: [
-        { name: "Guardia Rapida", type: "guardia", dur: 45, rest: 10, cue: "Agil, rapido, listo" },
-        { name: "Puños Rapidos", type: "puno", dur: 30, rest: 10, cue: "Velocidad maxima, no pensar" },
-        { name: "Patadas Rapidas", type: "patada", dur: 30, rest: 10, cue: "Patadas alternas sin pausa" },
-        { name: "Rodillazos Rapidos", type: "rodillazo", dur: 30, rest: 10, cue: "Rodillas alternas, ritmo alto" },
-        { name: "Codazos Rapidos", type: "codazo", dur: 30, rest: 10, cue: "Codazos cortos y explosivos" },
-        { name: "Combinacion Libre", type: "puno", dur: 60, rest: 15, cue: "Libera todo, golpes y patadas" },
-        { name: "Ronda Intensa 1", type: "patada", dur: 40, rest: 20, cue: "Intensidad maxima" },
-        { name: "Ronda Intensa 2", type: "puno", dur: 40, rest: 20, cue: "No bajar la guardia" },
-        { name: "Enfriamiento", type: "guardia", dur: 90, rest: 0, cue: "Respirar, relajar cuerpo" }
-      ]
-    },
-
-    am_completa: {
-      name: "Rutina Completa de Artes Marciales",
-      sport: "artes_marciales",
-      emoji: "\u2B50",
-      desc: "Sesion completa: golpes, patadas, combos e intensidad",
-      blocks: [
-        { name: "Calentamiento", type: "guardia", dur: 120, rest: 10, cue: "Movilizar todo el cuerpo" },
-        { name: "Guardia Base", type: "guardia", dur: 45, rest: 15, cue: "Postura solida y estable" },
-        { name: "Punetazos", type: "puno", dur: 60, rest: 15, cue: "Directos con potencia" },
-        { name: "Patadas", type: "patada", dur: 60, rest: 15, cue: "Patadas limpias y fuertes" },
-        { name: "Codazos", type: "codazo", dur: 60, rest: 15, cue: "Golpes de codo certeros" },
-        { name: "Rodillazos", type: "rodillazo", dur: 60, rest: 15, cue: "Rodillas con poder" },
-        { name: "Combinacion Total", type: "puno", dur: 60, rest: 15, cue: "Todo junto, fluidez letal" },
-        { name: "Ronda Intensa", type: "patada", dur: 40, rest: 20, cue: "Dalo todo, sin reserva" },
-        { name: "Ronda Intensa 2", type: "puno", dur: 40, rest: 20, cue: "Ultimo esfuerzo warrior" },
-        { name: "Enfriamiento", type: "guardia", dur: 90, rest: 0, cue: "Respirar, relajar, respeto" }
-      ]
-    }
+  completa: {
+    name: "RUTINA COMPLETA",
+    sport: "boxeo",
+    emoji: "\uD83D\uDCAF",
+    desc: "Calentamiento + tecnica + combos + intensidad.",
+    blocks: [
+      { name: "Calentamiento", type: "guardia", dur: 120, rest: 10, cue: "Trote, brazos en movimiento." },
+      { name: "Posicion de Guardia", type: "guardia", dur: 45, rest: 15, cue: "Ajusta tu postura." },
+      { name: "Jab", type: "jab", dur: 60, rest: 15, cue: "Jabs rapidos." },
+      { name: "Cross", type: "cross", dur: 60, rest: 15, cue: "Cross de potencia." },
+      { name: "Gancho + Uppercut", type: "hook", dur: 60, rest: 15, cue: "Alterna ganchos y uppercuts." },
+      { name: "Defensa", type: "defensa", dur: 60, rest: 15, cue: "Cobertura y esquivas." },
+      { name: "Combo 1-2-3", type: "cross", dur: 60, rest: 15, cue: "Jab + cross + gancho." },
+      { name: "Ronda Intensa", type: "uppercut", dur: 40, rest: 20, cue: "Maxima velocidad." },
+      { name: "Ronda Intensa 2", type: "bob", dur: 40, rest: 20, cue: "Esquivas + contraataque." },
+      { name: "Enfriamiento", type: "guardia", dur: 90, rest: 0, cue: "Respira y estira." }
+    ]
   },
-
-  // ─── CICLISMO ──────────────────────────────────────────────────
-
-  ciclismo: {
-
-    cic_resistencia: {
-      name: "Resistencia en Bicicleta",
-      sport: "ciclismo",
-      emoji: "\uD83D\uDEB4",
-      desc: "Sesion larga para construir base de resistencia",
-      blocks: [
-        { name: "Calentamiento", type: "ciclismo", dur: 180, rest: 15, cue: "Pedaleo suave, preparar piernas" },
-        { name: "Ritmo Medio 1", type: "ciclismo", dur: 300, rest: 15, cue: "Cadencia constante, postura recta" },
-        { name: "Ritmo Medio 2", type: "ciclismo", dur: 300, rest: 15, cue: "Mantener el ritmo, no bajar" },
-        { name: "Ritmo Alto 1", type: "ciclismo", dur: 180, rest: 15, cue: "Subir intensidad, respirar profundo" },
-        { name: "Ritmo Alto 2", type: "ciclismo", dur: 180, rest: 15, cue: "Mantener la carga, piernas fuertes" },
-        { name: "Enfriamiento", type: "ciclismo", dur: 180, rest: 0, cue: "Pedaleo ligero, bajar pulso" }
-      ]
-    },
-
-    cic_sprints: {
-      name: "Sprints en Bicicleta",
-      sport: "ciclismo",
-      emoji: "\u26A1",
-      desc: "Intervalos de alta intensidad para velocidad",
-      blocks: [
-        { name: "Calentamiento", type: "ciclismo", dur: 180, rest: 15, cue: "Preparar el cuerpo para sprints" },
-        { name: "Sprint 1", type: "ciclismo", dur: 30, rest: 30, cue: "Potencia maxima, pedalear fuerte" },
-        { name: "Sprint 2", type: "ciclismo", dur: 30, rest: 30, cue: "Sin bajar la intensidad" },
-        { name: "Sprint 3", type: "ciclismo", dur: 30, rest: 30, cue: "Explosividad pura" },
-        { name: "Sprint 4", type: "ciclismo", dur: 30, rest: 30, cue: "Resistir el dolor, seguir" },
-        { name: "Sprint 5", type: "ciclismo", dur: 30, rest: 30, cue: "Mitad de la serie, fuerte" },
-        { name: "Sprint 6", type: "ciclismo", dur: 30, rest: 30, cue: "No aflojar" },
-        { name: "Recuperacion", type: "ciclismo", dur: 120, rest: 15, cue: "Pedaleo suave, recuperar" },
-        { name: "Sprint 7", type: "ciclismo", dur: 30, rest: 30, cue: "Segunda serie, sin miedo" },
-        { name: "Sprint 8", type: "ciclismo", dur: 30, rest: 30, cue: "Velocidad pura" },
-        { name: "Sprint 9", type: "ciclismo", dur: 30, rest: 30, cue: "Casi listo" },
-        { name: "Sprint 10", type: "ciclismo", dur: 30, rest: 30, cue: "Ultimo sprint, todo o nada" },
-        { name: "Enfriamiento", type: "ciclismo", dur: 180, rest: 0, cue: "Pedaleo suave, bajar ritmo" }
-      ]
-    }
+  fut_tecnica: {
+    name: "TECNICA FUTBOL",
+    sport: "futbol",
+    emoji: "\u26BD",
+    desc: "Drible, pase, tiro y regate.",
+    blocks: [
+      { name: "Calentamiento", type: "footwork", dur: 120, rest: 10, cue: "Trote con balon imaginario." },
+      { name: "Dribbling Basico", type: "dribble", dur: 60, rest: 15, cue: "Toques cortos, cabeza arriba." },
+      { name: "Cambio de Ritmo", type: "regate", dur: 60, rest: 15, cue: "Acelera y frena entre conos." },
+      { name: "Pase Corto", type: "pase", dur: 60, rest: 15, cue: "Pase interior, follow-through." },
+      { name: "Pase Largo", type: "pase", dur: 60, rest: 15, cue: "Empeine, bola con efecto." },
+      { name: "Tiro a Gol", type: "tiro", dur: 60, rest: 15, cue: "Dispara con potencia." },
+      { name: "Regate 1v1", type: "regate", dur: 60, rest: 15, cue: "Supera al rival imaginario." },
+      { name: "Remate de Cabeza", type: "remate", dur: 60, rest: 15, cue: "Golpea con la frente." },
+      { name: "Enfriamiento", type: "footwork", dur: 90, rest: 0, cue: "Caminar y estirar." }
+    ]
+  },
+  fut_fisico: {
+    name: "FISICO FUTBOL",
+    sport: "futbol",
+    emoji: "\uD83D\uDCAA",
+    desc: "Velocidad, resistencia y agilidad.",
+    blocks: [
+      { name: "Trote", type: "footwork", dur: 180, rest: 15, cue: "Ritmo constante." },
+      { name: "Sprint 30m x6", type: "footwork", dur: 30, rest: 30, cue: "Explosivo, rodillas arriba." },
+      { name: "Cambio de Direccion", type: "regate", dur: 45, rest: 20, cue: "Gira rapido." },
+      { name: "Saltos de Valla", type: "footwork", dur: 45, rest: 20, cue: "Salta y aterriza suave." },
+      { name: "Defensa Posicional", type: "defensa_fut", dur: 60, rest: 15, cue: "Posicionate y lee el juego." },
+      { name: "Resistencia", type: "footwork", dur: 180, rest: 15, cue: "Manten el ritmo." },
+      { name: "Enfriamiento", type: "footwork", dur: 120, rest: 0, cue: "Caminar y estirar." }
+    ]
+  },
+  fut_completa: {
+    name: "COMPLETA FUTBOL",
+    sport: "futbol",
+    emoji: "\uD83C\uDFC6",
+    desc: "Tecnica + fisico + tactica.",
+    blocks: [
+      { name: "Calentamiento", type: "footwork", dur: 120, rest: 10, cue: "Trote y movilidad." },
+      { name: "Dribbling", type: "dribble", dur: 60, rest: 15, cue: "Toques rapidos." },
+      { name: "Pase y Control", type: "pase", dur: 60, rest: 15, cue: "Primer toque perfecto." },
+      { name: "Regate", type: "regate", dur: 60, rest: 15, cue: "Cambia de ritmo." },
+      { name: "Tiro", type: "tiro", dur: 60, rest: 15, cue: "Dispara fuerte." },
+      { name: "Defensa", type: "defensa_fut", dur: 60, rest: 15, cue: "Marca y roba." },
+      { name: "Sprint Final", type: "footwork", dur: 30, rest: 15, cue: "Todo o nada." },
+      { name: "Enfriamiento", type: "footwork", dur: 120, rest: 0, cue: "Relaja el cuerpo." }
+    ]
+  },
+  basq_tecnica: {
+    name: "TECNICA BASQUET",
+    sport: "basquet",
+    emoji: "\uD83C\uDFC0",
+    desc: "Drible, tiro, pase y agilidad.",
+    blocks: [
+      { name: "Calentamiento", type: "dribble", dur: 120, rest: 10, cue: "Dribbling suave." },
+      { name: "Dribble Derecha", type: "dribble", dur: 60, rest: 15, cue: "Solo mano derecha." },
+      { name: "Dribble Izquierda", type: "dribble", dur: 60, rest: 15, cue: "Solo mano izquierda." },
+      { name: "Crossover", type: "regate", dur: 60, rest: 15, cue: "Cruza el balon rapido." },
+      { name: "Tiro Libre", type: "tiro", dur: 60, rest: 15, cue: "Forma de L, follow-through." },
+      { name: "Tiro en Movimiento", type: "tiro", dur: 60, rest: 15, cue: "Un dribble y tira." },
+      { name: "Pase de Pecho", type: "pase", dur: 60, rest: 15, cue: "Pase fuerte al pecho." },
+      { name: "Layup Derecha", type: "tiro", dur: 60, rest: 15, cue: "2 pasos y layup suave." },
+      { name: "Enfriamiento", type: "dribble", dur: 90, rest: 0, cue: "Dribbling suave, respira." }
+    ]
+  },
+  basq_fisico: {
+    name: "FISICO BASQUET",
+    sport: "basquet",
+    emoji: "\uD83D\uDCAA",
+    desc: "Explosividad, agilidad y resistencia.",
+    blocks: [
+      { name: "Trote", type: "dribble", dur: 120, rest: 10, cue: "Trote con dribbling." },
+      { name: "Suicides x6", type: "footwork", dur: 20, rest: 30, cue: "Carrera ida y vuelta." },
+      { name: "Defensive Slides", type: "defensa_fut", dur: 45, rest: 15, cue: "Deslizate lateral." },
+      { name: "Jump Squats", type: "bob", dur: 40, rest: 20, cue: "Salta desde sentadilla." },
+      { name: "Burpees", type: "footwork", dur: 40, rest: 20, cue: "Abajo, salta, arriba." },
+      { name: "Sprint Cortos", type: "footwork", dur: 15, rest: 30, cue: "Explosivo." },
+      { name: "Dribble Sprint", type: "dribble", dur: 30, rest: 20, cue: "Dribbling rapido en carrera." },
+      { name: "Enfriamiento", type: "dribble", dur: 120, rest: 0, cue: "Caminar y estirar." }
+    ]
+  },
+  basq_completa: {
+    name: "COMPLETA BASQUET",
+    sport: "basquet",
+    emoji: "\uD83C\uDFC6",
+    desc: "Tecnica + fisico completo.",
+    blocks: [
+      { name: "Calentamiento", type: "dribble", dur: 120, rest: 10, cue: "Dribbling y movilidad." },
+      { name: "Dribble Basico", type: "dribble", dur: 60, rest: 15, cue: "Cambios de mano." },
+      { name: "Crossover + Tiro", type: "regate", dur: 60, rest: 15, cue: "Regate y tira." },
+      { name: "Layup Izq", type: "tiro", dur: 60, rest: 15, cue: "Layup mano izquierda." },
+      { name: "Defensa", type: "defensa_fut", dur: 60, rest: 15, cue: "Defiende agachado." },
+      { name: "Suicides", type: "footwork", dur: 20, rest: 30, cue: "Velocidad pura." },
+      { name: "Tiro Libre", type: "tiro", dur: 60, rest: 0, cue: "Calma y precision." },
+      { name: "Enfriamiento", type: "dribble", dur: 90, rest: 0, cue: "Relaja." }
+    ]
+  },
+  nat_tecnica: {
+    name: "TECNICA NATACION",
+    sport: "natacion",
+    emoji: "\uD83C\uDFCA",
+    desc: "Brazada, patada, respiracion.",
+    blocks: [
+      { name: "Patada con Tabla", type: "natacion", dur: 120, rest: 15, cue: "Piernas constantes." },
+      { name: "Brazada Un Brazo", type: "natacion", dur: 60, rest: 15, cue: "Solo brazo derecho." },
+      { name: "Brazada Un Brazo Izq", type: "natacion", dur: 60, rest: 15, cue: "Solo brazo izquierdo." },
+      { name: "Respiracion Lateral", type: "natacion", dur: 90, rest: 15, cue: "Gira la cabeza." },
+      { name: "Crol Completo", type: "natacion", dur: 120, rest: 20, cue: "Brazada + patada + respiracion." },
+      { name: "Pull Buoys", type: "natacion", dur: 90, rest: 15, cue: "Solo brazada." },
+      { name: "Enfriamiento", type: "natacion", dur: 120, rest: 0, cue: "Nado suave." }
+    ]
+  },
+  nat_resistencia: {
+    name: "RESISTENCIA NATACION",
+    sport: "natacion",
+    emoji: "\u23F1\uFE0F",
+    desc: "Series de resistencia acuatica.",
+    blocks: [
+      { name: "Calentamiento", type: "natacion", dur: 180, rest: 15, cue: "Nado suave." },
+      { name: "4x100m", type: "natacion", dur: 120, rest: 30, cue: "Ritmo constante." },
+      { name: "8x50m", type: "natacion", dur: 60, rest: 20, cue: "50m fuerte." },
+      { name: "4x100m Piernas", type: "natacion", dur: 120, rest: 30, cue: "Solo patada." },
+      { name: "200m Mezcla", type: "natacion", dur: 240, rest: 30, cue: "200m continuo." },
+      { name: "Enfriamiento", type: "natacion", dur: 180, rest: 0, cue: "Nado muy suave." }
+    ]
+  },
+  am_tecnica: {
+    name: "TECNICA AM",
+    sport: "artes_marciales",
+    emoji: "\uD83E\uDD4B",
+    desc: "Patadas, punos, codos, rodillas.",
+    blocks: [
+      { name: "Calentamiento", type: "guardia", dur: 120, rest: 10, cue: "Movilidad articular." },
+      { name: "Patada Frontal", type: "patada", dur: 60, rest: 15, cue: "Patada frontal, empenine." },
+      { name: "Patada Lateral", type: "patada", dur: 60, rest: 15, cue: "Patada lateral, cadera." },
+      { name: "Patada Rotando", type: "patada", dur: 60, rest: 15, cue: "Gira y golpea." },
+      { name: "Punetazo Directo", type: "puno", dur: 60, rest: 15, cue: "Directo con cadera." },
+      { name: "Jab + Cross", type: "cross", dur: 60, rest: 15, cue: "Combinacion de punos." },
+      { name: "Codazo Lateral", type: "codazo", dur: 60, rest: 15, cue: "Codo a la cara." },
+      { name: "Rodillazo", type: "rodillazo", dur: 60, rest: 15, cue: "Rodilla arriba." },
+      { name: "Combo Completo", type: "hook", dur: 60, rest: 0, cue: "Puno + codo + rodilla + patada." },
+      { name: "Enfriamiento", type: "guardia", dur: 90, rest: 0, cue: "Respira y estira." }
+    ]
+  },
+  am_fisico: {
+    name: "FISICO AM",
+    sport: "artes_marciales",
+    emoji: "\uD83D\uDCAA",
+    desc: "Potencia, resistencia y explosividad.",
+    blocks: [
+      { name: "Trote", type: "footwork", dur: 120, rest: 10, cue: "Trote ligero." },
+      { name: "Sentadillas + Patada", type: "patada", dur: 45, rest: 15, cue: "Sentadilla y patada." },
+      { name: "Burpees + Punetazo", type: "puno", dur: 45, rest: 15, cue: "Burpee y golpe." },
+      { name: "Rodillazos x20", type: "rodillazo", dur: 40, rest: 20, cue: "Alternando rodillas." },
+      { name: "Plancha + Golpe", type: "defensa", dur: 40, rest: 20, cue: "En plancha, golpea." },
+      { name: "Mountain Climbers", type: "footwork", dur: 40, rest: 20, cue: "Rodillas al pecho." },
+      { name: "Combate Libre", type: "hook", dur: 60, rest: 0, cue: "Todo lo que sepas." },
+      { name: "Enfriamiento", type: "guardia", dur: 120, rest: 0, cue: "Estira todo." }
+    ]
+  },
+  am_completa: {
+    name: "COMPLETA AM",
+    sport: "artes_marciales",
+    emoji: "\uD83C\uDFC6",
+    desc: "Tecnica + fisico completo.",
+    blocks: [
+      { name: "Calentamiento", type: "guardia", dur: 120, rest: 10, cue: "Movilidad y sombra ligera." },
+      { name: "Patadas Frontales", type: "patada", dur: 60, rest: 15, cue: "Patada recta." },
+      { name: "Punetazos", type: "puno", dur: 60, rest: 15, cue: "Jab + cross fuerte." },
+      { name: "Codazos", type: "codazo", dur: 60, rest: 15, cue: "Codos cortantes." },
+      { name: "Rodillazos", type: "rodillazo", dur: 60, rest: 15, cue: "Rodilla al pecho." },
+      { name: "Patada Giratoria", type: "patada", dur: 60, rest: 15, cue: "Gira y golpea." },
+      { name: "Combo Libre", type: "hook", dur: 60, rest: 0, cue: "Libera todo." },
+      { name: "Enfriamiento", type: "guardia", dur: 120, rest: 0, cue: "Respira y estira." }
+    ]
+  },
+  cic_resistencia: {
+    name: "RESISTENCIA",
+    sport: "ciclismo",
+    emoji: "\uD83D\uDEB4",
+    desc: "Ritmo constante y resistencia.",
+    blocks: [
+      { name: "Calentamiento", type: "ciclismo", dur: 180, rest: 10, cue: "Pedaleo suave." },
+      { name: "Ritmo Medio", type: "ciclismo", dur: 300, rest: 20, cue: "75-80 rpm, constante." },
+      { name: "Subida", type: "ciclismo", dur: 120, rest: 30, cue: "Resistencia alta." },
+      { name: "Ritmo Medio", type: "ciclismo", dur: 300, rest: 20, cue: "Vuelve al ritmo." },
+      { name: "Bajada", type: "ciclismo", dur: 120, rest: 10, cue: "Pedaleo suave." },
+      { name: "Ritmo Fuerte", type: "ciclismo", dur: 180, rest: 20, cue: "85+ rpm." },
+      { name: "Enfriamiento", type: "ciclismo", dur: 180, rest: 0, cue: "Pedaleo muy suave." }
+    ]
+  },
+  cic_sprints: {
+    name: "SPRINTS",
+    sport: "ciclismo",
+    emoji: "\u26A1",
+    desc: "Intervalos de velocidad pura.",
+    blocks: [
+      { name: "Calentamiento", type: "ciclismo", dur: 180, rest: 10, cue: "Pedaleo progresivo." },
+      { name: "Sprint 20s", type: "ciclismo", dur: 20, rest: 40, cue: "Maximo esfuerzo." },
+      { name: "Sprint 20s", type: "ciclismo", dur: 20, rest: 40, cue: "Otra vez, fuerte." },
+      { name: "Sprint 30s", type: "ciclismo", dur: 30, rest: 60, cue: "30s a tope." },
+      { name: "Sprint 20s", type: "ciclismo", dur: 20, rest: 40, cue: "Rapido." },
+      { name: "Sprint 30s", type: "ciclismo", dur: 30, rest: 60, cue: "Ultimo sprint fuerte." },
+      { name: "Recuperacion", type: "ciclismo", dur: 180, rest: 0, cue: "Pedaleo suave." }
+    ]
   }
 };
 
-// ═══════════════════════════════════════════════════════════════════
-//  MODO GUERRA
-// ═══════════════════════════════════════════════════════════════════
-
 var MODO_GUERRA = {
-  lema: "Disciplina es libertad",
+  lema: "DISCIPLINA HOY, LIBERTAD MANANA",
   despertar: "7:00",
   dormir: "22:30",
   plan: {
-    lunes: {
-      exercises: ["ab", "fl", "ss", "pl", "mc"]
-    },
-    martes: {
-      exercises: ["cu", "jj", "ab", "fl", "sl"]
-    },
-    miercoles: {
-      exercises: ["ss", "pl", "mc", "ab", "cu"]
-    },
-    jueves: {
-      exercises: ["jj", "fl", "ss", "pl", "sl"]
-    },
-    viernes: {
-      exercises: ["ab", "mc", "cu", "jj", "fl"]
-    },
-    sabado: {
-      trote: true
-    },
-    domingo: {
-      descanso: true
-    }
+    lunes:    { emoji: "\uD83D\uDCAA", ab: 20, fl: 10, ss: 20, pl: 30, mc: 20, cu: 1, jj: 30, sl: 20 },
+    martes:   { emoji: "\uD83D\uDD25", ab: 30, fl: 15, ss: 30, pl: 40, mc: 30, cu: 2, jj: 40, sl: 30 },
+    miercoles:{ emoji: "\u26A1", ab: 40, fl: 20, ss: 40, pl: 50, mc: 30, cu: 3, jj: 50, sl: 40 },
+    jueves:   { emoji: "\uD83D\uDCA5", ab: 30, fl: 15, ss: 30, pl: 40, mc: 30, cu: 2, jj: 40, sl: 30 },
+    viernes:  { emoji: "\uD83C\uDFC6", ab: 50, fl: 20, ss: 50, pl: 60, mc: 50, cu: 4, jj: 50, sl: 45 },
+    sabado:   { emoji: "\uD83C\uDFC3", trote: true, desc: "Trote suave, 30 minutos" },
+    domingo:  { emoji: "\uD83D\uDE0C", descanso: true, desc: "Descanso activo" }
   }
 };
 
-// ═══════════════════════════════════════════════════════════════════
-//  SCHEDULE
-// ═══════════════════════════════════════════════════════════════════
-
-function SCHEDULE_DEFAULTS() {
-  return {
-    semana: [
-      { time: "06:30", label: "Modo Guerra", routine: null, military: true },
-      { time: "20:00", label: "Boxeo Fundamentos", routine: "fundamentos", military: false }
-    ],
-    sabado: [
-      { time: "08:00", label: "Boxeo Completa", routine: "completa", military: false },
-      { time: "16:00", label: "Modo Guerra", routine: null, military: true }
-    ],
-    domingo: []
-  };
-}
+var SCHEDULE_DEFAULTS = (function () {
+  var semana = [
+    { t: "7:00", title: "Despertar", emoji: "\uD83C\uDF05", desc: "Tender la cama, tomar agua." },
+    { t: "7:10", title: "Activacion", emoji: "\uD83E\uDDD8", desc: "Estiramientos 10 min, respiracion 5 min." },
+    { t: "7:25", title: "Cardio", emoji: "\uD83C\uDFC3", desc: "Caminar o trotar 15 min." },
+    { t: "8:30", title: "Entrenamiento", emoji: "\uD83D\uDCAA", desc: "Segun el plan del dia." },
+    { t: "8:45", title: "Ducha", emoji: "\uD83D\uDEBF", desc: "Refrescarse." },
+    { t: "9:00", title: "Desayuno", emoji: "\uD83C\uDF73", desc: "Vestirse, preparar mochila." },
+    { t: "11:00", title: "Almuerzo", emoji: "\uD83E\uDD57", desc: "Almuerzo saludable." },
+    { t: "12:00", title: "Descanso", emoji: "\uD83D\uDE0C", desc: "Desconexion breve." },
+    { t: "12:30", title: "Escuela", emoji: "\uD83C\uDFEB", desc: "Salir con tiempo." },
+    { t: "13:00", title: "Clases", emoji: "\uD83C\uDFEB", desc: "Atencion y enfoque 100%.", until: "18:00" },
+    { t: "18:00", title: "Llego a casa", emoji: "\uD83C\uDFE0", desc: "Descanso breve, hidratarse." },
+    { t: "18:30", title: "Tiempo libre", emoji: "\uD83C\uDFAE", desc: "Relajarse, musica." },
+    { t: "19:00", title: "Estudiar", emoji: "\uD83D\uDCDA", desc: "Tareas, leer, aprender." },
+    { t: "20:00", title: "Proyecto", emoji: "\uD83D\uDEE0", desc: "Crear contenido." },
+    { t: "21:00", title: "Finanzas", emoji: "\uD83D\uDCB8", desc: "Registrar gastos." },
+    { t: "21:30", title: "Organizar", emoji: "\uD83D\uDDC2", desc: "Limpiar, preparar ropa." },
+    { t: "22:00", title: "Habitos", emoji: "\u2705", desc: "Tracker, musica, sin pantallas." },
+    { t: "22:15", title: "Dormir", emoji: "\uD83D\uDE34", desc: "Descansar 8h30min." }
+  ];
+  var sabado = [
+    { t: "7:00", title: "Despertar", emoji: "\uD83C\uDF05", desc: "Tender la cama." },
+    { t: "7:10", title: "Activacion", emoji: "\uD83E\uDDD8", desc: "Estiramientos y respiracion." },
+    { t: "7:25", title: "Cardio", emoji: "\uD83C\uDFC3", desc: "Trote suave 20 min." },
+    { t: "8:30", title: "Entrenamiento", emoji: "\uD83D\uDCAA", desc: "Trote + sombra." },
+    { t: "8:45", title: "Ducha", emoji: "\uD83D\uDEBF", desc: "Refrescarse." },
+    { t: "9:00", title: "Desayuno", emoji: "\uD83C\uDF73", desc: "Sin prisa." },
+    { t: "10:00", title: "Tareas casa", emoji: "\uD83E\uDDF9", desc: "Lavar ropa, limpiar." },
+    { t: "12:00", title: "Proyecto", emoji: "\uD83D\uDEE0", desc: "Crear contenido." },
+    { t: "13:00", title: "Almuerzo", emoji: "\uD83E\uDD57", desc: "Almuerzo saludable." },
+    { t: "14:00", title: "Tiempo libre", emoji: "\uD83C\uDFAE", desc: "Amigos, jugar." },
+    { t: "16:00", title: "Crear", emoji: "\uD83C\uDFA8", desc: "Edicion, diseño." },
+    { t: "18:00", title: "Descanso", emoji: "\uD83C\uDFB5", desc: "Musica, relajarse." },
+    { t: "19:00", title: "Estudiar", emoji: "\uD83D\uDCDA", desc: "Leer o aprender." },
+    { t: "20:00", title: "Finanzas", emoji: "\uD83D\uDCB8", desc: "Registrar gastos." },
+    { t: "21:00", title: "Organizar", emoji: "\uD83D\uDDC2", desc: "Preparar la semana." },
+    { t: "22:00", title: "Habitos", emoji: "\u2705", desc: "Tracker y relajacion." },
+    { t: "22:30", title: "Dormir", emoji: "\uD83D\uDE34", desc: "Recuperar." }
+  ];
+  var domingo = [
+    { t: "7:00", title: "Despertar", emoji: "\uD83C\uDF05", desc: "Tender la cama." },
+    { t: "7:15", title: "Prepararse", emoji: "\uD83E\uDEE9", desc: "Arreglarse para iglesia." },
+    { t: "8:00", title: "Iglesia", emoji: "\u26EA", desc: "Servicio.", until: "11:00" },
+    { t: "11:00", title: "Almuerzo familiar", emoji: "\uD83C\uDF73", desc: "Comer con la familia." },
+    { t: "12:30", title: "Descanso activo", emoji: "\uD83D\uDEB6", desc: "Caminar, estirar." },
+    { t: "14:00", title: "Tiempo libre", emoji: "\uD83C\uDFAE", desc: "Relajarse." },
+    { t: "16:00", title: "Lectura", emoji: "\uD83D\uDCD6", desc: "Leer o repasar." },
+    { t: "17:30", title: "Preparar semana", emoji: "\uD83D\uDDC2", desc: "Ropa, utes, plan." },
+    { t: "19:00", title: "Estudiar", emoji: "\uD83D\uDCDA", desc: "Aprender algo nuevo." },
+    { t: "20:30", title: "Finanzas", emoji: "\uD83D\uDCB8", desc: "Revisar la semana." },
+    { t: "21:30", title: "Relajacion", emoji: "\uD83D\uDE0C", desc: "Sin pantallas." },
+    { t: "22:00", title: "Dormir", emoji: "\uD83D\uDE34", desc: "Prepararse." }
+  ];
+  var o = {};
+  ["lunes", "martes", "miercoles", "jueves", "viernes"].forEach(function (k) {
+    o[k] = semana.map(function (x) { return Object.assign({}, x); });
+  });
+  o.sabado = sabado;
+  o.domingo = domingo;
+  return o;
+})();
 
 function loadScheduleStore() {
-  try {
-    var raw = localStorage.getItem("shadowbox_schedule");
-    if (raw) return JSON.parse(raw);
-  } catch (e) { /* ignore */ }
-  return null;
+  try { return JSON.parse(localStorage.getItem("mg_schedule") || "{}"); } catch (e) { return {}; }
 }
 
 function getDaySchedule(dayKey) {
   var store = loadScheduleStore();
-  if (store && store[dayKey]) return store[dayKey];
-  var defaults = SCHEDULE_DEFAULTS();
-  return defaults[dayKey] || [];
+  var d = store[dayKey];
+  return (d && d.length) ? d : (SCHEDULE_DEFAULTS[dayKey] || []);
 }
 
 function getEditableSchedule(dayKey) {
-  return JSON.parse(JSON.stringify(getDaySchedule(dayKey)));
+  var store = loadScheduleStore();
+  if (!store[dayKey] || !store[dayKey].length) {
+    store[dayKey] = getDaySchedule(dayKey).map(function (x) { return Object.assign({}, x); });
+    localStorage.setItem("mg_schedule", JSON.stringify(store));
+  }
+  return store[dayKey];
 }
 
 function toTimeInput(t) {
-  if (typeof t === "string" && t.indexOf(":") >= 0) return t;
-  var mins = parseInt(t, 10) || 0;
-  var h = Math.floor(mins / 60);
-  var m = mins % 60;
-  return (h < 10 ? "0" : "") + h + ":" + (m < 10 ? "0" : "") + m;
+  if (!t) return "";
+  var p = String(t).split(":");
+  return ("0" + (+p[0])).slice(-2) + ":" + (p[1] || "00");
 }
 
 function escHtml(s) {
-  return String(s)
-    .replace(/&/g, "&amp;")
-    .replace(/</g, "&lt;")
-    .replace(/>/g, "&gt;")
-    .replace(/"/g, "&quot;")
-    .replace(/'/g, "&#39;");
+  return String(s == null ? "" : s)
+    .replace(/&/g, "&amp;").replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;").replace(/"/g, "&quot;");
 }
-
-// ═══════════════════════════════════════════════════════════════════
-//  MODO GUERRA — BLOCKS
-// ═══════════════════════════════════════════════════════════════════
 
 function militaryBlocks(dayKey) {
-  var plan = MODO_GUERRA.plan[dayKey];
-  if (!plan || plan.descanso) return [];
-  if (plan.trote) {
-    return [
-      { name: "Trote Continuo", type: "ciclismo", dur: 300, rest: 0, cue: "Mantener ritmo constante, respirar" }
-    ];
+  var d = MODO_GUERRA.plan[dayKey];
+  var B = function (name, type, dur, rest, cue) { return { name: name, type: type, dur: dur, rest: rest, cue: cue }; };
+  var out = [B("Activacion", "guardia", 120, 10, "Estiramientos y movilidad.")];
+  if (d.trote) {
+    out.push(B("Trote 10 min", "guardia", 600, 30, "Ritmo constante, respira."));
+    out.push(B("Trote 10 min", "guardia", 600, 30, "Manten el ritmo."));
+    out.push(B("Trote 10 min", "guardia", 600, 20, "Ultima parte."));
+    out.push(B("Sombra Combos", "cross", 60, 20, "Jab + cross."));
+    out.push(B("Sombra Esquivas", "bob", 60, 20, "Bob & weave."));
+    out.push(B("Sombra Libre", "jab", 60, 0, "Combina todo."));
+  } else if (d.descanso) {
+    out.push(B("Caminar 15 min", "guardia", 900, 0, "Paso ligero."));
+    out.push(B("Estiramientos", "guardia", 300, 0, "Estira todo."));
+    out.push(B("Respiracion", "guardia", 300, 0, "Inhala 4s, exhala 6s."));
+    return out;
+  } else {
+    out.push(B("Abdominales x" + d.ab, "guardia", 60, 20, "Contrae el abdomen."));
+    out.push(B("Flexiones x" + d.fl, "guardia", 60, 20, "Cuerpo recto."));
+    out.push(B("Sentadillas salto x" + d.ss, "guardia", 60, 20, "Explota arriba."));
+    out.push(B("Plancha " + d.pl + "s", "guardia", d.pl, 30, "Firme, no bajes la cadera."));
+    out.push(B("Mountain climbers x" + d.mc, "guardia", 60, 20, "Rodillas al pecho."));
+    out.push(B("Cuerda " + d.cu + " min", "guardia", d.cu * 60, 20, "Ritmo constante."));
+    out.push(B("Jumping jacks x" + d.jj, "guardia", 60, 20, "Abre y cierra."));
+    out.push(B("Saltos laterales x" + d.sl, "guardia", 60, 20, "De lado a lado."));
+    out.push(B("Sombra Combos", "cross", 60, 20, "Jab + cross."));
+    out.push(B("Sombra Esquivas", "bob", 60, 20, "Bob & weave."));
+    out.push(B("Sombra Libre", "jab", 60, 0, "Combina todo."));
   }
-  var catalog = {
-    ab: { name: "Abdominales", type: "guardia", dur: 45, rest: 15, cue: "Core firme, respirar en cada rep" },
-    fl: { name: "Flexiones", type: "guardia", dur: 45, rest: 15, cue: "Cuerpo recto, bajar completo" },
-    ss: { name: "Sentadillas", type: "guardia", dur: 45, rest: 15, cue: "Rodillas alineadas, bajar profundo" },
-    pl: { name: "Plancha", type: "guardia", dur: 45, rest: 15, cue: "Cuerpo recto, no hundir cadera" },
-    mc: { name: "Mountain Climbers", type: "guardia", dur: 45, rest: 15, cue: "Rodillas al pecho, ritmo rapido" },
-    cu: { name: "Cuclillas", type: "guardia", dur: 45, rest: 15, cue: "Paso largo, rodilla al suelo" },
-    jj: { name: "Jumping Jacks", type: "guardia", dur: 45, rest: 15, cue: "Brazos completos, saltar ligero" },
-    sl: { name: "Skipping", type: "guardia", dur: 45, rest: 15, cue: "Rodillas altas, ritmo constante" }
-  };
-  var blocks = [];
-  var exercises = plan.exercises || [];
-  for (var i = 0; i < exercises.length; i++) {
-    var ex = catalog[exercises[i]];
-    if (ex) {
-      blocks.push({
-        name: ex.name,
-        type: ex.type,
-        dur: ex.dur,
-        rest: ex.rest,
-        cue: ex.cue
-      });
-    }
-  }
-  return blocks;
+  return out;
 }
 
-// ═══════════════════════════════════════════════════════════════════
-//  HABITS
-// ═══════════════════════════════════════════════════════════════════
-
 var HABITS = [
-  { key: "entrene", name: "Entrene hoy", icon: "\uD83E\uDD4A" },
-  { key: "estudie", name: "Estudie", icon: "\uD83D\uDCDA" },
-  { key: "lei", name: "Lei al menos 15 min", icon: "\uD83D\uDCD6" },
-  { key: "ahorre", name: "Ahorre dinero", icon: "\uD83D\uDCB0" },
-  { key: "registre", name: "Registre su progreso", icon: "\uD83D\uDCDD" },
-  { key: "nocompras", name: "No compro impulsivamente", icon: "\uD83D\uDEAB" },
-  { key: "agua", name: "Tome suficiente agua", icon: "\uD83D\uDCA7" },
-  { key: "dormi", name: "Dormi 7+ horas", icon: "\uD83D\uDE34" },
-  { key: "noprocrast", name: "No procrastine", icon: "\u23F0" },
-  { key: "aprendi", name: "Aprendi algo nuevo", icon: "\uD83E\uDDE0" }
+  { key: "entrene",    label: "Entrene",                  emoji: "\uD83D\uDCAA" },
+  { key: "estudie",    label: "Estudie",                  emoji: "\uD83D\uDCDA" },
+  { key: "lei",        label: "Lei",                      emoji: "\uD83D\uDCD6" },
+  { key: "ahorre",     label: "Ahorre",                   emoji: "\uD83D\uDCB0" },
+  { key: "registre",   label: "Registre gastos",          emoji: "\uD83E\uDDFE" },
+  { key: "nocompras",  label: "Sin compras impulsivas",   emoji: "\uD83D\uDEAB" },
+  { key: "agua",       label: "Agua (2L)",                emoji: "\uD83D\uDCA7" },
+  { key: "dormi",      label: "Dormi temprano",           emoji: "\uD83C\uDF19" },
+  { key: "noprocrast", label: "Sin procrastinar",         emoji: "\u23F1\uFE0F" },
+  { key: "aprendi",    label: "Aprendi algo nuevo",       emoji: "\uD83E\uDDE0" }
 ];
-
-// ═══════════════════════════════════════════════════════════════════
-//  GOALS
-// ═══════════════════════════════════════════════════════════════════
 
 var GOALS = [
-  { key: "g1", name: "Correr 5K sin parar", icon: "\uD83C\uDFC3" },
-  { key: "g2", name: "100 flexiones seguidas", icon: "\uD83D\uDCAA" },
-  { key: "g3", name: "30 dias de disciplina", icon: "\uD83D\uDD25" },
-  { key: "g4", name: "Dominar combinacion 1-2-3", icon: "\uD83E\uDD4A" },
-  { key: "g5", name: "Plancha 3 minutos seguidos", icon: "\u23F1\uFE0F" },
-  { key: "g6", name: "Leer 12 libros este anio", icon: "\uD83D\uDCDA" },
-  { key: "g7", name: "Ahorrar 1000 este mes", icon: "\uD83D\uDCB0" },
-  { key: "g8", name: "Hablar ingles 15 min diarios", icon: "\uD83D\uDDE3\uFE0F" },
-  { key: "g9", name: "Entrenar 5 veces por semana", icon: "\uD83C\uDFCB\uFE0F" },
-  { key: "g10", name: "Ascender a rango ORO", icon: "\uD83E\uDD47" }
+  { key: "pasos",     label: "10.000 pasos" },
+  { key: "agua2",     label: "2 litros de agua" },
+  { key: "leer15",    label: "Leer 15 paginas" },
+  { key: "ahorrardin",label: "Ahorrar dinero" },
+  { key: "registrar", label: "Registrar gastos" },
+  { key: "noprocra2", label: "No procrastinar" },
+  { key: "estudiar",  label: "Estudiar 2 horas" },
+  { key: "cuarto",    label: "Cuarto limpio" },
+  { key: "entrenar",  label: "Entrenar" },
+  { key: "dormir",    label: "Dormir antes de 10:30" }
 ];
-
-// ═══════════════════════════════════════════════════════════════════
-//  RANKS
-// ═══════════════════════════════════════════════════════════════════
 
 var RANKS = [
-  { level: 1, name: "COBRE", min: 0, color: "#cd7f32" },
-  { level: 2, name: "HIERRO", min: 30, color: "#808080" },
-  { level: 3, name: "ORO", min: 50, color: "#ffd700" },
-  { level: 4, name: "DIAMANTE", min: 70, color: "#b9f2ff" },
-  { level: 5, name: "NEMESIS", min: 85, color: "#ff1f1f" },
-  { level: 6, name: "ARCH NEMESIS", min: 95, color: "#ff4444" }
+  { level: 1, name: "COBRE",    icon: "\uD83E\uDE99", min: 0,   color: "#cd7f32" },
+  { level: 2, name: "HIERRO",   icon: "\u2699\uFE0F",  min: 30,  color: "#808080" },
+  { level: 3, name: "ORO",      icon: "\uD83E\uDD47", min: 50,  color: "#ffd700" },
+  { level: 4, name: "DIAMANTE", icon: "\uD83D\uDC8E", min: 70,  color: "#b9f2ff" },
+  { level: 5, name: "NEMESIS",  icon: "\u2620\uFE0F",  min: 85,  color: "#ff1f1f" },
+  { level: 6, name: "ARCH NEMESIS", icon: "\uD83D\uDD25", min: 95, color: "#ff4444" }
 ];
-
-// ═══════════════════════════════════════════════════════════════════
-//  RANK FUNCTIONS
-// ═══════════════════════════════════════════════════════════════════
 
 function getRankForPercent(pct) {
   var rank = RANKS[0];
-  for (var i = 0; i < RANKS.length; i++) {
-    if (pct >= RANKS[i].min) rank = RANKS[i];
+  for (var i = RANKS.length - 1; i >= 0; i--) {
+    if (pct >= RANKS[i].min) { rank = RANKS[i]; break; }
   }
   return rank;
 }
@@ -614,79 +548,54 @@ function getNextRank(currentLevel) {
 }
 
 function calcDisciplinePercent(startDate, endDate, habitsStore) {
-  var start = new Date(startDate);
-  var end = new Date(endDate);
-  var msPerDay = 86400000;
-  var totalDays = Math.round((end - start) / msPerDay) + 1;
-  if (totalDays <= 0) return 0;
-  var totalPossible = totalDays * HABITS.length;
-  var completed = 0;
-  var d = new Date(start);
-  while (d <= end) {
+  var total = 0, done = 0;
+  var d = new Date(startDate);
+  while (d <= endDate) {
     var dk = dateKey(d);
-    var dayData = habitsStore ? habitsStore[dk] : null;
-    if (dayData) {
-      for (var h = 0; h < HABITS.length; h++) {
-        if (dayData[HABITS[h].key]) completed++;
-      }
-    }
+    var day = habitsStore[dk] || {};
+    var dayTotal = HABITS.length;
+    var dayDone = HABITS.filter(function (h) { return day[h.key]; }).length;
+    total += dayTotal;
+    done += dayDone;
     d.setDate(d.getDate() + 1);
   }
-  return totalPossible > 0 ? Math.round((completed / totalPossible) * 100) : 0;
+  return total > 0 ? Math.round((done / total) * 100) : 0;
 }
 
-// ═══════════════════════════════════════════════════════════════════
-//  UTILITY FUNCTIONS
-// ═══════════════════════════════════════════════════════════════════
-
 function fmtTime(sec) {
+  sec = Math.max(0, Math.round(sec));
   var m = Math.floor(sec / 60);
   var s = sec % 60;
   return (m < 10 ? "0" : "") + m + ":" + (s < 10 ? "0" : "") + s;
 }
 
 function routineBlocks(key) {
-  for (var sportKey in ROUTINES) {
-    if (ROUTINES.hasOwnProperty(sportKey)) {
-      if (ROUTINES[sportKey][key]) {
-        return ROUTINES[sportKey][key].blocks;
-      }
-    }
-  }
-  return null;
+  return (ROUTINES[key] ? ROUTINES[key].blocks : []).map(function (b) {
+    return { name: b.name, type: b.type, dur: b.dur, rest: b.rest || 0, cue: b.cue || "" };
+  });
 }
 
 function routineTotal(blocks) {
-  var total = 0;
-  for (var i = 0; i < blocks.length; i++) {
-    total += blocks[i].dur + (blocks[i].rest || 0);
-  }
-  return total;
+  return blocks.reduce(function (acc, b) { return acc + b.dur + b.rest; }, 0);
 }
 
 function buildSchedule(blocks) {
+  var segs = [];
   var t = 0;
-  var result = [];
-  for (var i = 0; i < blocks.length; i++) {
-    var b = blocks[i];
-    result.push({
-      name: b.name,
-      type: b.type,
-      dur: b.dur,
-      rest: b.rest,
-      cue: b.cue,
-      start: t,
-      end: t + b.dur
-    });
-    t += b.dur + (b.rest || 0);
-  }
-  result.totalTime = t;
-  return result;
+  blocks.forEach(function (b, bi) {
+    segs.push({ kind: "work", bi: bi, name: b.name, type: b.type, dur: b.dur, cue: b.cue, start: t });
+    t += b.dur;
+    if (b.rest > 0) {
+      segs.push({ kind: "rest", bi: bi, name: "Descanso", type: "rest", dur: b.rest, cue: "Descansa. Respira.", start: t });
+      t += b.rest;
+    }
+  });
+  return segs;
 }
 
 function dateKey(d) {
-  var y = d.getFullYear();
-  var m = d.getMonth() + 1;
-  var day = d.getDate();
-  return y + "-" + (m < 10 ? "0" : "") + m + "-" + (day < 10 ? "0" : "") + day;
+  d = d || new Date();
+  var m = ("0" + (d.getMonth() + 1)).slice(-2);
+  var dd = ("0" + d.getDate()).slice(-2);
+  return d.getFullYear() + "-" + m + "-" + dd;
 }
