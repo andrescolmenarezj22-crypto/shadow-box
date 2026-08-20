@@ -854,6 +854,7 @@
 
     // Skip
     $("btnSkipAuth").addEventListener("click", function () { showApp(); });
+    if ($("btnSkipAuth2")) $("btnSkipAuth2").addEventListener("click", function () { showApp(); });
   }
 
   /* ---- Cargar datos del usuario ---- */
