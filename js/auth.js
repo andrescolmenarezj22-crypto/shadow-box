@@ -21,25 +21,36 @@ var Auth = (function () {
     else localStorage.removeItem(SESSION_KEY);
   }
 
-  /* Hash SHA-256 de contrasena */
-  async function hashPass(pass) {
-    var enc = new TextEncoder().encode(pass);
-    var buf = await crypto.subtle.digest("SHA-256", enc);
-    return Array.from(new Uint8Array(buf)).map(function(b){return b.toString(16).padStart(2,"0");}).join("");
+  /* Hash simple de contrasena (djb2 + salt) */
+  function hashPass(pass, salt) {
+    salt = salt || "yc2024";
+    var str = salt + pass + salt;
+    var hash = 5381;
+    for (var i = 0; i < str.length; i++) {
+      hash = ((hash << 5) + hash) + str.charCodeAt(i);
+      hash = hash & 0x7FFFFFFF;
+    }
+    /* Segunda pasada para mayor entropia */
+    var hash2 = 0x12345678;
+    for (var j = 0; j < str.length; j++) {
+      hash2 = ((hash2 << 7) ^ hash2) + str.charCodeAt(j);
+      hash2 = hash2 & 0x7FFFFFFF;
+    }
+    return hash.toString(36) + "_" + hash2.toString(36);
   }
 
   /* Registrar nuevo usuario */
-  async function register(username, pass) {
+  function register(username, pass) {
     username = (username || "").trim().toLowerCase();
     if (!username || !pass) throw new Error("Ingresa usuario y contrasena");
-    if (username.length < 3) throw new Error("El usuario debe tener 3+ caracteres");
-    if (pass.length < 4) throw new Error("La contrasena debe tener 4+ caracteres");
-    if (!/^[a-z0-9_]+$/.test(username)) throw new Error("Solo letras, numeros y guion bajo");
+    if (username.length < 3) throw new Error("Minimo 3 caracteres");
+    if (pass.length < 4) throw new Error("Contrasena minimo 4 caracteres");
+    if (!/^[a-z0-9_]+$/.test(username)) throw new Error("Solo minusculas, numeros y _");
 
     var users = getUsers();
     if (users[username]) throw new Error("Este usuario ya existe");
 
-    var hash = await hashPass(pass);
+    var hash = hashPass(pass);
     users[username] = {
       hash: hash,
       created: Date.now(),
@@ -54,7 +65,7 @@ var Auth = (function () {
   }
 
   /* Iniciar sesion */
-  async function login(username, pass) {
+  function login(username, pass) {
     username = (username || "").trim().toLowerCase();
     if (!username || !pass) throw new Error("Ingresa usuario y contrasena");
 
@@ -62,7 +73,7 @@ var Auth = (function () {
     var user = users[username];
     if (!user) throw new Error("Usuario no encontrado");
 
-    var hash = await hashPass(pass);
+    var hash = hashPass(pass);
     if (user.hash !== hash) throw new Error("Contrasena incorrecta");
 
     currentUser = { username: username, displayName: user.displayName || username };
@@ -85,7 +96,7 @@ var Auth = (function () {
   /* Escuchar cambios de sesion */
   function onAuthChange(fn) {
     listeners.push(fn);
-    if (currentUser !== null || getSession()) fn(currentUser);
+    fn(currentUser);
   }
   function notifyListeners() {
     listeners.forEach(function (fn) { fn(currentUser); });
@@ -123,7 +134,7 @@ var Auth = (function () {
     } catch (e) { return null; }
   }
 
-  /* Guardar con alias (compatible con el sistema actual) */
+  /* Guardar con alias */
   function saveAndSync(lsKey, value) {
     saveData(lsKey, value);
   }

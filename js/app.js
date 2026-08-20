@@ -828,7 +828,7 @@
       var user = $("authUser").value.trim();
       var pass = $("authPass").value;
       if (!user || !pass) { showAuthError("Ingresa usuario y contrasena"); return; }
-      Auth.login(user, pass).catch(function (e) { showAuthError(e.message); });
+      try { Auth.login(user, pass); } catch (e) { showAuthError(e.message); }
     });
 
     // Register
@@ -837,7 +837,7 @@
       var user = $("authRegUser").value.trim();
       var pass = $("authRegPass").value;
       if (!user || !pass) { showAuthError("Ingresa usuario y contrasena"); return; }
-      Auth.register(user, pass).catch(function (e) { showAuthError(e.message); });
+      try { Auth.register(user, pass); } catch (e) { showAuthError(e.message); }
     });
 
     // Form switching
